@@ -1,0 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700&family=Open+Sans:wght@400;600&display=swap");
+
+:root {
+  --font-heading: "M PLUS Rounded 1c", system-ui, sans-serif;
+  --font-body: "Open Sans", system-ui, sans-serif;
+}

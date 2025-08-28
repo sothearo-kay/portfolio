@@ -12,6 +12,7 @@ body {
   margin: 0;
   background-color: var(--color-background);
   color: var(--color-foreground);
+  font-family: var(--font-body);
 }
 
 p {
@@ -23,4 +24,48 @@ h2,
 h3,
 h4 {
   text-wrap: balance;
+  font-family: var(--font-heading);
+}
+
+button {
+  all: unset;
+}
+
+button:not(:disabled),
+[role="button"]:not(:disabled) {
+  cursor: pointer;
+}
+
+ul {
+  margin-block: 0;
+  padding-inline: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  font-family: var(--font-heading);
+}
+
+/* Color Mode transition */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 2147483646;
+}
+.dark::view-transition-old(root) {
+  z-index: 2147483646;
+}
+.dark::view-transition-new(root) {
+  z-index: 1;
 }

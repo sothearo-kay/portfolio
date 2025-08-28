@@ -1,0 +1,131 @@
+---
+import IconMoon from "~/icons/moon.svg"
+import IconSun from "~/icons/sun.svg"
+import Hidden from "./common/Hidden.astro"
+
+---
+
+<button id="theme-toggle" aria-label="Toggle theme">
+  <IconSun class="icon sun" />
+  <IconMoon class="icon moon" />
+  <Hidden>
+    Switch Colorscheme
+  </Hidden>
+</button>
+
+<script>
+const themeToggle = document.getElementById("theme-toggle")
+const html = document.documentElement
+
+const currentTheme = localStorage.getItem("theme") || "light"
+
+if (currentTheme === "dark") {
+  html.setAttribute("data-theme", "dark")
+}
+
+const isAppearanceTransition = typeof document !== "undefined"
+  // @ts-expect-error: Transition API
+  && document.startViewTransition
+  && !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+function toggleTheme(event: MouseEvent) {
+  const isDark = html.getAttribute("data-theme") === "dark"
+
+  if (!isAppearanceTransition || !event) {
+    if (isDark) {
+      html.removeAttribute("data-theme")
+      localStorage.setItem("theme", "light")
+    }
+    else {
+      html.setAttribute("data-theme", "dark")
+      localStorage.setItem("theme", "dark")
+    }
+    return
+  }
+
+  const x = event.clientX
+  const y = event.clientY
+  const endRadius = Math.hypot(
+    Math.max(x, innerWidth - x),
+    Math.max(y, innerHeight - y),
+  )
+
+  const transition = document.startViewTransition(() => {
+    if (isDark) {
+      html.removeAttribute("data-theme")
+      localStorage.setItem("theme", "light")
+    }
+    else {
+      html.setAttribute("data-theme", "dark")
+      localStorage.setItem("theme", "dark")
+    }
+  })
+
+  // Animate the transition with a circular clip path
+  transition.ready.then(() => {
+    const clipPath = [
+      `circle(0px at ${x}px ${y}px)`,
+      `circle(${endRadius}px at ${x}px ${y}px)`,
+    ]
+
+    html.animate(
+      {
+        clipPath,
+      },
+      {
+        duration: 400,
+        easing: "ease-in-out",
+        pseudoElement: "::view-transition-new(root)",
+      },
+    )
+  })
+}
+
+themeToggle!.addEventListener("click", toggleTheme)
+</script>
+
+<style>
+  button {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.15s ease-in-out;
+    transition-property: background-color, color;
+
+    &:hover {
+      background-color: var(--color-accent);
+      color: var(--color-accent-foreground);
+    }
+
+    &:focus-visible {
+      outline: 1px solid var(--color-foreground);
+    }
+
+    .icon {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .sun {
+      display: block;
+    }
+
+    .moon {
+      display: none;
+    }
+  }
+
+:global([data-theme="dark"]) button {
+  .sun {
+    display: none;
+  }
+
+  .moon {
+    display: block;
+  }
+}
+</style>
