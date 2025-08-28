@@ -1,0 +1,31 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+type BlockTag
+  = | "div"
+    | "main"
+    | "section"
+    | "article"
+    | "aside"
+    | "header"
+    | "footer"
+    | "nav"
+
+interface Props extends HTMLAttributes<"div"> {
+  as?: BlockTag
+}
+
+const { as: Tag = "div", class: className, ...attrs } = Astro.props;
+---
+
+<Tag class={`container ${className || ""}`} {...attrs}>
+  <slot />
+</Tag>
+
+<style>
+.container {
+  max-width: 58rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+</style>

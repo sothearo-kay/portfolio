@@ -1,0 +1,32 @@
+---
+import Footer from "~/components/App/Footer.astro"
+import Header from "~/components/App/Header.astro"
+import Container from "~/components/Common/Container.astro"
+import Head from "~/components/Common/Head.astro"
+
+interface Props {
+  title: string
+  description: string
+}
+
+const { title, description } = Astro.props
+---
+
+<html lang="en">
+  <Head {title} {description} />
+  <body class="app">
+    <Header />
+    <Container as="main">
+      <slot />
+    </Container>
+    <Footer />
+  </body>
+</html>
+
+<style>
+.app {
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+  min-height: 100dvh;
+}
+</style>
