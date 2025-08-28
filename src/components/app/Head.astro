@@ -23,10 +23,21 @@ const { title, description } = Astro.props;
   <meta name="description" content={description} />
 
   <script is:inline>
-    const theme = localStorage.getItem("theme")
-    if (theme === "dark") {
-      document.documentElement.setAttribute("data-theme", "dark")
+    function setDarkMode(document) {
+      const theme = localStorage.getItem("theme")
+      if (theme === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark")
+      }
+      else {
+        document.documentElement.removeAttribute("data-theme")
+      }
     }
+
+    setDarkMode(document)
+
+    document.addEventListener("astro:before-swap", (event) => {
+      setDarkMode(event.newDocument)
+    })
   </script>
 
   <ClientRouter />
