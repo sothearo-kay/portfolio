@@ -1,4 +1,5 @@
 ---
+import Separator from "../common/Separator.astro"
 import ThemeToggle from "../ThemeToggle.astro"
 
 const navItems = [
@@ -10,7 +11,7 @@ const navItems = [
 ---
 
 <header>
-  <div class="wrapper">
+  <div class="header--wrapper">
     <nav>
       <ul>
         {navItems.map(item => (
@@ -19,6 +20,7 @@ const navItems = [
       </ul>
     </nav>
 
+    <Separator orientation="vertical" />
     <ThemeToggle />
   </div>
 </header>
@@ -32,7 +34,7 @@ header {
   margin-top: 1rem;
   top: 1rem;
 
-  .wrapper {
+  .header--wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
