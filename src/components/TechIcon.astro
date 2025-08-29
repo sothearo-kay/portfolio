@@ -1,11 +1,26 @@
 ---
 import AstroIcon from "~/icons/astro.svg"
+import ClaudeIcon from "~/icons/claude.svg"
+import CSSIcon from "~/icons/css.svg"
+import DockerIcon from "~/icons/docker.svg"
 import GitIcon from "~/icons/git.svg"
+import GitHubIcon from "~/icons/github.svg"
+import HTMLIcon from "~/icons/html.svg"
 import JavaScriptIcon from "~/icons/javascript.svg"
+import MotionIcon from "~/icons/motion.svg"
 import NextJSIcon from "~/icons/nextjs.svg"
-import ReactIcon from "~/icons/react.svg"
+import NodeJSIcon from "~/icons/nodejs.svg"
+import NuxtJSIcon from "~/icons/nuxtjs.svg"
+import OpenAIIcon from "~/icons/openai.svg"
+import PiniaIcon from "~/icons/pinia.svg"
+import RadixUIIcon from "~/icons/radixui.svg"
+import ReactJSIcon from "~/icons/reactjs.svg"
+import ShadcnUIIcon from "~/icons/shadcnui.svg"
+import SvelteJSIcon from "~/icons/sveltejs.svg"
 import TailwindIcon from "~/icons/tailwind.svg"
 import TypeScriptIcon from "~/icons/typescript.svg"
+import VitestIcon from "~/icons/vitest.svg"
+import VueJSIcon from "~/icons/vuejs.svg"
 import Hidden from "./common/Hidden.astro"
 
 interface Props {
@@ -16,13 +31,28 @@ interface Props {
 const { name, label } = Astro.props
 
 const icons = {
-  react: ReactIcon,
-  typescript: TypeScriptIcon,
-  javascript: JavaScriptIcon,
-  nextjs: NextJSIcon,
-  tailwind: TailwindIcon,
   astro: AstroIcon,
+  claude: ClaudeIcon,
+  css: CSSIcon,
+  docker: DockerIcon,
   git: GitIcon,
+  github: GitHubIcon,
+  html: HTMLIcon,
+  javascript: JavaScriptIcon,
+  motion: MotionIcon,
+  nextjs: NextJSIcon,
+  nodejs: NodeJSIcon,
+  nuxtjs: NuxtJSIcon,
+  openai: OpenAIIcon,
+  pinia: PiniaIcon,
+  radixui: RadixUIIcon,
+  reactjs: ReactJSIcon,
+  shadcnui: ShadcnUIIcon,
+  sveltejs: SvelteJSIcon,
+  tailwind: TailwindIcon,
+  typescript: TypeScriptIcon,
+  vitest: VitestIcon,
+  vuejs: VueJSIcon,
 }
 
 const Icon = icons[name as keyof typeof icons]
@@ -31,6 +61,7 @@ const Icon = icons[name as keyof typeof icons]
 <div class="tech-icon">
   <Icon class="icon" />
   <Hidden>{label}</Hidden>
+  <span class="tooltip">{label}</span>
 </div>
 
 <style>
@@ -38,11 +69,59 @@ const Icon = icons[name as keyof typeof icons]
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    cursor: default;
   }
 
   .icon {
     width: 2.5rem;
     height: 2.5rem;
   }
-</style>
 
+  .tooltip {
+    position: absolute;
+    top: -3rem;
+    left: 50%;
+    transform: translateX(-50%) scale(0.85);
+    transform-origin: bottom center;
+    background: var(--color-background-elevated);
+    color: var(--color-foreground);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font: var(--font-xs);
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition-duration: 0.2s;
+    transition-property: opacity, visibility, transform;
+    z-index: 10;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .tech-icon:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) scale(1);
+  }
+
+  .tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid transparent;
+    border-top-color: var(--color-background-elevated);
+  }
+
+  .tooltip::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: var(--color-border);
+  }
+</style>
