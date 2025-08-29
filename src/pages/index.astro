@@ -1,15 +1,42 @@
 ---
 import MonkeyIllustration from "~/assets/images/monkey-illustration.svg"
+import Heading from "~/components/common/Heading.astro"
+import TechIcon from "~/components/TechIcon.astro"
 import Layout from "~/layouts/default.astro"
+
+const technologies = [
+  { name: "html", label: "HTML" },
+  { name: "css", label: "CSS" },
+  { name: "javascript", label: "JavaScript" },
+  { name: "typescript", label: "TypeScript" },
+  { name: "reactjs", label: "React" },
+  { name: "nextjs", label: "Next.js" },
+  { name: "vuejs", label: "Vue.js" },
+  { name: "nuxtjs", label: "Nuxt.js" },
+  { name: "sveltejs", label: "Svelte" },
+  { name: "astro", label: "Astro" },
+  { name: "nodejs", label: "Node.js" },
+  { name: "tailwind", label: "Tailwind CSS" },
+  { name: "motion", label: "Motion" },
+  { name: "pinia", label: "Pinia" },
+  { name: "radixui", label: "Radix UI" },
+  { name: "shadcnui", label: "shadcn/ui" },
+  { name: "git", label: "Git" },
+  { name: "github", label: "GitHub" },
+  { name: "docker", label: "Docker" },
+  { name: "vitest", label: "Vitest" },
+  { name: "claude", label: "Claude" },
+  { name: "openai", label: "ChatGPT" },
+]
 ---
 
 <Layout title="Home" description="Welcome to my portfolio">
   <section class="hero">
     <div class="hero-content">
       <div class="hero-text">
-        <h1>Hello, I'm Sothearo.</h1>
+        <Heading level={1}>Hello, I'm Sothearo.</Heading>
         <p class="intro">
-          I'm a <strong>Frontend Developer</strong> from Phnom Penh who loves
+          I'm a <strong>Frontend Developer</strong> based in Phnom Penh who loves
           building beautiful, functional web experiences.
         </p>
         <p class="description">
@@ -23,11 +50,20 @@ import Layout from "~/layouts/default.astro"
       </div>
     </div>
   </section>
+
+  <section class="technologies">
+    <Heading level={2}>Technologies I &hearts;</Heading>
+    <div class="tech-grid">
+      {technologies.map(tech => (
+        <TechIcon name={tech.name} label={tech.label} />
+      ))}
+    </div>
+  </section>
 </Layout>
 
 <style>
   .hero {
-    padding-block: 4rem;
+    padding-block: 2rem;
   }
 
   .hero-content {
@@ -37,13 +73,16 @@ import Layout from "~/layouts/default.astro"
     align-items: center;
   }
 
-  .hero h1 {
-    font: var(--font-3xl);
-    font-weight: bold;
-  }
 
   .intro, .description {
     font: var(--font-md);
+  }
+
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+    gap: 1rem;
+    justify-items: center;
   }
 
   .monkey-illustration {

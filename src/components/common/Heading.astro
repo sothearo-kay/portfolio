@@ -1,0 +1,37 @@
+---
+interface Props {
+  level?: 1 | 2 | 3 | 4
+  class?: string
+}
+
+const { level = 1, class: className } = Astro.props
+
+const Tag = `h${level}` as const
+---
+
+<Tag class={className}>
+  <slot />
+</Tag>
+
+<style>
+  h1 {
+    font: var(--font-3xl);
+    font-weight: 700;
+  }
+
+  h2 {
+    font: var(--font-2xl);
+    font-weight: 700;
+  }
+
+  h3 {
+    font: var(--font-xl);
+    font-weight: 700;
+  }
+
+  h4 {
+    font: var(--font-lg);
+    font-weight: 600;
+  }
+</style>
+
