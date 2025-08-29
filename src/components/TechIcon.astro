@@ -1,0 +1,48 @@
+---
+import AstroIcon from "~/icons/astro.svg"
+import GitIcon from "~/icons/git.svg"
+import JavaScriptIcon from "~/icons/javascript.svg"
+import NextJSIcon from "~/icons/nextjs.svg"
+import ReactIcon from "~/icons/react.svg"
+import TailwindIcon from "~/icons/tailwind.svg"
+import TypeScriptIcon from "~/icons/typescript.svg"
+import Hidden from "./common/Hidden.astro"
+
+interface Props {
+  name: string
+  label: string
+}
+
+const { name, label } = Astro.props
+
+const icons = {
+  react: ReactIcon,
+  typescript: TypeScriptIcon,
+  javascript: JavaScriptIcon,
+  nextjs: NextJSIcon,
+  tailwind: TailwindIcon,
+  astro: AstroIcon,
+  git: GitIcon,
+}
+
+const Icon = icons[name as keyof typeof icons]
+---
+
+<div class="tech-icon">
+  <Icon class="icon" />
+  <Hidden>{label}</Hidden>
+</div>
+
+<style>
+  .tech-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .icon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+</style>
+
