@@ -1,6 +1,6 @@
 ---
 import MonkeyIllustration from "~/assets/images/monkey-illustration.svg"
-import Layout from "../layouts/default.astro"
+import Layout from "~/layouts/default.astro"
 ---
 
 <Layout title="Home" description="Welcome to my portfolio">
@@ -39,12 +39,11 @@ import Layout from "../layouts/default.astro"
 
   .hero h1 {
     font: var(--font-3xl);
-    margin-bottom: 1.5rem;
+    font-weight: bold;
   }
 
   .intro, .description {
     font: var(--font-md);
-    margin-bottom: 1.5rem;
   }
 
   .monkey-illustration {
