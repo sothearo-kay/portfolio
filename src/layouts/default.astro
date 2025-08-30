@@ -25,8 +25,16 @@ const { title, description } = Astro.props
 
 <style>
 .app {
+  width: 100%;
+  max-width: 60rem;
+  min-height: 100dvh;
+  margin-inline: auto;
   display: grid;
   grid-template-rows: max-content 1fr max-content;
-  min-height: 100dvh;
+  border-inline: 1px solid color-mix(in srgb, var(--color-border) 40%, transparent);
+
+  @media (max-width: 768px) {
+    border-inline: none;
+  }
 }
 </style>

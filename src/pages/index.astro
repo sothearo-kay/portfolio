@@ -1,8 +1,112 @@
 ---
-import Layout from "../layouts/default.astro"
+import MonkeyIllustration from "~/assets/images/monkey-illustration.svg"
+import Heading from "~/components/common/Heading.astro"
+import TechIcon from "~/components/TechIcon.astro"
+import Layout from "~/layouts/default.astro"
+
+const technologies = [
+  { name: "html", label: "HTML" },
+  { name: "css", label: "CSS" },
+  { name: "javascript", label: "JavaScript" },
+  { name: "typescript", label: "TypeScript" },
+  { name: "vuejs", label: "Vue.js" },
+  { name: "reactjs", label: "React" },
+  { name: "sveltejs", label: "Svelte" },
+  { name: "astro", label: "Astro" },
+  { name: "nuxtjs", label: "Nuxt.js" },
+  { name: "nextjs", label: "Next.js" },
+  { name: "nodejs", label: "Node.js" },
+  { name: "tailwind", label: "Tailwind CSS" },
+  { name: "motion", label: "Motion" },
+  { name: "pinia", label: "Pinia" },
+  { name: "radixui", label: "Radix UI" },
+  { name: "shadcnui", label: "shadcn/ui" },
+  { name: "git", label: "Git" },
+  { name: "docker", label: "Docker" },
+  { name: "vitest", label: "Vitest" },
+  { name: "claude", label: "Claude" },
+  { name: "openai", label: "ChatGPT" },
+]
 ---
 
 <Layout title="Home" description="Welcome to my portfolio">
-  <h1>Welcome to My Portfolio</h1>
-  <p>This is the home page content!</p>
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <Heading level={1}>Hello, I'm Sothearo.</Heading>
+        <p class="intro">
+          I'm a <strong>Frontend Developer</strong> based in Phnom Penh who loves
+          building beautiful, functional web experiences.
+        </p>
+        <p class="description">
+          Code by day, manga by night. Always excited about
+          <strong>creating something amazing</strong>.
+        </p>
+      </div>
+
+      <div class="hero-image">
+        <MonkeyIllustration class="monkey-illustration" />
+      </div>
+    </div>
+  </section>
+
+  <section class="technologies">
+    <Heading level={2}>Technologies</Heading>
+    <div class="tech-grid">
+      {technologies.map(tech => (
+        <TechIcon name={tech.name} label={tech.label} />
+      ))}
+    </div>
+  </section>
 </Layout>
+
+<style>
+  .hero {
+    padding-block: 2rem;
+  }
+
+  .hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+
+  .intro, .description {
+    font: var(--font-md);
+  }
+
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+    gap: 1rem;
+    justify-items: center;
+  }
+
+  .monkey-illustration {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding-block: 2rem;
+    }
+
+    .hero-content {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 0;
+    }
+
+    .hero-content .hero-image {
+      grid-row-start: 1;
+    }
+
+    .monkey-illustration {
+      max-width: 280px;
+    }
+  }
+</style>

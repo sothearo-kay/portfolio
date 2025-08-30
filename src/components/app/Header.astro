@@ -27,6 +27,7 @@ const navItems = [
 
 <style>
 header {
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,8 +43,8 @@ header {
     padding-block: 0.5rem;
     padding-inline: 1rem;
     border-radius: 999px;
-    background-color: var(--color-background-elevated);
-    backdrop-filter: blur(12px);
+    background-color: var(--color-background-elevated-transparent);
+    backdrop-filter: blur(10px);
     border: 1px solid var(--color-border-subtle);
     box-shadow: 0 4px 6px -1px oklch(0% 0 0deg / 0.05), 0 2px 4px -2px oklch(0% 0 0deg / 0.03);
   }
