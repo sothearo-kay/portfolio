@@ -4,7 +4,6 @@ import ClaudeIcon from "~/icons/claude.svg"
 import CSSIcon from "~/icons/css.svg"
 import DockerIcon from "~/icons/docker.svg"
 import GitIcon from "~/icons/git.svg"
-import GitHubIcon from "~/icons/github.svg"
 import HTMLIcon from "~/icons/html.svg"
 import JavaScriptIcon from "~/icons/javascript.svg"
 import MotionIcon from "~/icons/motion.svg"
@@ -21,7 +20,6 @@ import TailwindIcon from "~/icons/tailwind.svg"
 import TypeScriptIcon from "~/icons/typescript.svg"
 import VitestIcon from "~/icons/vitest.svg"
 import VueJSIcon from "~/icons/vuejs.svg"
-import Hidden from "./common/Hidden.astro"
 
 interface Props {
   name: string
@@ -36,7 +34,6 @@ const icons = {
   css: CSSIcon,
   docker: DockerIcon,
   git: GitIcon,
-  github: GitHubIcon,
   html: HTMLIcon,
   javascript: JavaScriptIcon,
   motion: MotionIcon,
@@ -60,7 +57,6 @@ const Icon = icons[name as keyof typeof icons]
 
 <div class="tech-icon">
   <Icon class="icon" />
-  <Hidden>{label}</Hidden>
   <span class="tooltip">{label}</span>
 </div>
 
