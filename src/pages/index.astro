@@ -2,31 +2,8 @@
 import MonkeyIllustration from "~/assets/images/monkey-illustration.svg"
 import Heading from "~/components/common/Heading.astro"
 import TechIcon from "~/components/TechIcon.astro"
+import { technologies } from "~/constants/technologies"
 import Layout from "~/layouts/default.astro"
-
-const technologies = [
-  { name: "html", label: "HTML" },
-  { name: "css", label: "CSS" },
-  { name: "javascript", label: "JavaScript" },
-  { name: "typescript", label: "TypeScript" },
-  { name: "vuejs", label: "Vue.js" },
-  { name: "reactjs", label: "React" },
-  { name: "sveltejs", label: "Svelte" },
-  { name: "astro", label: "Astro" },
-  { name: "nuxtjs", label: "Nuxt.js" },
-  { name: "nextjs", label: "Next.js" },
-  { name: "nodejs", label: "Node.js" },
-  { name: "tailwind", label: "Tailwind CSS" },
-  { name: "motion", label: "Motion" },
-  { name: "pinia", label: "Pinia" },
-  { name: "radixui", label: "Radix UI" },
-  { name: "shadcnui", label: "shadcn/ui" },
-  { name: "git", label: "Git" },
-  { name: "docker", label: "Docker" },
-  { name: "vitest", label: "Vitest" },
-  { name: "claude", label: "Claude" },
-  { name: "openai", label: "ChatGPT" },
-]
 ---
 
 <Layout title="Home" description="Welcome to my portfolio">
