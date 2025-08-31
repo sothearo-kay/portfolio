@@ -1,9 +1,12 @@
 ---
-import Default from "~/layouts/default.astro"
+import Heading from "~/components/common/Heading.astro"
+import Layout from "~/layouts/default.astro"
 ---
 
-<Default title="Blog - My Portfolio" description="Blog posts and articles">
-  <h1>Blog</h1>
-  <p>Coming soon! This is where I'll share my thoughts and experiences.</p>
-</Default>
+<Layout title="Blog" description="Blog posts and articles">
+  <section>
+    <Heading as="h1" size="2xl">Blog</Heading>
+    <p>Coming soon! This is where I'll share my thoughts and experiences.</p>
+  </section>
+</Layout>
 

@@ -1,8 +1,11 @@
 ---
-import Default from "~/layouts/default.astro"
+import Heading from "~/components/common/Heading.astro"
+import Layout from "~/layouts/default.astro"
 ---
 
-<Default title="Projects - My Portfolio" description="My portfolio of projects and work">
-  <h1>Projects</h1>
-  <p>Here are some of the projects I've worked on.</p>
-</Default>
+<Layout title="Projects" description="My portfolio of projects and work">
+  <section>
+    <Heading as="h1" size="2xl">Projects</Heading>
+    <p>Here are some of the projects I've worked on.</p>
+  </section>
+</Layout>
