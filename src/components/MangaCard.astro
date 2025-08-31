@@ -1,0 +1,49 @@
+---
+import { Image } from "astro:assets"
+
+interface Props {
+  title: string
+  coverId: string
+}
+
+const { title, coverId } = Astro.props
+---
+
+<div class="manga-card">
+  <Image
+    src={`https://mangadex.org/covers/${coverId}.jpg.512.jpg`}
+    alt={title}
+    width={256}
+    height={384}
+    class="cover"
+  />
+  <h3 class="title">{title}</h3>
+</div>
+
+<style>
+.manga-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  .cover {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .title {
+    font: var(--font-sm);
+    font-family: var(--font-heading);
+    font-weight: 500;
+    text-align: center;
+    color: var(--color-foreground);
+    text-transform: capitalize;
+    margin-block: 0;
+  }
+}
+</style>
+

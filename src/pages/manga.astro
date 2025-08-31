@@ -1,0 +1,44 @@
+---
+import Heading from "~/components/common/Heading.astro"
+import MangaCard from "~/components/MangaCard.astro"
+import { mangaList } from "~/data/manga"
+import Layout from "~/layouts/default.astro"
+---
+
+<Layout title="Manga" description="My favorite manga collection">
+  <section class="manga">
+    <Heading as="h1" size="2xl">My Favorite Manga</Heading>
+    <p class="description">
+      Here are some of the manga series I'm currently reading and enjoying.
+    </p>
+
+    <div class="manga-grid">
+      {mangaList.map(manga => (
+        <MangaCard
+          title={manga.title}
+          coverId={manga.coverId}
+        />
+      ))}
+    </div>
+  </section>
+</Layout>
+
+<style>
+.manga {
+  padding-top: 2rem;
+
+  .description {
+    font: var(--font-sm);
+    color: var(--color-foreground-muted);
+  }
+
+  .manga-grid {
+    margin-top: 1.75rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1.5rem;
+    justify-items: center;
+  }
+}
+</style>
+
