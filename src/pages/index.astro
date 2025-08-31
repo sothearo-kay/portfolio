@@ -1,8 +1,8 @@
 ---
-import MonkeyIllustration from "~/assets/images/monkey-illustration.svg"
 import Heading from "~/components/common/Heading.astro"
 import TechIcon from "~/components/TechIcon.astro"
-import { technologies } from "~/constants/technologies"
+import { technologies } from "~/data/technologies"
+import MonkeyIllustration from "~/icons/monkey-illustration.svg"
 import Layout from "~/layouts/default.astro"
 ---
 
@@ -10,7 +10,7 @@ import Layout from "~/layouts/default.astro"
   <section class="hero">
     <div class="content">
       <div class="text">
-        <Heading level={1}>Hello, I'm Sothearo.</Heading>
+        <Heading as="h1" size="3xl">Hello, I'm Sothearo.</Heading>
         <p class="intro">
           I'm a <strong>Frontend Developer</strong> based in Phnom Penh who loves
           building beautiful, functional web experiences.
@@ -28,7 +28,7 @@ import Layout from "~/layouts/default.astro"
   </section>
 
   <section class="technologies">
-    <Heading level={2}>Technologies</Heading>
+    <Heading as="h2" size="2xl">Technologies</Heading>
     <div class="grid">
       {technologies.map(tech => (
         <TechIcon name={tech.name} label={tech.label} />
@@ -61,6 +61,10 @@ import Layout from "~/layouts/default.astro"
   }
 
   .technologies {
+    h2 {
+      margin-block: 2rem;
+    }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));

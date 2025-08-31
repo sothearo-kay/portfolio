@@ -1,35 +1,41 @@
 ---
+type HeadingTag
+= | "h1"
+  | "h2"
+  | "h3"
+  | "h4"
+
 interface Props {
-  level?: 1 | 2 | 3 | 4
+  as?: HeadingTag
+  size?: "3xl" | "2xl" | "xl" | "lg"
   class?: string
 }
 
-const { level = 1, class: className } = Astro.props
 
-const Tag = `h${level}` as const
+const { as: Tag = "h1", size = "3xl", class: className }: Props = Astro.props
 ---
 
-<Tag class={className}>
+<Tag class:list={[size, className]}>
   <slot />
 </Tag>
 
 <style>
-  h1 {
+  .\33 xl {
     font: var(--font-3xl);
     font-weight: 700;
   }
 
-  h2 {
+  .\32 xl {
     font: var(--font-2xl);
     font-weight: 700;
   }
 
-  h3 {
+  .xl {
     font: var(--font-xl);
     font-weight: 700;
   }
 
-  h4 {
+  .lg {
     font: var(--font-lg);
     font-weight: 600;
   }
