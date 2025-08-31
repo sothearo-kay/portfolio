@@ -10,12 +10,16 @@ const navItems = [
 ];
 ---
 
-<header>
-  <div class="header--wrapper">
-    <nav>
-      <ul>
+<header class="header">
+  <div class="wrapper">
+    <nav class="nav">
+      <ul class="nav-list">
         {navItems.map(item => (
-          <li><a href={item.href}>{item.text}</a></li>
+          <li class="nav-item">
+            <a href={item.href} class="nav-link">
+              {item.text}
+            </a>
+          </li>
         ))}
       </ul>
     </nav>
@@ -26,7 +30,7 @@ const navItems = [
 </header>
 
 <style>
-header {
+.header {
   z-index: 1;
   display: flex;
   align-items: center;
@@ -35,7 +39,7 @@ header {
   margin-top: 1rem;
   top: 1rem;
 
-  .header--wrapper {
+  .wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -49,21 +53,19 @@ header {
     box-shadow: 0 4px 6px -1px oklch(0% 0 0deg / 0.05), 0 2px 4px -2px oklch(0% 0 0deg / 0.03);
   }
 
-  nav {
-    ul {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
+  .nav-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
 
-      li {
-        font-size: 14px;
-        font-weight: 500;
+  .nav-item {
+    font-size: 14px;
+    font-weight: 500;
 
-        a {
-          padding: 0.5rem;
-        }
-      }
+    .nav-link {
+      padding: 0.5rem;
     }
   }
 }

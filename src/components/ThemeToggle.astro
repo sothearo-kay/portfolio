@@ -4,7 +4,7 @@ import SunIcon from "~/icons/sun.svg"
 import Hidden from "./common/Hidden.astro"
 ---
 
-<button id="theme-toggle" aria-label="Toggle theme">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
   <SunIcon class="icon sun" />
   <MoonIcon class="icon moon" />
   <Hidden>
@@ -83,7 +83,7 @@ document.addEventListener("astro:page-load", () => {
 </script>
 
 <style>
-  button {
+  .theme-toggle {
     width: 2rem;
     height: 2rem;
     border-radius: 0.5rem;
@@ -106,24 +106,26 @@ document.addEventListener("astro:page-load", () => {
     .icon {
       width: 1rem;
       height: 1rem;
-    }
 
-    .sun {
-      display: block;
-    }
+      &.sun {
+        display: block;
+      }
 
-    .moon {
+      &.moon {
+        display: none;
+      }
+    }
+  }
+
+:global([data-theme="dark"]) .theme-toggle {
+  .icon {
+    &.sun {
       display: none;
     }
-  }
 
-:global([data-theme="dark"]) button {
-  .sun {
-    display: none;
-  }
-
-  .moon {
-    display: block;
+    &.moon {
+      display: block;
+    }
   }
 }
 </style>

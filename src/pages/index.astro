@@ -31,8 +31,8 @@ const technologies = [
 
 <Layout title="Home" description="Welcome to my portfolio">
   <section class="hero">
-    <div class="hero-content">
-      <div class="hero-text">
+    <div class="content">
+      <div class="text">
         <Heading level={1}>Hello, I'm Sothearo.</Heading>
         <p class="intro">
           I'm a <strong>Frontend Developer</strong> based in Phnom Penh who loves
@@ -44,15 +44,15 @@ const technologies = [
         </p>
       </div>
 
-      <div class="hero-image">
-        <MonkeyIllustration class="monkey-illustration" />
+      <div class="image">
+        <MonkeyIllustration class="illustration" />
       </div>
     </div>
   </section>
 
   <section class="technologies">
     <Heading level={2}>Technologies</Heading>
-    <div class="tech-grid">
+    <div class="grid">
       {technologies.map(tech => (
         <TechIcon name={tech.name} label={tech.label} />
       ))}
@@ -63,50 +63,52 @@ const technologies = [
 <style>
   .hero {
     padding-block: 2rem;
+
+    .content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .intro,
+    .description {
+      font: var(--font-md);
+    }
+
+    .illustration {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+    }
   }
 
-  .hero-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-
-
-  .intro, .description {
-    font: var(--font-md);
-  }
-
-  .tech-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
-    gap: 1rem;
-    justify-items: center;
-  }
-
-  .monkey-illustration {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
+  .technologies {
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+      gap: 1rem;
+      justify-items: center;
+    }
   }
 
   @media (max-width: 768px) {
     .hero {
       padding-block: 2rem;
-    }
 
-    .hero-content {
-      grid-template-columns: 1fr;
-      text-align: center;
-      gap: 0;
-    }
+      .content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 0;
+      }
 
-    .hero-content .hero-image {
-      grid-row-start: 1;
-    }
+      .image {
+        grid-row-start: 1;
+      }
 
-    .monkey-illustration {
-      max-width: 280px;
+      .illustration {
+        max-width: 280px;
+      }
     }
   }
 </style>
