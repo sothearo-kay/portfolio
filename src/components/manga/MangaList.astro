@@ -23,11 +23,11 @@ function getTransitionName(title: string) {
 }
 ---
 
-<div class="manga-list-container">
-  <div class="filter-buttons">
+<div class="container">
+  <div class="filters">
     {filterButtons.map(({ key, label, count }, index) => (
       <button
-        class:list={["filter-btn", { active: index === 0 }]}
+        class:list={["btn", { active: index === 0 }]}
         data-filter={key}
       >
         {label} ({count})
@@ -35,10 +35,10 @@ function getTransitionName(title: string) {
     ))}
   </div>
 
-  <div class="manga-grid">
+  <div class="grid">
     {mangaList.map(manga => (
       <div
-        class="manga-item"
+        class="item"
         data-status={manga.finished ? "finished" : "reading"}
         style={`view-transition-name: ${getTransitionName(manga.title)}`}
       >
@@ -59,8 +59,8 @@ class MangaFilter {
   private mangaItems: NodeListOf<HTMLElement>
 
   constructor() {
-    this.filterButtons = document.querySelectorAll(".filter-btn")
-    this.mangaItems = document.querySelectorAll(".manga-item")
+    this.filterButtons = document.querySelectorAll(".btn")
+    this.mangaItems = document.querySelectorAll(".item")
     this.init()
   }
 
@@ -114,18 +114,17 @@ document.addEventListener("astro:page-load", () => {
 </script>
 
 <style>
-  .manga-list-container {
-    width: 100%;
-  }
+.container {
+  width: 100%;
 
-  .filter-buttons {
+  .filters {
     display: flex;
     justify-content: center;
     gap: 0.5rem;
     margin-block: 1.75rem;
   }
 
-  .filter-btn {
+  .btn {
     height: 2rem;
     padding-inline: 0.75rem;
     border: 1px solid var(--color-border);
@@ -136,24 +135,24 @@ document.addEventListener("astro:page-load", () => {
     font-weight: 500;
     transition: 0.2s ease;
     transition-property: background-color, border-color, color;
+
+    &:hover {
+      background-color: var(--color-background-secondary);
+      border-color: var(--color-border);
+      color: var(--color-foreground);
+    }
+
+    &.active {
+      background-color: var(--color-foreground);
+      color: var(--color-background);
+      border-color: var(--color-foreground);
+    }
   }
 
-  .filter-btn:hover {
-    background-color: var(--color-background-secondary);
-    border-color: var(--color-border);
-    color: var(--color-foreground);
-  }
-
-  .filter-btn.active {
-    background-color: var(--color-foreground);
-    color: var(--color-background);
-    border-color: var(--color-foreground);
-  }
-
-  .manga-grid {
+  .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 1.5rem;
-    justify-items: center;
   }
+}
 </style>

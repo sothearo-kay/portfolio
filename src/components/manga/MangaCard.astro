@@ -9,38 +9,80 @@ interface Props {
 const { title, coverId } = Astro.props
 ---
 
-<div class="manga-card">
-  <Picture
-    src={`https://mangadex.org/covers/${coverId}.jpg.512.jpg`}
-    alt={title}
-    width={256}
-    height={384}
-    widths={[256, 512]}
-    formats={["avif", "webp"]}
-    class="cover"
-  />
+<div class="card">
+  <div class="wrapper">
+    <Picture
+      src={`https://mangadex.org/covers/${coverId}.jpg.512.jpg`}
+      alt={title}
+      width={256}
+      height={384}
+      widths={[256, 512]}
+      formats={["avif", "webp"]}
+      class="cover"
+      data-loaded="false"
+    />
+  </div>
   <h3 class="title">{title}</h3>
 </div>
 
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const cards = document.querySelectorAll(".card")
+
+    cards.forEach((card) => {
+      const img = card.querySelector("img")
+
+      if (img) {
+        img.addEventListener("load", () => {
+          img.setAttribute("data-loaded", "true")
+        })
+
+        if (img.complete) {
+          img.setAttribute("data-loaded", "true")
+        }
+      }
+    })
+  })
+</script>
+
 <style>
-.manga-card {
+.card {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 
-  .cover {
+  .wrapper {
+    position: relative;
     width: 100%;
-    height: auto;
     aspect-ratio: 2/3;
     border-radius: 0.5rem;
+    overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    display: block;
+    background: linear-gradient(
+      90deg,
+      var(--color-skeleton-from) 0%,
+      var(--color-skeleton-to) 50%,
+      var(--color-skeleton-from) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s ease-in-out infinite;
+
+    &:has(img[data-loaded="true"]) {
+      animation: none;
+    }
   }
 
-  .cover img {
+  .cover {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    &[data-loaded="true"] {
+      opacity: 1;
+    }
   }
 
   .title {
@@ -53,5 +95,10 @@ const { title, coverId } = Astro.props
     margin-block: 0;
   }
 }
-</style>
 
+@keyframes shimmer {
+  100% {
+    background-position-x: -200%;
+  }
+}
+</style>
