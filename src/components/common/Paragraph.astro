@@ -1,0 +1,23 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+export interface Props extends HTMLAttributes<"p"> {
+  secondary?: boolean
+}
+
+const { secondary = false, ...attrs } = Astro.props
+---
+
+<p class:list={["paragraph", { secondary }]} {...attrs}>
+  <slot />
+</p>
+
+<style>
+.paragraph {
+  font: var(--font-sm);
+
+  &.secondary {
+    color: var(--color-foreground-muted);
+  }
+}
+</style>
