@@ -1,3 +1,9 @@
+export interface Manga {
+  title: string
+  coverId: string
+  finished?: boolean
+}
+
 export const mangaList = [
   {
     title: "sakamoto days",
@@ -18,14 +24,17 @@ export const mangaList = [
   {
     title: "the legend of the northern blade",
     coverId: `9ed16bc9-f570-4e71-8dda-aebc098b683b/8a917622-1853-47b7-9114-997da510a8a2`,
+    finished: true,
   },
   {
     title: "nano machine",
     coverId: `6e4805a6-75ab-462d-883c-4ddedb8e4df6/16406b53-9224-4639-8511-9951484ad99a`,
+    finished: true,
   },
   {
     title: "solo leveling",
     coverId: `32d76d19-8a05-4db0-9fc2-e0b0648fe9d0/e90bdc47-c8b9-4df7-b2c0-17641b645ee1`,
+    finished: true,
   },
   {
     title: "mercenary enrollment",
@@ -34,9 +43,10 @@ export const mangaList = [
   {
     title: "the greatest estate developer",
     coverId: `d7f56ace-cd30-48b9-8b64-afeca0077fca/c2613a1e-426f-4ee3-a6f7-caf003324dc7`,
+    finished: true,
   },
   {
     title: "the fragrant flower blooms with dignity",
     coverId: `418791c0-35cf-4f87-936b-acd9cddf0989/d070482f-ba73-4f79-b42d-2c07119c5218`,
   },
-]
+] satisfies Manga[]

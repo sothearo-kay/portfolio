@@ -1,5 +1,6 @@
 html {
   box-sizing: border-box;
+  scrollbar-gutter: stable;
 }
 
 *,
@@ -25,6 +26,14 @@ h3,
 h4 {
   text-wrap: balance;
   font-family: var(--font-heading);
+}
+
+section:first-of-type {
+  padding-block: 2rem;
+}
+
+section:last-of-type {
+  padding-bottom: 0;
 }
 
 section > :is(h1, h2, h3, h4):first-child {
