@@ -1,5 +1,6 @@
 ---
 import Heading from "~/components/common/Heading.astro"
+import Paragraph from "~/components/common/Paragraph.astro"
 import MangaList from "~/components/manga/MangaList.astro"
 import { mangaList } from "~/data/manga"
 import Layout from "~/layouts/default.astro"
@@ -8,19 +9,10 @@ import Layout from "~/layouts/default.astro"
 <Layout title="Manga" description="My favorite manga collection">
   <section>
     <Heading as="h1" size="2xl">My Favorite Manga</Heading>
-    <p class="description">
+    <Paragraph secondary>
       Here are some of my favorite manga series.
-    </p>
+    </Paragraph>
 
     <MangaList {mangaList} />
   </section>
 </Layout>
-
-<style>
-.description {
-  font: var(--font-sm);
-  color: var(--color-foreground-muted);
-  margin-block-end: 0;
-}
-</style>
-
