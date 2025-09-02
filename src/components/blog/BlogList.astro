@@ -12,11 +12,13 @@ const { posts } = Astro.props
 
 <BlogFilter client:load />
 
-<div class="posts" id="posts-container">
+<ul class="posts" id="posts-container">
   {posts.map(post => (
-    <BlogCard {post} />
+    <li data-date={post.data.publishedAt.toISOString()}>
+      <BlogCard {post} />
+    </li>
   ))}
-</div>
+</ul>
 
 <style>
 .posts {

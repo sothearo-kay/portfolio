@@ -1,25 +1,26 @@
 <script lang="ts">
-  import { onDestroy, onMount } from 'svelte'
-  import type { Snippet } from 'svelte'
+  import type { Snippet } from "svelte"
+  import { onDestroy, onMount } from "svelte"
 
   interface Props {
     target?: string | HTMLElement
     children: Snippet
   }
 
-  let { target = 'body', children }: Props = $props()
+  const { target = "body", children }: Props = $props()
 
   let portalElement: HTMLElement | null = null
 
   onMount(() => {
     let targetElement: HTMLElement
-    
-    if (typeof target === 'string') {
+
+    if (typeof target === "string") {
       targetElement = document.querySelector(target) || document.body
-    } else {
+    }
+    else {
       targetElement = target || document.body
     }
-    
+
     targetElement.appendChild(portalElement!)
   })
 

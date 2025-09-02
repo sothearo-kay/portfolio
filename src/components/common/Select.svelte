@@ -1,12 +1,12 @@
 <script>
-  import { fly } from 'svelte/transition'
-  import Portal from './Portal.svelte'
+  import { fly } from "svelte/transition"
+  import Portal from "./Portal.svelte"
 
-  let { 
-    value = $bindable(''),
+  let {
+    value = $bindable(""),
     options = [],
-    placeholder = 'Select option',
-    onchange = () => {}
+    placeholder = "Select option",
+    onchange = () => {},
   } = $props()
 
   let isOpen = $state(false)
@@ -23,7 +23,7 @@
   }
 
   function handleKeydown(event) {
-    if (event.key === 'Escape') {
+    if (event.key === "Escape") {
       isOpen = false
     }
   }
@@ -34,7 +34,7 @@
     }
   }
 
-  let selectedOption = $derived(options.find(opt => opt.value === value))
+  const selectedOption = $derived(options.find(opt => opt.value === value))
 </script>
 
 <svelte:window onkeydown={handleKeydown} onclick={handleClickOutside} />
@@ -42,26 +42,26 @@
 <div class="select">
   <button
     bind:this={selectButton}
-    type="button" 
+    type="button"
     class="button"
     class:open={isOpen}
     onclick={toggle}
   >
     <span>{selectedOption?.label || placeholder}</span>
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="m6 9 6 6 6-6"/>
+      <path d="m6 9 6 6 6-6" />
     </svg>
   </button>
 
   {#if isOpen}
     <Portal>
-      <div 
-        class="dropdown" 
+      <div
+        class="dropdown"
         style="
-          position: absolute; 
-          top: {selectButton?.getBoundingClientRect().bottom + 4}px; 
-          left: {selectButton?.getBoundingClientRect().left}px; 
-          width: {selectButton?.offsetWidth}px;
+          position: absolute;
+          top: {selectButton?.getBoundingClientRect().bottom + 4}px;
+            left: {selectButton?.getBoundingClientRect().left}px;
+            width: {selectButton?.offsetWidth}px;
         "
         transition:fly={{ y: -6, duration: 150 }}
       >
