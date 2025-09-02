@@ -6,6 +6,15 @@ import { defineConfig } from "astro/config"
 export default defineConfig({
   site: "https://sothearo.dev",
 
+  markdown: {
+    shikiConfig: {
+      themes: {
+        light: "vitesse-light",
+        dark: "vitesse-dark",
+      },
+    },
+  },
+
   image: {
     remotePatterns: [
       {
