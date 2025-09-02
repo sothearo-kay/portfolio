@@ -111,6 +111,13 @@ class MangaFilter {
 document.addEventListener("astro:page-load", () => {
   void new MangaFilter()
 })
+
+document.addEventListener("astro:before-preparation", () => {
+  const mangaItems = document.querySelectorAll<HTMLElement>(".item")
+  mangaItems.forEach((item) => {
+    item.style.viewTransitionName = ""
+  })
+})
 </script>
 
 <style>

@@ -6,23 +6,35 @@ import Container from "~/components/common/Container.astro"
 import Heading from "~/components/common/Heading.astro"
 import Paragraph from "~/components/common/Paragraph.astro"
 import Separator from "~/components/common/Separator.astro"
+import ArrowLeft from "~/icons/arrow-left.svg"
+import ArrowRight from "~/icons/arrow-right.svg"
 import Layout from "~/layouts/blog.astro"
 import "~/styles/code.css"
 import "~/styles/prose.css"
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog", ({ data }) => !data.draft)
-  return blogEntries.map(entry => ({
+  const sortedEntries = blogEntries.sort((a, b) =>
+    new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime(),
+  )
+
+  return sortedEntries.map((entry, index) => ({
     params: { slug: entry.id },
-    props: { entry },
+    props: {
+      entry,
+      prevPost: index < sortedEntries.length - 1 ? sortedEntries[index + 1] : null,
+      nextPost: index > 0 ? sortedEntries[index - 1] : null,
+    },
   }))
 }
 
 interface Props {
   entry: CollectionEntry<"blog">
+  prevPost: CollectionEntry<"blog"> | null
+  nextPost: CollectionEntry<"blog"> | null
 }
 
-const { entry }: Props = Astro.props
+const { entry, prevPost, nextPost }: Props = Astro.props
 const { Content } = await render(entry)
 ---
 
@@ -38,6 +50,31 @@ const { Content } = await render(entry)
       <Separator />
       <Content />
     </Container>
+
+    <Container class="navigation">
+      <Separator />
+      <nav class="buttons">
+        {prevPost && (
+          <a href={`/blog/${prevPost.id}`} class="button prev">
+            <ArrowLeft />
+            <div class="content">
+              <span class="label">Previous</span>
+              <span class="title">{prevPost.data.title}</span>
+            </div>
+          </a>
+        )}
+
+        {nextPost && (
+          <a href={`/blog/${nextPost.id}`} class="button next">
+            <div class="content">
+              <span class="label">Next</span>
+              <span class="title">{nextPost.data.title}</span>
+            </div>
+            <ArrowRight />
+          </a>
+        )}
+      </nav>
+    </Container>
   </article>
 </Layout>
 
@@ -46,19 +83,87 @@ const { Content } = await render(entry)
   padding-top: 2rem;
 
   .header {
-    & h1 {
+    h1 {
       margin-block: 0;
     }
 
-    & p {
+    p {
       margin-top: 0.5rem;
       margin-bottom: 0.75rem;
     }
   }
 
-  .prose {
-    & .separator {
-      margin-block: 1.75rem;
+  .prose .separator {
+    margin-block: 1.75rem;
+  }
+
+  .navigation .separator {
+    margin-block: 2.25rem;
+  }
+}
+
+.navigation {
+  .buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    min-height: 4rem;
+
+    &:hover {
+      background-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
+    }
+
+    &.prev {
+      justify-content: start;
+      text-align: left;
+    }
+
+    &.next {
+      justify-content: end;
+      text-align: right;
+      grid-column-start: 2;
+    }
+
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      color: var(--color-foreground-muted);
+      flex-shrink: 0;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      min-width: 0;
+    }
+
+    .label {
+      font: var(--font-xs);
+      color: var(--color-foreground-muted);
+      text-transform: capitalize;
+      letter-spacing: 0.05em;
+      font-weight: 500;
+    }
+
+    .title {
+      font: var(--font-sm);
+      font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 }
