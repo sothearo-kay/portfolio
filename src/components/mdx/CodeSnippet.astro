@@ -1,0 +1,14 @@
+---
+import CopyButton from "./CopyButton.svelte"
+---
+
+<div class="code-snippet">
+  <slot />
+  <CopyButton client:load />
+</div>
+
+<style>
+  .code-snippet {
+    position: relative;
+  }
+</style>
