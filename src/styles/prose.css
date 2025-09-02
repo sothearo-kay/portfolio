@@ -70,4 +70,76 @@
     padding-left: 1rem;
     border-left: 3px solid var(--color-accent-foreground);
   }
+
+  table {
+    display: block;
+    max-width: fit-content;
+    margin: 1rem 0;
+    overflow-x: auto;
+    border-collapse: collapse;
+    white-space: nowrap;
+
+    th,
+    td {
+      min-width: 75px;
+    }
+
+    th {
+      text-align: left;
+      padding: 0.4rem 0.8rem;
+      border-bottom: 2px solid var(--color-border);
+    }
+
+    td {
+      padding: 0.2rem 0.8rem;
+    }
+
+    tr {
+      border-bottom: 1px solid var(--color-border-subtle);
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    & > * {
+      line-height: 2rem;
+    }
+  }
+
+  hr {
+    width: 100%;
+    margin: 2rem auto;
+    height: 1px;
+    border: none;
+    background-color: var(--color-border-subtle);
+  }
+
+  pre,
+  table {
+    &::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--color-background);
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--color-foreground-muted);
+      border-radius: 8px;
+      border: 2px solid var(--color-background);
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: var(--color-foreground);
+    }
+
+    @supports (scrollbar-color: auto) {
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-foreground-muted) var(--color-background);
+    }
+  }
 }

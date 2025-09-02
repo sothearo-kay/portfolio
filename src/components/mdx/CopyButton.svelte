@@ -59,24 +59,25 @@
     height: 2rem;
     border-radius: 0.5rem;
     background-color: transparent;
-    border: 1px solid transparent;
+    border: 1px solid var(--color-border);
+    transform: scale(0.95);
+    transform-origin: top right;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: 0.2s ease;
-    transition-property: opacity, background-color, border-color;
+    transition-property: opacity, background-color, transform;
     opacity: 0;
   }
 
   :global(.code-snippet:hover) .copy-button,
   .copy-button.copied {
     opacity: 1;
-    border-color: var(--color-border);
+    transform: scale(1);
   }
 
   .copy-button:hover {
     background-color: var(--color-accent);
-    color: var(--color-foreground);
   }
 
   .tooltip {
