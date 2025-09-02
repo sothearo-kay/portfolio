@@ -1,4 +1,5 @@
 // @ts-check
+import mdx from "@astrojs/mdx"
 import svelte from "@astrojs/svelte"
 import { defineConfig } from "astro/config"
 
@@ -25,5 +26,5 @@ export default defineConfig({
     ],
   },
 
-  integrations: [svelte()],
+  integrations: [svelte(), mdx()],
 })
