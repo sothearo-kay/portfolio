@@ -63,8 +63,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: 0.15s ease-in-out;
-    transition-property: background-color, color, opacity, border-color;
+    transition: 0.2s ease;
+    transition-property: opacity, background-color, border-color;
     opacity: 0;
   }
 

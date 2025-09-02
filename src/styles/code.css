@@ -1,3 +1,7 @@
+:root {
+  --shiki-light-bg: oklch(98% 0.003 240deg);
+}
+
 [data-theme="dark"] {
   .astro-code,
   .astro-code span {
@@ -10,11 +14,8 @@
   }
 }
 
-:root {
-  --shiki-light-bg: oklch(98% 0.003 240deg);
-}
-
 code {
+  background-color: var(--color-accent);
   font: var(--font-code-inline);
   border-radius: 4px;
   padding: 0.1rem 0.2rem;
@@ -29,6 +30,7 @@ pre {
   & code {
     display: grid;
     padding: 10px 0;
+    background-color: transparent;
     font: var(--font-code-block);
     counter-reset: line;
     counter-increment: line 0;
@@ -38,7 +40,11 @@ pre {
       border-left: 3px solid transparent;
 
       &::before {
-        color: color-mix(in srgb, var(--color-foreground-muted) 70%, transparent);
+        color: color-mix(
+          in srgb,
+          var(--color-foreground-muted) 70%,
+          transparent
+        );
         content: counter(line);
         counter-increment: line;
         width: 1rem;

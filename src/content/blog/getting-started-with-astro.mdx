@@ -6,6 +6,8 @@ tags: ["astro", "javascript", "web-development"]
 draft: false
 ---
 
+import CodeSnippet from "~/components/mdx/CodeSnippet.astro";
+
 Astro is a modern web framework that delivers lightning-fast performance by shipping zero JavaScript by default. In this post, we'll explore why Astro is an excellent choice for building content-focused websites.
 
 ## What makes Astro special?
@@ -21,10 +23,14 @@ Astro uses a unique "islands architecture" that allows you to build your site wi
 
 ## Getting started
 
+<CodeSnippet>
+
 ```bash
 npm create astro@latest
 cd my-astro-site
 npm run dev
 ```
+
+</CodeSnippet>
 
 That's it! You now have a blazing-fast Astro site running locally.

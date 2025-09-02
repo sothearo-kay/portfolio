@@ -64,4 +64,10 @@
   em {
     font-style: italic;
   }
+
+  blockquote {
+    margin: 1rem 0;
+    padding-left: 1rem;
+    border-left: 3px solid var(--color-accent-foreground);
+  }
 }
