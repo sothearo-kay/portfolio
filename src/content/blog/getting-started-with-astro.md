@@ -6,8 +6,6 @@ tags: ["astro", "javascript", "web-development"]
 draft: false
 ---
 
-# Getting Started with Astro
-
 Astro is a modern web framework that delivers lightning-fast performance by shipping zero JavaScript by default. In this post, we'll explore why Astro is an excellent choice for building content-focused websites.
 
 ## What makes Astro special?
@@ -30,4 +28,3 @@ npm run dev
 ```
 
 That's it! You now have a blazing-fast Astro site running locally.
-

@@ -28,6 +28,17 @@ h4 {
   font-family: var(--font-heading);
 }
 
+a.link {
+  color: var(--color-accent-foreground);
+  text-underline-offset: 0.2em;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--color-foreground);
+  }
+}
+
 section:first-of-type {
   padding-block: 2rem;
 }
@@ -56,10 +67,7 @@ button:not(:disabled),
 ul {
   margin-block: 0;
   padding-inline: 0;
-}
-
-li {
-  list-style: none;
+  list-style-type: none;
 }
 
 a {

@@ -1,8 +1,8 @@
 ---
 import type { CollectionEntry } from "astro:content"
-import Date from "~/components/common/Date.astro"
 import Heading from "~/components/common/Heading.astro"
 import Paragraph from "~/components/common/Paragraph.astro"
+import BlogMeta from "./BlogMeta.astro"
 
 interface Props {
   post: CollectionEntry<"blog">
@@ -21,16 +21,7 @@ const { post } = Astro.props
       {post.data.description}
     </Paragraph>
 
-    <div class="meta">
-      <Date date={post.data.publishedAt} />
-      {post.data.tags.length > 0 && (
-        <div class="tags">
-          {post.data.tags.map(tag => (
-            <span class="tag">{tag}</span>
-          ))}
-        </div>
-      )}
-    </div>
+    <BlogMeta date={post.data.publishedAt} tags={post.data.tags} />
   </a>
 </article>
 
@@ -62,23 +53,5 @@ const { post } = Astro.props
     margin-bottom: 0.75rem;
   }
 
-  .meta {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-
-    .tags {
-      display: flex;
-      gap: 0.25rem;
-
-      .tag {
-        font: var(--font-xs);
-        color: var(--color-foreground-muted);
-        background: var(--color-background-secondary);
-        padding: 0.125rem 0.375rem;
-        border-radius: 0.25rem;
-      }
-    }
-  }
 }
 </style>

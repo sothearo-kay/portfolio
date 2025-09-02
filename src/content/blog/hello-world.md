@@ -6,8 +6,6 @@ image: "/images/hello-world.jpg"
 tags: ["personal", "web-development", "astro"]
 ---
 
-# Welcome to My Blog!
-
 This is my first blog post. I'm excited to share my journey as a frontend developer and my experiences with modern web technologies.
 
 ## What You Can Expect

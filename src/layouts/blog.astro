@@ -1,0 +1,39 @@
+---
+import Footer from "~/components/app/Footer.astro"
+import Head from "~/components/app/Head.astro"
+import Header from "~/components/app/Header.astro"
+
+interface Props {
+  title: string
+  description: string
+}
+
+const { title, description } = Astro.props
+---
+
+<html lang="en">
+  <Head {title} {description} />
+  <body class="app">
+    <Header />
+    <main transition:animate="fade">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+.app {
+  width: 100%;
+  max-width: 58rem;
+  min-height: 100dvh;
+  margin-inline: auto;
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+  border-inline: 1px solid color-mix(in srgb, var(--color-border) 40%, transparent);
+
+  @media (max-width: 768px) {
+    border-inline: none;
+  }
+}
+</style>
