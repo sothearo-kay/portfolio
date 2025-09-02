@@ -36,11 +36,6 @@
   .portal-container {
     position: fixed;
     inset: 0;
-    pointer-events: none;
     z-index: 9999;
-  }
-
-  .portal-container > :global(*) {
-    pointer-events: auto;
   }
 </style>
