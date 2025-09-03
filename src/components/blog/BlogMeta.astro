@@ -50,6 +50,10 @@ const { date, tags } = Astro.props
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    order: -1;
+  }
 }
 
 .tag {
