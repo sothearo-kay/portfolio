@@ -35,9 +35,9 @@ function getTransitionName(title: string) {
     ))}
   </div>
 
-  <div class="grid">
+  <ul class="grid">
     {mangaList.map(manga => (
-      <div
+      <li
         class="item"
         data-status={manga.finished ? "finished" : "reading"}
         style={`view-transition-name: ${getTransitionName(manga.title)}`}
@@ -46,9 +46,9 @@ function getTransitionName(title: string) {
           title={manga.title}
           coverId={manga.coverId}
         />
-      </div>
+      </li>
     ))}
-  </div>
+  </ul>
 </div>
 
 <script>
@@ -110,6 +110,13 @@ class MangaFilter {
 
 document.addEventListener("astro:page-load", () => {
   void new MangaFilter()
+})
+
+document.addEventListener("astro:before-preparation", () => {
+  const mangaItems = document.querySelectorAll<HTMLElement>(".item")
+  mangaItems.forEach((item) => {
+    item.style.viewTransitionName = ""
+  })
 })
 </script>
 

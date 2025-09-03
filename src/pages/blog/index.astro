@@ -1,0 +1,31 @@
+---
+import { getCollection } from "astro:content"
+import BlogList from "~/components/blog/BlogList.astro"
+import Heading from "~/components/common/Heading.astro"
+import Paragraph from "~/components/common/Paragraph.astro"
+import Layout from "~/layouts/default.astro"
+
+const blogPosts = await getCollection("blog", ({ data }) => !data.draft)
+const sortedPosts = blogPosts.sort((a, b) =>
+  new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime(),
+)
+---
+
+<Layout title="Blog" description="Blog posts and articles">
+  <section>
+    <Heading as="h1" size="2xl">Blog</Heading>
+    <Paragraph secondary>
+      My thoughts on web development, design, and technology.
+    </Paragraph>
+
+    {sortedPosts.length > 0
+      ? (
+        <BlogList posts={sortedPosts} />
+      )
+      : (
+        <Paragraph secondary>
+          No blog posts yet. Check back soon!
+        </Paragraph>
+      )}
+  </section>
+</Layout>

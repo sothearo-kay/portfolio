@@ -1,8 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700&family=Open+Sans:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=M+PLUS+Rounded+1c:wght@500;700&family=Open+Sans:wght@400;500&display=swap");
 
 :root {
   --font-heading: "M PLUS Rounded 1c", system-ui, sans-serif;
   --font-body: "Open Sans", system-ui, sans-serif;
+  --font-code: "JetBrains Mono", monospace;
 
   --font-size-xs: clamp(0.75rem, 0.7rem + 0.2vi, 0.875rem);
   --font-size-sm: clamp(0.875rem, 0.8rem + 0.3vi, 1rem);
@@ -21,4 +22,6 @@
   --font-2xl: var(--font-size-2xl) / 1.2 var(--font-heading);
   --font-3xl: var(--font-size-3xl) / 1.1 var(--font-heading);
   --font-4xl: var(--font-size-4xl) / 1 var(--font-heading);
+  --font-code-inline: var(--font-size-sm) / 1.4 var(--font-code);
+  --font-code-block: var(--font-size-sm) / 1.6 var(--font-code);
 }

@@ -1,0 +1,33 @@
+---
+import type { CollectionEntry } from "astro:content"
+import BlogCard from "./BlogCard.astro"
+import BlogFilter from "./BlogFilter.svelte"
+
+interface Props {
+  posts: CollectionEntry<"blog">[]
+}
+
+const { posts } = Astro.props
+---
+
+<BlogFilter client:load />
+
+<ul class="posts" id="posts-container">
+  {posts.map(post => (
+    <li data-date={post.data.publishedAt.toISOString()}>
+      <BlogCard {post} />
+    </li>
+  ))}
+</ul>
+
+<style>
+.posts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  @media (max-width: 768px) {
+    gap: 2rem;
+  }
+}
+</style>
