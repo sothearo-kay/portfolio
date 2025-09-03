@@ -20,10 +20,11 @@ interface Props {
 }
 
 const { entry, prevPost, nextPost } = Astro.props
+const ogImageUrl = `${Astro.url.origin}/blog/${entry.id}/og.png`
 ---
 
 <html lang="en" transition:name="root">
-  <Head title={entry.data.title} description={entry.data.description} />
+  <Head title={entry.data.title} description={entry.data.description} ogImage={ogImageUrl} />
   <body class="app">
     <Header />
     <main transition:animate="fade">
@@ -48,24 +49,6 @@ const { entry, prevPost, nextPost } = Astro.props
 </html>
 
 <style>
-.app {
-  width: 100%;
-  max-width: 58rem;
-  min-height: 100dvh;
-  margin-inline: auto;
-  display: grid;
-  grid-template-rows: max-content 1fr max-content;
-  border-inline: 1px solid color-mix(in srgb, var(--color-border) 40%, transparent);
-
-  @media (max-width: 768px) {
-    border-inline: none;
-  }
-
-  main {
-    min-width: 0;
-  }
-}
-
 .post {
   padding-top: 2rem;
 

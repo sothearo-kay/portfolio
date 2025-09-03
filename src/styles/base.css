@@ -16,6 +16,25 @@ body {
   font-family: var(--font-body);
 }
 
+.app {
+  width: 100%;
+  max-width: 58rem;
+  min-height: 100dvh;
+  margin-inline: auto;
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+  border-inline: 1px solid
+    color-mix(in srgb, var(--color-border) 40%, transparent);
+
+  @media (max-width: 768px) {
+    border-inline: none;
+  }
+
+  main {
+    min-width: 0;
+  }
+}
+
 p {
   text-wrap: pretty;
 }
