@@ -20,10 +20,11 @@ interface Props {
 }
 
 const { entry, prevPost, nextPost } = Astro.props
+const ogImageUrl = `${Astro.url.origin}/blog/${entry.id}/og.png`
 ---
 
 <html lang="en" transition:name="root">
-  <Head title={entry.data.title} description={entry.data.description} />
+  <Head title={entry.data.title} description={entry.data.description} ogImage={ogImageUrl} />
   <body class="app">
     <Header />
     <main transition:animate="fade">
