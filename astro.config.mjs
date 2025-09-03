@@ -1,7 +1,7 @@
 // @ts-check
 import mdx from "@astrojs/mdx"
 import svelte from "@astrojs/svelte"
-import vercel from "@astrojs/vercel/static"
+import vercel from "@astrojs/vercel"
 import { defineConfig } from "astro/config"
 
 // https://astro.build/config
@@ -15,6 +15,7 @@ export default defineConfig({
 
   build: {
     inlineStylesheets: "always",
+    format: "file",
   },
 
   experimental: {
@@ -46,9 +47,5 @@ export default defineConfig({
   ],
 
   output: "static",
-  adapter: vercel({
-    webAnalytics: {
-      enabled: true,
-    },
-  }),
+  adapter: vercel(),
 })

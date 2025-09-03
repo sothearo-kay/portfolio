@@ -95,7 +95,7 @@
   border: 1px solid var(--color-border-subtle);
   border-radius: 0.5rem;
   color: var(--color-foreground);
-  font: var(--font-xs);
+  font: var(--font-sm);
   height: 2.25rem;
   padding-inline: 0.75rem;
   transition: border-color 0.2s ease;
@@ -136,7 +136,7 @@
   background: transparent;
   border: none;
   color: var(--color-foreground);
-  font: var(--font-xs);
+  font: var(--font-sm);
   border-radius: 0.25rem;
   margin-bottom: 0.125rem;
   box-sizing: border-box;

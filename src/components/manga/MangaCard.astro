@@ -1,12 +1,15 @@
 ---
 import { Picture } from "astro:assets"
+import StarIcon from "~/icons/star.svg"
+import Separator from "../common/Separator.astro"
 
 interface Props {
   title: string
   coverId: string
+  rating?: number
 }
 
-const { title, coverId } = Astro.props
+const { title, coverId, rating } = Astro.props
 ---
 
 <div class="card">
@@ -22,7 +25,19 @@ const { title, coverId } = Astro.props
       data-loaded="false"
     />
   </div>
-  <h3 class="title">{title}</h3>
+  <h3 class="title">
+    {title}
+    {rating && (
+      <div class="rating-section">
+        <Separator />
+        <div class="stars">
+          {Array.from({ length: rating }, () => (
+            <StarIcon class="star" />
+          ))}
+        </div>
+      </div>
+    )}
+  </h3>
 </div>
 
 <script>
@@ -88,11 +103,32 @@ const { title, coverId } = Astro.props
   .title {
     font: var(--font-sm);
     font-family: var(--font-heading);
-    font-weight: 500;
-    text-align: center;
+    font-weight: 700;
     color: var(--color-foreground);
     text-transform: capitalize;
     margin-block: 0;
+
+    .rating-section {
+      display: flex;
+      margin-top: 0.125rem;
+      align-items: center;
+      gap: 0.5rem;
+
+      & .separator {
+        flex: 1;
+      }
+
+      .stars {
+        display: flex;
+        gap: 0.125rem;
+
+        .star {
+          width: 0.75rem;
+          height: 0.75rem;
+          color: #fbbf24;
+        }
+      }
+    }
   }
 }
 
