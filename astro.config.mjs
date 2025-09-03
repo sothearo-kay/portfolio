@@ -8,13 +8,12 @@ export default defineConfig({
   site: "https://sothearo.dev",
 
   prefetch: {
-    prefetchAll: true,
     defaultStrategy: "viewport",
+    prefetchAll: true,
   },
 
   build: {
     inlineStylesheets: "always",
-    format: "file",
   },
 
   experimental: {
