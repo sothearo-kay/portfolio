@@ -40,11 +40,7 @@ pre {
       border-left: 3px solid transparent;
 
       &::before {
-        color: color-mix(
-          in srgb,
-          var(--color-foreground-muted) 70%,
-          transparent
-        );
+        color: color-mix(in srgb, var(--color-foreground-muted) 70%, transparent);
         content: counter(line);
         counter-increment: line;
         width: 1rem;

@@ -4,7 +4,7 @@
   }
 
   :is(h1, h2, h3, h4) {
-    margin-top: 1.75rem;
+    margin-top: 2.25rem;
     margin-bottom: 0;
   }
 
@@ -31,6 +31,17 @@
   p {
     font: var(--font-md);
     margin-top: 0.5rem;
+  }
+
+  a {
+    color: var(--color-accent-foreground);
+    text-underline-offset: 3px;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--color-foreground);
+    }
   }
 
   ul,

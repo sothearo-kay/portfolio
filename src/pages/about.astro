@@ -44,5 +44,16 @@ import Layout from "~/layouts/default.astro"
   p {
     margin-block: 0;
   }
+
+  .link {
+    color: var(--color-accent-foreground);
+    text-underline-offset: 3px;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--color-foreground);
+    }
+  }
 }
 </style>

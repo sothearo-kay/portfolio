@@ -20,7 +20,7 @@ const { title, coverId, rating } = Astro.props
       width={256}
       height={384}
       widths={[256, 512]}
-      formats={["avif", "webp"]}
+      formats={["avif", "png"]}
       class="cover"
       data-loaded="false"
     />
@@ -114,7 +114,7 @@ const { title, coverId, rating } = Astro.props
       align-items: center;
       gap: 0.5rem;
 
-      & .separator {
+      .separator {
         flex: 1;
       }
 
