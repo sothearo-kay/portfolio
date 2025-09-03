@@ -1,6 +1,7 @@
 // @ts-check
 import mdx from "@astrojs/mdx"
 import svelte from "@astrojs/svelte"
+import vercel from "@astrojs/vercel/static"
 import { defineConfig } from "astro/config"
 
 // https://astro.build/config
@@ -8,13 +9,12 @@ export default defineConfig({
   site: "https://sothearo.dev",
 
   prefetch: {
-    prefetchAll: true,
     defaultStrategy: "viewport",
+    prefetchAll: true,
   },
 
   build: {
     inlineStylesheets: "always",
-    format: "file",
   },
 
   experimental: {
@@ -44,4 +44,11 @@ export default defineConfig({
     svelte(),
     mdx(),
   ],
+
+  output: "static",
+  adapter: vercel({
+    webAnalytics: {
+      enabled: true,
+    },
+  }),
 })
