@@ -1,12 +1,12 @@
-html {
-  box-sizing: border-box;
-  scrollbar-gutter: stable;
-}
-
 *,
 *:before,
 *:after {
   box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  scrollbar-gutter: stable;
 }
 
 body {

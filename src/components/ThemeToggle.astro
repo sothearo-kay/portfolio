@@ -25,18 +25,24 @@ document.addEventListener("astro:page-load", () => {
     && document.startViewTransition
     && !window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
+  function applyTheme(isDark: boolean) {
+    if (isDark) {
+      html.removeAttribute("data-theme")
+      localStorage.setItem("theme", "light")
+      document.querySelector("meta[name=\"theme-color\"]")?.setAttribute("content", "#ffffff")
+    }
+    else {
+      html.setAttribute("data-theme", "dark")
+      localStorage.setItem("theme", "dark")
+      document.querySelector("meta[name=\"theme-color\"]")?.setAttribute("content", "#1a1a1a")
+    }
+  }
+
   function toggleTheme(event: MouseEvent) {
     const isDark = html.getAttribute("data-theme") === "dark"
 
     if (!isAppearanceTransition || !event) {
-      if (isDark) {
-        html.removeAttribute("data-theme")
-        localStorage.setItem("theme", "light")
-      }
-      else {
-        html.setAttribute("data-theme", "dark")
-        localStorage.setItem("theme", "dark")
-      }
+      applyTheme(isDark)
       return
     }
 
@@ -48,14 +54,7 @@ document.addEventListener("astro:page-load", () => {
     )
 
     const transition = document.startViewTransition(() => {
-      if (isDark) {
-        html.removeAttribute("data-theme")
-        localStorage.setItem("theme", "light")
-      }
-      else {
-        html.setAttribute("data-theme", "dark")
-        localStorage.setItem("theme", "dark")
-      }
+      applyTheme(isDark)
     })
 
     // Animate the transition with a circular clip path

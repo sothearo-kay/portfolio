@@ -22,6 +22,6 @@
   --font-2xl: var(--font-size-2xl) / 1.2 var(--font-heading);
   --font-3xl: var(--font-size-3xl) / 1.1 var(--font-heading);
   --font-4xl: var(--font-size-4xl) / 1 var(--font-heading);
-  --font-code-inline: var(--font-size-xs) / 1.4 var(--font-code);
-  --font-code-block: var(--font-size-xs) / 1.6 var(--font-code);
+  --font-code-inline: var(--font-size-sm) / 1.4 var(--font-code);
+  --font-code-block: var(--font-size-sm) / 1.6 var(--font-code);
 }

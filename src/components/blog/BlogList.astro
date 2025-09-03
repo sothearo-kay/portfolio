@@ -25,5 +25,9 @@ const { posts } = Astro.props
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  @media (max-width: 768px) {
+    gap: 2rem;
+  }
 }
 </style>

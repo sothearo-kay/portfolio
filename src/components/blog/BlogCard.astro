@@ -17,7 +17,7 @@ const { post } = Astro.props
       {post.data.title}
     </Heading>
 
-    <Paragraph secondary size="xs" class="description">
+    <Paragraph secondary size="sm" class="description">
       {post.data.description}
     </Paragraph>
 
@@ -31,9 +31,11 @@ const { post } = Astro.props
   border-radius: 0.5rem;
   transition: all 0.2s ease;
 
-  &:hover {
-    background: color-mix(in srgb, var(--color-accent) 40%, transparent);
-    border-color: var(--color-border-subtle);
+  @media (min-width: 769px) {
+    &:hover {
+      background: color-mix(in srgb, var(--color-accent) 40%, transparent);
+      border-color: var(--color-border-subtle);
+    }
   }
 
   .link {
@@ -41,6 +43,10 @@ const { post } = Astro.props
     padding: 1.5rem;
     color: inherit;
     text-decoration: none;
+
+    @media (max-width: 768px) {
+      padding: 0;
+    }
   }
 
   & .title {
