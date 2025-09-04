@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.4",
+    "@astrojs/rss": "^4.0.12",
     "@astrojs/svelte": "^7.1.0",
     "@astrojs/vercel": "^8.2.7",
     "@vercel/analytics": "^1.5.0",

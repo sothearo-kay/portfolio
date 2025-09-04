@@ -80,8 +80,8 @@ export const GET: APIRoute = async ({ params }) => {
                         props: {
                           src: logoDataUrl,
                           style: {
-                            width: "80px",
-                            height: "80px",
+                            width: "100px",
+                            height: "100px",
                             marginRight: "16px",
                           },
                         },
@@ -91,9 +91,9 @@ export const GET: APIRoute = async ({ params }) => {
                         props: {
                           children: siteName,
                           style: {
-                            fontSize: 24,
-                            fontWeight: 700,
                             color: "#111827",
+                            fontSize: 40,
+                            fontWeight: 700,
                             fontFamily: "M PLUS Rounded 1c",
                           },
                         },
