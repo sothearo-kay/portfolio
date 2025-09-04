@@ -48,10 +48,14 @@ const { prevPost, nextPost } = Astro.props
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1.5rem;
+
+      @media (max-width: 640px) {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
     }
 
     .button {
-      width: 100%;
       display: flex;
       align-items: center;
       gap: 0.75rem;
@@ -61,6 +65,7 @@ const { prevPost, nextPost } = Astro.props
       text-decoration: none;
       transition: all 0.2s ease;
       min-height: 4rem;
+      min-width: 0;
 
       &:hover {
         background-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
@@ -69,12 +74,13 @@ const { prevPost, nextPost } = Astro.props
       &.prev {
         justify-content: start;
         text-align: left;
+        grid-column: 1;
       }
 
       &.next {
         justify-content: end;
         text-align: right;
-        grid-column-start: 2;
+        grid-column: 2;
       }
 
       svg {
