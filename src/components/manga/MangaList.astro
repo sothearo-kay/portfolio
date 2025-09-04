@@ -53,114 +53,49 @@ function getTransitionName(title: string) {
 </div>
 
 <script>
-type FilterType = "all" | "reading" | "finished"
-
-class MangaFilter {
-  private filterButtons: NodeListOf<HTMLButtonElement>
-  private mangaItems: NodeListOf<HTMLElement>
-
-  constructor() {
-    this.filterButtons = document.querySelectorAll(".btn")
-    this.mangaItems = document.querySelectorAll(".item")
-    this.init()
-  }
-
-  private init() {
-    this.filterButtons.forEach((button) => {
-      button.addEventListener("click", this.handleFilterClick)
-    })
-  }
-
-  private handleFilterClick = (event: Event) => {
-    const button = event.target as HTMLButtonElement
-    const filterType = button.getAttribute("data-filter") as FilterType
-
-    if (filterType) {
-      this.filterManga(filterType)
-    }
-  }
-
-  private filterManga(filterType: FilterType) {
-    if ("startViewTransition" in document) {
-      document.startViewTransition(() => {
-        this.applyFilter(filterType)
-      })
-    }
-    else {
-      this.applyFilter(filterType)
-    }
-  }
-
-  private applyFilter(filterType: FilterType) {
-    this.mangaItems.forEach((item) => {
-      const status = item.getAttribute("data-status") as "reading" | "finished"
-      const shouldShow = filterType === "all" || status === filterType
-      item.style.display = shouldShow ? "block" : "none"
-    })
-
-    this.updateButtonStates(filterType)
-  }
-
-  private updateButtonStates(activeFilter: FilterType) {
-    this.filterButtons.forEach((button) => {
-      const isActive = button.getAttribute("data-filter") === activeFilter
-      button.classList.toggle("active", isActive)
-    })
-  }
-}
-
-document.addEventListener("astro:page-load", () => {
-  void new MangaFilter()
-})
-
-document.addEventListener("astro:before-preparation", () => {
-  const mangaItems = document.querySelectorAll<HTMLElement>(".item")
-  mangaItems.forEach((item) => {
-    item.style.viewTransitionName = ""
-  })
-})
+  import "~/scripts/manga-filter.ts"
 </script>
 
 <style>
-.container {
-  width: 100%;
+  .container {
+    width: 100%;
 
-  .filters {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-block: 1.75rem;
-  }
-
-  .btn {
-    height: 2rem;
-    padding-inline: 0.75rem;
-    border: 1px solid var(--color-border);
-    background: var(--color-background);
-    color: var(--color-foreground-muted);
-    border-radius: 999px;
-    font: var(--font-xs);
-    font-weight: 500;
-    transition: 0.2s ease;
-    transition-property: background-color, border-color, color;
-
-    &:hover {
-      background-color: var(--color-background-secondary);
-      border-color: var(--color-border);
-      color: var(--color-foreground);
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-block: 1.75rem;
     }
 
-    &.active {
-      background-color: var(--color-foreground);
-      color: var(--color-background);
-      border-color: var(--color-foreground);
+    .btn {
+      height: 2rem;
+      padding-inline: 0.75rem;
+      border: 1px solid var(--color-border);
+      background: var(--color-background);
+      color: var(--color-foreground-muted);
+      border-radius: 999px;
+      font: var(--font-xs);
+      font-weight: 500;
+      transition: 0.2s ease;
+      transition-property: background-color, border-color, color;
+
+      &:hover {
+        background-color: var(--color-background-secondary);
+        border-color: var(--color-border);
+        color: var(--color-foreground);
+      }
+
+      &.active {
+        background-color: var(--color-foreground);
+        color: var(--color-background);
+        border-color: var(--color-foreground);
+      }
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1.5rem;
     }
   }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 1.5rem;
-  }
-}
 </style>

@@ -39,73 +39,73 @@ const { prevPost, nextPost } = Astro.props
 </Container>
 
 <style>
-.navigation {
-  .separator {
-    margin-block: 2.25rem;
-  }
-
-  .buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-  }
-
-  .button {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1.25rem;
-    border: 1px solid var(--color-border);
-    border-radius: 10px;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    min-height: 4rem;
-
-    &:hover {
-      background-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
+  .navigation {
+    .separator {
+      margin-block: 2.25rem;
     }
 
-    &.prev {
-      justify-content: start;
-      text-align: left;
+    .buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
     }
 
-    &.next {
-      justify-content: end;
-      text-align: right;
-      grid-column-start: 2;
-    }
-
-    svg {
-      width: 1.25rem;
-      height: 1.25rem;
-      color: var(--color-foreground-muted);
-      flex-shrink: 0;
-    }
-
-    .content {
+    .button {
+      width: 100%;
       display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-      min-width: 0;
-    }
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1.25rem;
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      min-height: 4rem;
 
-    .label {
-      font: var(--font-xs);
-      color: var(--color-foreground-muted);
-      text-transform: capitalize;
-      letter-spacing: 0.05em;
-      font-weight: 500;
-    }
+      &:hover {
+        background-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
+      }
 
-    .title {
-      font: var(--font-sm);
-      font-weight: 500;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      &.prev {
+        justify-content: start;
+        text-align: left;
+      }
+
+      &.next {
+        justify-content: end;
+        text-align: right;
+        grid-column-start: 2;
+      }
+
+      svg {
+        width: 1.25rem;
+        height: 1.25rem;
+        color: var(--color-foreground-muted);
+        flex-shrink: 0;
+      }
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        min-width: 0;
+      }
+
+      .label {
+        font: var(--font-xs);
+        color: var(--color-foreground-muted);
+        text-transform: capitalize;
+        letter-spacing: 0.05em;
+        font-weight: 500;
+      }
+
+      .title {
+        font: var(--font-sm);
+        font-weight: 500;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
     }
   }
-}
 </style>
