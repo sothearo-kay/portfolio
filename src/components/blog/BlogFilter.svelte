@@ -14,8 +14,6 @@
   ]
 
   function handleSortChange(value) {
-    sortValue = value
-
     if (!postsContainer)
       return
 

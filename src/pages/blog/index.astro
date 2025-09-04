@@ -1,14 +1,11 @@
 ---
-import { getCollection } from "astro:content"
 import BlogList from "~/components/blog/BlogList.astro"
 import Heading from "~/components/common/Heading.astro"
 import Paragraph from "~/components/common/Paragraph.astro"
 import Layout from "~/layouts/default.astro"
+import { getPosts } from "~/utils/blog"
 
-const blogPosts = await getCollection("blog", ({ data }) => !data.draft)
-const sortedPosts = blogPosts.sort((a, b) =>
-  new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime(),
-)
+const sortedPosts = await getPosts()
 ---
 
 <Layout title="Blog" description="Blog posts and articles">
