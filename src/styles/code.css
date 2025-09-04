@@ -26,6 +26,7 @@ pre {
   overflow-x: auto;
   border-radius: 10px;
   tab-size: 2;
+  -webkit-text-size-adjust: none;
 
   & code {
     display: grid;
