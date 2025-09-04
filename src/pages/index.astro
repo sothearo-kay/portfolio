@@ -39,54 +39,54 @@ import Layout from "~/layouts/default.astro"
 </Layout>
 
 <style>
-.hero {
-  padding-block: 2rem;
-
-  .content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    align-items: center;
-  }
-
-
-  .illustration {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-  }
-}
-
-.technologies {
-  h2 {
-    margin-block: 2rem;
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
-    gap: 1rem;
-    justify-items: center;
-  }
-}
-
-@media (max-width: 768px) {
   .hero {
     padding-block: 2rem;
 
     .content {
-      grid-template-columns: 1fr;
-      text-align: center;
-      gap: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
     }
 
-    .image {
-      grid-row-start: 1;
-    }
 
     .illustration {
-      max-width: 280px;
+      width: 100%;
+      max-width: 400px;
+      height: auto;
     }
   }
-}
+
+  .technologies {
+    h2 {
+      margin-block: 2rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+      gap: 1rem;
+      justify-items: center;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding-block: 2rem;
+
+      .content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 0;
+      }
+
+      .image {
+        grid-row-start: 1;
+      }
+
+      .illustration {
+        max-width: 280px;
+      }
+    }
+  }
 </style>

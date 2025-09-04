@@ -61,63 +61,63 @@ const Icon = icons[name as keyof typeof icons]
 </div>
 
 <style>
-.tech-icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  cursor: default;
+  .tech-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: default;
 
-  .icon {
-    width: 2.5rem;
-    height: 2.5rem;
-  }
+    .icon {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
 
-  .tooltip {
-    position: absolute;
-    top: -3rem;
-    left: 50%;
-    transform: translateX(-50%) scale(0.85);
-    transform-origin: bottom center;
-    background: var(--color-background-elevated);
-    color: var(--color-foreground);
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    font: var(--font-xs);
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition-duration: 0.2s;
-    transition-property: opacity, visibility, transform;
-    z-index: 10;
-    border: 1px solid var(--color-border);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-
-    &::before,
-    &::after {
-      content: '';
+    .tooltip {
       position: absolute;
-      top: 100%;
+      top: -3rem;
       left: 50%;
-      transform: translateX(-50%);
-      border: solid transparent;
+      transform: translateX(-50%) scale(0.85);
+      transform-origin: bottom center;
+      background: var(--color-background-elevated);
+      color: var(--color-foreground);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font: var(--font-xs);
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition-duration: 0.2s;
+      transition-property: opacity, visibility, transform;
+      z-index: 10;
+      border: 1px solid var(--color-border);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: solid transparent;
+      }
+
+      &::before {
+        border-width: 5px;
+        border-top-color: var(--color-border);
+      }
+
+      &::after {
+        border-width: 4px;
+        border-top-color: var(--color-background-elevated);
+      }
     }
 
-    &::before {
-      border-width: 5px;
-      border-top-color: var(--color-border);
-    }
-
-    &::after {
-      border-width: 4px;
-      border-top-color: var(--color-background-elevated);
+    &:hover .tooltip {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) scale(1);
     }
   }
-
-  &:hover .tooltip {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) scale(1);
-  }
-}
 </style>
