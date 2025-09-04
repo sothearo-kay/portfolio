@@ -153,4 +153,14 @@
       scrollbar-color: var(--color-foreground-muted) var(--color-background);
     }
   }
+
+  img {
+    max-width: 100%;
+    border-radius: 6px;
+    content-visibility: auto;
+  }
+
+  img[alt="cover"] {
+    box-shadow: 1px 2px 5px 0 var(--color-border);
+  }
 }
