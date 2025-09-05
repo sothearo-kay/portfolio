@@ -1,4 +1,7 @@
 .prose {
+  --heading-anchor-size: 0.8em;
+  --heading-anchor-spacing: 0.5rem;
+
   & > *:last-child {
     margin-bottom: 0;
   }
@@ -6,6 +9,38 @@
   :is(h1, h2, h3, h4) {
     margin-top: 2.25rem;
     margin-bottom: 0;
+    position: relative;
+
+    &:has(a) {
+      display: flex;
+      align-items: center;
+    }
+
+    a {
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      text-decoration: none;
+      position: absolute;
+      left: calc(
+        -1 * var(--heading-anchor-spacing) - var(--heading-anchor-size)
+      );
+      top: 50%;
+      transform: translateY(-50%);
+
+      &::after {
+        content: "";
+        display: inline-block;
+        width: var(--heading-anchor-size);
+        height: var(--heading-anchor-size);
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>');
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+    }
+
+    &:hover a {
+      opacity: 1;
+    }
   }
 
   h1 {
@@ -161,6 +196,6 @@
   }
 
   img[alt="cover"] {
-    box-shadow: 1px 2px 5px 0 var(--color-border);
+    box-shadow: var(--shadow-card);
   }
 }

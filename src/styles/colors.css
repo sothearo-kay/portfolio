@@ -15,6 +15,9 @@
 
   --color-skeleton-from: oklch(96% 0 0);
   --color-skeleton-to: oklch(92% 0 0);
+
+  --shadow-card:
+    0 2px 8px 0 oklch(0% 0 0deg / 0.1), 0 1px 3px 0 oklch(0% 0 0deg / 0.06);
 }
 
 [data-theme="dark"] {
@@ -34,4 +37,7 @@
 
   --color-skeleton-from: oklch(30% 0.005 240deg);
   --color-skeleton-to: oklch(25% 0.004 240deg);
+
+  --shadow-card:
+    0 2px 8px 0 oklch(0% 0 0deg / 0.25), 0 1px 3px 0 oklch(0% 0 0deg / 0.15);
 }
