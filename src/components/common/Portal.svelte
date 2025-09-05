@@ -34,7 +34,7 @@
 </div>
 
 <style>
-  .portal-container {
+  :global(.portal-container) {
     position: fixed;
     inset: 0;
     z-index: 9999;
