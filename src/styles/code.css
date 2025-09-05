@@ -41,7 +41,11 @@ pre {
       border-left: 3px solid transparent;
 
       &::before {
-        color: color-mix(in srgb, var(--color-foreground-muted) 70%, transparent);
+        color: color-mix(
+          in srgb,
+          var(--color-foreground-muted) 70%,
+          transparent
+        );
         content: counter(line);
         counter-increment: line;
         width: 1rem;
@@ -49,6 +53,56 @@ pre {
         display: inline-block;
         text-align: right;
       }
+
+      &.highlighted {
+        background-color: var(--color-code-highlight) !important;
+        border-left-color: var(--color-accent-foreground);
+      }
+
+      &.diff.add {
+        background-color: color-mix(
+          in srgb,
+          var(--color-diff-add) 15%,
+          transparent
+        ) !important;
+        border-left-color: var(--color-diff-add);
+
+        &::before {
+          color: var(--color-diff-add);
+        }
+      }
+
+      &.diff.remove {
+        background-color: color-mix(
+          in srgb,
+          var(--color-diff-remove) 15%,
+          transparent
+        ) !important;
+        border-left-color: var(--color-diff-remove);
+
+        &::before {
+          color: var(--color-diff-remove);
+        }
+      }
+
+      &:is(.highlighted, .focused, .diff) {
+        & > span {
+          background-color: transparent !important;
+        }
+      }
+    }
+
+    &:has(.focused) span.line:not(.focused) {
+      opacity: 0.4;
+      filter: blur(1px);
+      transition:
+        opacity 0.2s ease,
+        filter 0.2s ease;
+    }
+
+    &:has(.focused):hover span.line:not(.focused) {
+      opacity: 1;
+      filter: none;
     }
   }
 }

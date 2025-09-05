@@ -9,11 +9,6 @@
   :is(h1, h2, h3, h4) {
     margin-top: 2.25rem;
     margin-bottom: 0;
-    position: relative;
-
-    &:has(a) {
-      display: inline;
-    }
 
     a {
       opacity: 0;
