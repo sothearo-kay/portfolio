@@ -3,6 +3,8 @@ import mdx from "@astrojs/mdx"
 import svelte from "@astrojs/svelte"
 import vercel from "@astrojs/vercel"
 import { defineConfig } from "astro/config"
+import rehypeAutolinkHeadings from "rehype-autolink-headings"
+import rehypeSlug from "rehype-slug"
 
 // https://astro.build/config
 export default defineConfig({
@@ -29,6 +31,10 @@ export default defineConfig({
         dark: "vitesse-dark",
       },
     },
+    rehypePlugins: [
+      rehypeSlug,
+      [rehypeAutolinkHeadings, { behavior: "append" }],
+    ],
   },
 
   image: {
