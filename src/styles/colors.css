@@ -16,6 +16,15 @@
   --color-skeleton-from: oklch(96% 0 0);
   --color-skeleton-to: oklch(92% 0 0);
 
+  --color-code-highlight: color-mix(
+    in srgb,
+    var(--color-accent) 95%,
+    oklch(98% 0.003 240deg)
+  );
+
+  --color-diff-add: oklch(65% 0.15 145deg);
+  --color-diff-remove: oklch(65% 0.15 15deg);
+
   --shadow-card:
     0 2px 8px 0 oklch(0% 0 0deg / 0.1), 0 1px 3px 0 oklch(0% 0 0deg / 0.06);
 }
@@ -37,6 +46,15 @@
 
   --color-skeleton-from: oklch(30% 0.005 240deg);
   --color-skeleton-to: oklch(25% 0.004 240deg);
+
+  --color-code-highlight: color-mix(
+    in srgb,
+    var(--color-accent) 50%,
+    oklch(18% 0.004 240deg)
+  );
+
+  --color-diff-add: oklch(55% 0.12 145deg);
+  --color-diff-remove: oklch(55% 0.12 15deg);
 
   --shadow-card:
     0 2px 8px 0 oklch(0% 0 0deg / 0.25), 0 1px 3px 0 oklch(0% 0 0deg / 0.15);

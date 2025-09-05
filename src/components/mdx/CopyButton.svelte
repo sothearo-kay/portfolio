@@ -76,6 +76,13 @@
     transform: scale(1);
   }
 
+  @media (hover: none) {
+    .copy-button {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
   .copy-button:hover {
     background-color: var(--color-accent);
   }
