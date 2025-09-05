@@ -35,27 +35,5 @@ const { title, description, ogImage } = Astro.props;
   <meta property="twitter:description" content={description} />
   {ogImage && <meta property="twitter:image" content={ogImage} />}
 
-  <script is:inline>
-    function setTheme(document) {
-      const theme = localStorage.getItem("theme")
-      const isDark = theme === "dark" || (theme !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches)
-
-      if (isDark) {
-        document.documentElement.setAttribute("data-theme", "dark")
-        document.querySelector("meta[name=\"theme-color\"]")?.setAttribute("content", "#1a1a1a")
-      }
-      else {
-        document.documentElement.removeAttribute("data-theme")
-        document.querySelector("meta[name=\"theme-color\"]")?.setAttribute("content", "#ffffff")
-      }
-    }
-
-    setTheme(document)
-
-    document.addEventListener("astro:before-swap", (event) => {
-      setTheme(event.newDocument)
-    })
-  </script>
-
   <ClientRouter fallback="swap" />
 </head>
