@@ -9,14 +9,14 @@ export async function getPosts() {
 
 export async function getPostsWithReadingTime() {
   const posts = await getPosts()
-  
+
   return Promise.all(
     posts.map(async (post) => {
       const { remarkPluginFrontmatter } = await render(post)
       return {
         ...post,
-        readingTime: remarkPluginFrontmatter.minutesRead
+        readingTime: remarkPluginFrontmatter.minutesRead as string,
       }
-    })
+    }),
   )
 }

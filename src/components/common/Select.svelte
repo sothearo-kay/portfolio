@@ -91,17 +91,16 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
-  background: var(--color-background);
-  border: 1px solid var(--color-border-subtle);
+  background: transparent;
+  border: 1px solid var(--color-border);
   border-radius: 0.5rem;
-  color: var(--color-foreground);
+  color: var(--color-foreground-muted);
   font: var(--font-sm);
-  height: 2.25rem;
-  padding-inline: 0.75rem;
-  transition: border-color 0.2s ease;
+  padding: 0.5rem 0.75rem;
+  transition: all 0.2s ease;
 
   &:hover {
-    border-color: var(--color-border);
+    background: var(--color-background-secondary);
   }
 
   svg {

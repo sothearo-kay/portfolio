@@ -1,0 +1,46 @@
+---
+import XIcon from "~/icons/x.svg"
+
+interface Props {
+  currentTag: string
+}
+
+const { currentTag } = Astro.props
+---
+
+<div class="filter">
+  <a href="/blog" class="clear">
+    <XIcon />
+    <span>Clear filter</span>
+    <span class="tag">{currentTag}</span>
+  </a>
+</div>
+
+<style>
+  .clear {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 2rem;
+    text-decoration: none;
+    color: var(--color-foreground-muted);
+    font: var(--font-sm);
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--color-background-secondary);
+    }
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+      flex-shrink: 0;
+    }
+
+    .tag {
+      border: none;
+    }
+  }
+</style>
