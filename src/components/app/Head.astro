@@ -9,9 +9,11 @@ interface Props {
   title: string
   description: string
   ogImage?: string
+  type?: "website" | "article"
 }
 
-const { title, description, ogImage = "/home.png" } = Astro.props;
+const { title, description, ogImage = "/home-og.png", type = "website" } = Astro.props
+const pageTitle = type === "article" ? title : `Sothearo - ${title}`
 ---
 
 <head>
@@ -21,11 +23,11 @@ const { title, description, ogImage = "/home.png" } = Astro.props;
   <meta name="generator" content={Astro.generator} />
   <meta name="theme-color" content="#ffffff" />
 
-  <title>{title}</title>
-  <meta name="title" content={title} />
+  <title>{pageTitle}</title>
+  <meta name="title" content={pageTitle} />
   <meta name="description" content={description} />
 
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content={type} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:image" content={ogImage} />

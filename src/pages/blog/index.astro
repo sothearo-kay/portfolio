@@ -8,11 +8,11 @@ import { getPosts } from "~/utils/blog"
 const sortedPosts = await getPosts()
 ---
 
-<Layout title="Blog" description="Blog posts and articles">
+<Layout title="Blog Posts" description="My thoughts on web development, technology, books, and life philosophy. Code by day, manga by night.">
   <section>
     <Heading as="h1" size="2xl">Blog</Heading>
     <Paragraph secondary>
-      My thoughts on web development, design, and technology. <a href="/rss.xml" class="link">Subscribe via RSS</a>.
+      My thoughts on web development, technology, books, and life philosophy. <a href="/rss.xml" class="link">Subscribe via RSS</a>.
     </Paragraph>
 
     {sortedPosts.length > 0

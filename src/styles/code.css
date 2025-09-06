@@ -41,11 +41,7 @@ pre {
       border-left: 3px solid transparent;
 
       &::before {
-        color: color-mix(
-          in srgb,
-          var(--color-foreground-muted) 70%,
-          transparent
-        );
+        color: color-mix(in srgb, var(--color-foreground-muted) 70%, transparent);
         content: counter(line);
         counter-increment: line;
         width: 1rem;
@@ -60,11 +56,7 @@ pre {
       }
 
       &.diff.add {
-        background-color: color-mix(
-          in srgb,
-          var(--color-diff-add) 15%,
-          transparent
-        ) !important;
+        background-color: color-mix(in srgb, var(--color-diff-add) 15%, transparent) !important;
         border-left-color: var(--color-diff-add);
 
         &::before {
@@ -73,11 +65,7 @@ pre {
       }
 
       &.diff.remove {
-        background-color: color-mix(
-          in srgb,
-          var(--color-diff-remove) 15%,
-          transparent
-        ) !important;
+        background-color: color-mix(in srgb, var(--color-diff-remove) 15%, transparent) !important;
         border-left-color: var(--color-diff-remove);
 
         &::before {
