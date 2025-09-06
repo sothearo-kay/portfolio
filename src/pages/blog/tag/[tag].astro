@@ -1,16 +1,11 @@
 ---
 import BlogListLayout from "~/layouts/blog-listing.astro"
-import { getPostsWithReadingTime } from "~/utils/blog"
+import { getPostsWithReadingTime, getTags } from "~/utils/blog"
 
 export async function getStaticPaths() {
-  const posts = await getPostsWithReadingTime()
+  const allTags = await getTags()
 
-  const allTags = new Set()
-  posts.forEach((post) => {
-    post.data.tags.forEach(tag => allTags.add(tag))
-  })
-
-  return Array.from(allTags).map(tag => ({
+  return allTags.map(tag => ({
     params: { tag },
   }))
 }

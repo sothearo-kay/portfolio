@@ -7,6 +7,17 @@ export async function getPosts() {
   )
 }
 
+export async function getTags() {
+  const posts = await getPosts()
+  const allTags = new Set<string>()
+
+  posts.forEach((post) => {
+    post.data.tags.forEach((tag: string) => allTags.add(tag))
+  })
+
+  return [...allTags]
+}
+
 export async function getPostsWithReadingTime() {
   const posts = await getPosts()
 
