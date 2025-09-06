@@ -10,6 +10,7 @@ import {
 import { defineConfig } from "astro/config"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeSlug from "rehype-slug"
+import { remarkReadingTime } from "./src/plugins/index.mjs"
 
 // https://astro.build/config
 export default defineConfig({
@@ -41,6 +42,7 @@ export default defineConfig({
         transformerNotationDiff(),
       ],
     },
+    remarkPlugins: [remarkReadingTime],
     rehypePlugins: [
       rehypeSlug,
       [rehypeAutolinkHeadings, { behavior: "append" }],

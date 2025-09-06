@@ -5,7 +5,7 @@ import Paragraph from "~/components/common/Paragraph.astro"
 import BlogMeta from "./BlogMeta.astro"
 
 interface Props {
-  post: CollectionEntry<"blog">
+  post: CollectionEntry<"blog"> & { readingTime?: string }
 }
 
 const { post } = Astro.props
@@ -21,7 +21,7 @@ const { post } = Astro.props
       {post.data.description}
     </Paragraph>
 
-    <BlogMeta date={post.data.publishedAt} tags={post.data.tags} />
+    <BlogMeta date={post.data.publishedAt} tags={post.data.tags} readingTime={post.readingTime} />
   </a>
 </article>
 

@@ -17,9 +17,10 @@ interface Props {
   entry: CollectionEntry<"blog">
   prevPost: CollectionEntry<"blog"> | null
   nextPost: CollectionEntry<"blog"> | null
+  readingTime?: string
 }
 
-const { entry, prevPost, nextPost } = Astro.props
+const { entry, prevPost, nextPost, readingTime } = Astro.props
 const ogImageUrl = `${Astro.url.origin}/blog/${entry.id}/og.png`
 ---
 
@@ -37,7 +38,7 @@ const ogImageUrl = `${Astro.url.origin}/blog/${entry.id}/og.png`
         <Container as="header" class="header">
           <Heading as="h1" size="2xl">{entry.data.title}</Heading>
           <Paragraph>{entry.data.description}</Paragraph>
-          <BlogMeta date={entry.data.publishedAt} tags={entry.data.tags} />
+          <BlogMeta date={entry.data.publishedAt} tags={entry.data.tags} readingTime={readingTime} />
         </Container>
 
         <Container class="prose">

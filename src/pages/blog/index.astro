@@ -3,9 +3,9 @@ import BlogList from "~/components/blog/BlogList.astro"
 import Heading from "~/components/common/Heading.astro"
 import Paragraph from "~/components/common/Paragraph.astro"
 import Layout from "~/layouts/default.astro"
-import { getPosts } from "~/utils/blog"
+import { getPostsWithReadingTime } from "~/utils/blog"
 
-const sortedPosts = await getPosts()
+const postsWithReadingTime = await getPostsWithReadingTime()
 ---
 
 <Layout title="Blog Posts" description="My thoughts on web development, technology, books, and life philosophy. Code by day, manga by night.">
@@ -15,9 +15,9 @@ const sortedPosts = await getPosts()
       My thoughts on web development, technology, books, and life philosophy. <a href="/rss.xml" class="link">Subscribe via RSS</a>.
     </Paragraph>
 
-    {sortedPosts.length > 0
+    {postsWithReadingTime.length > 0
       ? (
-        <BlogList posts={sortedPosts} />
+        <BlogList posts={postsWithReadingTime} />
       )
       : (
         <Paragraph secondary>
