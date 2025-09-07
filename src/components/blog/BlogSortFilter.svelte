@@ -45,6 +45,5 @@
   .filter {
     display: flex;
     justify-content: flex-end;
-    margin-block: 1rem;
   }
 </style>

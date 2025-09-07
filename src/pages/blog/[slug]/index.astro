@@ -24,9 +24,14 @@ interface Props {
 }
 
 const { entry, prevPost, nextPost }: Props = Astro.props
-const { Content } = await render(entry)
+const { Content, remarkPluginFrontmatter } = await render(entry)
 ---
 
-<BlogLayout {entry} {prevPost} {nextPost}>
+<BlogLayout
+  {entry}
+  {prevPost}
+  {nextPost}
+  readingTime={remarkPluginFrontmatter.minutesRead}
+>
   <Content />
 </BlogLayout>

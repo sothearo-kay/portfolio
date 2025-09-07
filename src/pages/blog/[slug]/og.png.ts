@@ -2,7 +2,7 @@ import type { APIRoute } from "astro"
 import { Buffer } from "node:buffer"
 import { readFile } from "node:fs/promises"
 import { ImageResponse } from "@vercel/og"
-import { getCollection, getEntry } from "astro:content"
+import { getCollection, getEntry, render } from "astro:content"
 import { colors, siteName } from "~/constants"
 
 async function loadGoogleFont(font: string, text: string) {
@@ -34,7 +34,9 @@ export const GET: APIRoute = async ({ params }) => {
       return new Response("Not found", { status: 404 })
     }
 
+    const { remarkPluginFrontmatter } = await render(entry)
     const { title, description, publishedAt, tags } = entry.data
+    const readingTime = remarkPluginFrontmatter.minutesRead
     const formattedDate = new Date(publishedAt).toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
@@ -43,7 +45,7 @@ export const GET: APIRoute = async ({ params }) => {
 
     const [mPlusFont, openSansFont, logoSvg] = await Promise.all([
       loadGoogleFont("M+PLUS+Rounded+1c:wght@700", `${siteName} ${title}`),
-      loadGoogleFont("Open+Sans:wght@400", `${description} ${formattedDate} ${tags?.join(" ") || ""}`),
+      loadGoogleFont("Open+Sans:wght@400", `${description} ${formattedDate} ${readingTime || ""} ${tags?.join(" ") || ""}`),
       readFile("src/icons/monkey-illustration.svg", "utf-8"),
     ])
 
@@ -155,11 +157,46 @@ export const GET: APIRoute = async ({ params }) => {
               children: [
                 {
                   props: {
-                    children: formattedDate,
+                    children: [
+                      {
+                        props: {
+                          children: formattedDate,
+                          style: {
+                            fontSize: 20,
+                            color: "#6b7280",
+                            fontFamily: "Open Sans",
+                          },
+                        },
+                        type: "div",
+                      },
+                      ...(readingTime
+                        ? [{
+                            props: {
+                              children: "•",
+                              style: {
+                                fontSize: 20,
+                                color: "#6b7280",
+                                fontFamily: "Open Sans",
+                                margin: "0 12px",
+                              },
+                            },
+                            type: "div",
+                          }, {
+                            props: {
+                              children: readingTime,
+                              style: {
+                                fontSize: 20,
+                                color: "#6b7280",
+                                fontFamily: "Open Sans",
+                              },
+                            },
+                            type: "div",
+                          }]
+                        : []),
+                    ],
                     style: {
-                      fontSize: 20,
-                      color: "#6b7280",
-                      fontFamily: "Open Sans",
+                      display: "flex",
+                      alignItems: "center",
                     },
                   },
                   type: "div",

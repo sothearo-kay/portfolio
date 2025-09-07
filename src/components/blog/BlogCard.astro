@@ -5,53 +5,41 @@ import Paragraph from "~/components/common/Paragraph.astro"
 import BlogMeta from "./BlogMeta.astro"
 
 interface Props {
-  post: CollectionEntry<"blog">
+  post: CollectionEntry<"blog"> & { readingTime?: string }
 }
 
 const { post } = Astro.props
 ---
 
 <article class="card">
-  <a href={`/blog/${post.id}`} class="link">
-    <Heading as="h2" size="lg" class="title">
+  <Heading as="h2" size="lg">
+    <a href={`/blog/${post.id}`} class="title">
       {post.data.title}
-    </Heading>
+    </a>
+  </Heading>
 
-    <Paragraph secondary size="sm" class="description">
-      {post.data.description}
-    </Paragraph>
+  <Paragraph secondary size="sm" class="description">
+    {post.data.description}
+  </Paragraph>
 
-    <BlogMeta date={post.data.publishedAt} tags={post.data.tags} />
-  </a>
+  <BlogMeta date={post.data.publishedAt} tags={post.data.tags} readingTime={post.readingTime} />
 </article>
 
 <style>
   .card {
-    border: 1px solid transparent;
-    border-radius: 0.5rem;
-    transition: all 0.2s ease;
-
-    @media (min-width: 769px) {
-      &:hover {
-        background: color-mix(in srgb, var(--color-accent) 40%, transparent);
-        border-color: var(--color-border-subtle);
-      }
-    }
-
-    .link {
-      display: block;
-      padding: 1.5rem;
-      color: inherit;
-      text-decoration: none;
-
-      @media (max-width: 768px) {
-        padding: 0;
-      }
+    h2 {
+      margin-block: 0;
     }
 
     .title {
       font-family: var(--font-heading);
-      margin-block: 0;
+      color: inherit;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
     }
 
     .description {

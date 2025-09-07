@@ -1,16 +1,21 @@
 ---
 import type { CollectionEntry } from "astro:content"
 import BlogCard from "./BlogCard.astro"
-import BlogFilter from "./BlogFilter.svelte"
+import BlogSortFilter from "./BlogSortFilter.svelte"
+import BlogTagFilter from "./BlogTagFilter.astro"
 
 interface Props {
-  posts: CollectionEntry<"blog">[]
+  posts: (CollectionEntry<"blog"> & { readingTime: string })[]
+  currentTag?: string
 }
 
-const { posts } = Astro.props
+const { posts, currentTag } = Astro.props
 ---
 
-<BlogFilter client:load />
+<div class="filters">
+  {currentTag ? <BlogTagFilter currentTag={currentTag} /> : <div></div>}
+  <BlogSortFilter client:load />
+</div>
 
 <ul class="posts" id="posts-container">
   {posts.map(post => (
@@ -21,13 +26,16 @@ const { posts } = Astro.props
 </ul>
 
 <style>
+  .filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-block: 1.5rem;
+  }
+
   .posts {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-
-    @media (max-width: 768px) {
-      gap: 2rem;
-    }
+    gap: 2rem;
   }
 </style>

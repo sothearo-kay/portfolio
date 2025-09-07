@@ -1,28 +1,8 @@
 ---
-import BlogList from "~/components/blog/BlogList.astro"
-import Heading from "~/components/common/Heading.astro"
-import Paragraph from "~/components/common/Paragraph.astro"
-import Layout from "~/layouts/default.astro"
-import { getPosts } from "~/utils/blog"
+import BlogListLayout from "~/layouts/blog-listing.astro"
+import { getPostsWithReadingTime } from "~/utils/blog"
 
-const sortedPosts = await getPosts()
+const postsWithReadingTime = await getPostsWithReadingTime()
 ---
 
-<Layout title="Blog Posts" description="My thoughts on web development, technology, books, and life philosophy. Code by day, manga by night.">
-  <section>
-    <Heading as="h1" size="2xl">Blog</Heading>
-    <Paragraph secondary>
-      My thoughts on web development, technology, books, and life philosophy. <a href="/rss.xml" class="link">Subscribe via RSS</a>.
-    </Paragraph>
-
-    {sortedPosts.length > 0
-      ? (
-        <BlogList posts={sortedPosts} />
-      )
-      : (
-        <Paragraph secondary>
-          No blog posts yet. Check back soon!
-        </Paragraph>
-      )}
-  </section>
-</Layout>
+<BlogListLayout posts={postsWithReadingTime} />

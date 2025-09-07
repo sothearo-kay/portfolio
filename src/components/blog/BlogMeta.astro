@@ -4,22 +4,28 @@ import Date from "~/components/common/Date.astro"
 interface Props {
   date: Date
   tags: string[]
+  readingTime?: string
 }
 
-const { date, tags } = Astro.props
+const { date, tags, readingTime } = Astro.props
 ---
 
 <div class="meta">
-  <Date date={date} />
+  <div class="date-time">
+    <Date date={date} />
+    {readingTime && (
+      <>
+        <span class="separator">•</span>
+        <span class="reading-time">{readingTime}</span>
+      </>
+    )}
+  </div>
   {tags.length > 0 && (
-    <>
-      <span class="separator">—</span>
-      <div class="tags">
-        {tags.map(tag => (
-          <span class="tag">{tag}</span>
-        ))}
-      </div>
-    </>
+    <div class="tags">
+      {tags.map(tag => (
+        <a href={`/blog/tag/${encodeURIComponent(tag)}`} class="tag">{tag}</a>
+      ))}
+    </div>
   )}
 </div>
 
@@ -27,7 +33,6 @@ const { date, tags } = Astro.props
   .meta {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
     flex-wrap: wrap;
 
     @media (max-width: 768px) {
@@ -37,32 +42,36 @@ const { date, tags } = Astro.props
     }
   }
 
+  .date-time {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
   .separator {
     color: var(--color-foreground-muted);
     font: var(--font-sm);
+  }
 
-    @media (max-width: 768px) {
-      display: none;
-    }
+  .reading-time {
+    font: var(--font-xs);
+    font-weight: 500;
+    color: var(--color-foreground-muted);
   }
 
   .tags {
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
+    margin-left: 0.75rem;
 
     @media (max-width: 768px) {
       order: -1;
+      margin-left: 0;
     }
   }
 
-  .tag {
-    font: var(--font-xs);
-    font-weight: 500;
-    color: var(--color-foreground-muted);
-    background: var(--color-background-secondary);
-    border: 1px solid var(--color-border);
-    padding: 0.125rem 0.375rem;
-    border-radius: 0.25rem;
+  .tag:hover {
+    text-decoration: underline;
   }
 </style>

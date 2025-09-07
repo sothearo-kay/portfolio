@@ -1,0 +1,26 @@
+---
+import BlogListLayout from "~/layouts/blog-listing.astro"
+import { getPostsWithReadingTime, getTags } from "~/utils/blog"
+
+export async function getStaticPaths() {
+  const { tags } = await getTags()
+
+  return tags.map(tag => ({
+    params: { tag },
+  }))
+}
+
+const { tag } = Astro.params
+
+if (!tag || typeof tag !== "string") {
+  return Astro.redirect("/blog")
+}
+
+const postsWithReadingTime = await getPostsWithReadingTime()
+
+const filteredPosts = postsWithReadingTime.filter(post =>
+  post.data.tags.some(postTag => postTag.toLowerCase() === tag.toLowerCase()),
+)
+---
+
+<BlogListLayout posts={filteredPosts} currentTag={tag} />
