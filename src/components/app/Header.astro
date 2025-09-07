@@ -7,7 +7,15 @@ const navItems = [
   { href: "/blog", text: "Blog" },
   { href: "/projects", text: "Projects" },
   { href: "/about", text: "About" },
-];
+]
+
+const currentPath = new URL(Astro.request.url).pathname
+
+function isActive(href: string) {
+  const normalizedCurrent = currentPath === "/" ? "/" : currentPath.replace(/\/$/, "")
+  const normalizedHref = href === "/" ? "/" : href.replace(/\/$/, "")
+  return normalizedCurrent === normalizedHref
+}
 ---
 
 <header class="header">
@@ -16,7 +24,7 @@ const navItems = [
       <ul class="nav-list">
         {navItems.map(item => (
           <li class="nav-item">
-            <a href={item.href} class="nav-link">
+            <a href={item.href} class:list={["nav-link", { active: isActive(item.href) }]}>
               {item.text}
             </a>
           </li>
@@ -49,7 +57,8 @@ const navItems = [
       border-radius: 999px;
       background-color: var(--color-background-elevated-transparent);
       border: 1px solid var(--color-border-subtle);
-      box-shadow: 0 4px 6px -1px oklch(0% 0 0deg / 0.05), 0 2px 4px -2px oklch(0% 0 0deg / 0.03);
+      box-shadow: var(--shadow-header);
+      backdrop-filter: blur(0);
     }
 
     .nav-list {
@@ -68,7 +77,8 @@ const navItems = [
         color: var(--color-accent-foreground);
         transition: color 0.2s ease;
 
-        &:hover {
+        &:hover,
+        &.active {
           color: var(--color-foreground);
         }
       }
