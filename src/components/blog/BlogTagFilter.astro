@@ -40,6 +40,12 @@ const { currentTag } = Astro.props
       background: var(--color-background-secondary);
     }
 
+    span:first-of-type {
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+
     svg {
       width: 1rem;
       height: 1rem;

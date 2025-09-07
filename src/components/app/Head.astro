@@ -12,8 +12,9 @@ interface Props {
   type?: "website" | "article"
 }
 
-const { title, description, ogImage = "/home-og.png", type = "website" } = Astro.props
+const { title, description, ogImage = "/home.png", type = "website" } = Astro.props
 const pageTitle = type === "article" ? title : `Sothearo - ${title}`
+const absoluteOgImage = ogImage.startsWith("http") ? ogImage : new URL(ogImage, Astro.url).href
 ---
 
 <head>
@@ -28,14 +29,15 @@ const pageTitle = type === "article" ? title : `Sothearo - ${title}`
   <meta name="description" content={description} />
 
   <meta property="og:type" content={type} />
+  <meta property="og:url" content={Astro.url.href} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:image" content={ogImage} />
+  <meta property="og:image" content={absoluteOgImage} />
 
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:title" content={title} />
   <meta property="twitter:description" content={description} />
-  <meta property="twitter:image" content={ogImage} />
+  <meta property="twitter:image" content={absoluteOgImage} />
 
   <ClientRouter fallback="swap" />
 </head>
