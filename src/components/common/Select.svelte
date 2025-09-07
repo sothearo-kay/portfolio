@@ -96,8 +96,8 @@
   border-radius: 0.5rem;
   color: var(--color-foreground-muted);
   font: var(--font-sm);
-  padding: 0.5rem 0.75rem;
-  transition: all 0.2s ease;
+  padding: 0.375rem 0.75rem;
+  transition: background-color 0.2s ease;
 
   &:hover {
     background: var(--color-background-secondary);

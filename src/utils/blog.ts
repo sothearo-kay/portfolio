@@ -15,7 +15,10 @@ export async function getTags() {
     post.data.tags.forEach((tag: string) => allTags.add(tag))
   })
 
-  return [...allTags]
+  return {
+    tags: [...allTags],
+    posts,
+  }
 }
 
 export async function getPostsWithReadingTime() {

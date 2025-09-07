@@ -1,0 +1,55 @@
+---
+import Heading from "~/components/common/Heading.astro"
+import Paragraph from "~/components/common/Paragraph.astro"
+import Layout from "~/layouts/default.astro"
+import { getTags } from "~/utils/blog"
+
+const { tags, posts } = await getTags()
+const tagCounts = new Map<string, number>()
+
+posts.forEach((post) => {
+  post.data.tags.forEach((tag: string) => {
+    tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1)
+  })
+})
+
+const sortedTags = tags.sort((a, b) => a.localeCompare(b))
+---
+
+<Layout title="Blog Tags" description="Browse all blog post tags to discover content by topic.">
+  <section>
+    <Heading as="h1" size="2xl">Tags</Heading>
+    <Paragraph secondary>
+      Browse all tags to discover content by topic. <a href="/blog" class="link">View all posts</a>.
+    </Paragraph>
+
+    {sortedTags.length > 0
+      ? (
+        <div class="tags">
+          {sortedTags.map(tag => (
+            <a href={`/blog/tag/${encodeURIComponent(tag)}`} class="tag">
+              {tag} ({tagCounts.get(tag)})
+            </a>
+          ))}
+        </div>
+      )
+      : (
+        <Paragraph secondary>
+          No tags found yet. Check back soon!
+        </Paragraph>
+      )}
+  </section>
+</Layout>
+
+<style>
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .tag:hover {
+    text-decoration: underline;
+  }
+</style>
