@@ -1,13 +1,26 @@
 <script>
-  import { onMount } from "svelte"
+  import { MediaQuery } from "svelte/reactivity"
 
   let scrollProgress = $state(0)
 
-  onMount(() => {
-    function updateProgress() {
-      const article = document.querySelector("article.post")
-      if (!article)
-        return
+  const largeScreen = new MediaQuery("(min-width: 1280px)")
+
+  let article = $state(null)
+  let ticking = $state(false)
+
+  function updateProgress() {
+    if (!largeScreen.current || ticking)
+      return
+
+    ticking = true
+    requestAnimationFrame(() => {
+      if (!article) {
+        article = document.querySelector("article.post")
+        if (!article) {
+          ticking = false
+          return
+        }
+      }
 
       const articleRect = article.getBoundingClientRect()
       const articleTop = articleRect.top + window.pageYOffset
@@ -28,70 +41,81 @@
         const progress = ((currentScroll - scrollStart) / (scrollEnd - scrollStart)) * 100
         scrollProgress = Math.min(Math.max(progress, 0), 100)
       }
-    }
 
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: "smooth" })
-    }
+      ticking = false
+    })
+  }
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+
+  $effect(() => {
+    if (!largeScreen.current)
+      return
 
     window.addEventListener("scroll", updateProgress, { passive: true })
-    window.addEventListener("resize", updateProgress)
     updateProgress()
-
-    const progressBar = document.querySelector(".progress-bar")
-    if (progressBar) {
-      progressBar.addEventListener("click", scrollToTop)
-    }
 
     return () => {
       window.removeEventListener("scroll", updateProgress)
-      window.removeEventListener("resize", updateProgress)
-      if (progressBar) {
-        progressBar.removeEventListener("click", scrollToTop)
-      }
+    }
+  })
+
+  $effect(() => {
+    if (largeScreen.current) {
+      article = null
+      updateProgress()
+    }
+    else {
+      scrollProgress = 0
     }
   })
 </script>
 
-<div class="progress-container">
-  <div
-    class="progress-bar"
-    class:visible={scrollProgress > 0}
-    role="button"
-    tabindex="0"
-    aria-label="Scroll to top"
-  >
-    <svg width="48" height="48">
-      <circle
-        class="bg"
-        stroke="var(--color-border)"
-        stroke-width="2"
-        fill="transparent"
-        r="20"
-        cx="24"
-        cy="24"
-      />
-      <circle
-        class="progress"
-        stroke="var(--color-progress)"
-        stroke-width="2"
-        fill="transparent"
-        r="20"
-        cx="24"
-        cy="24"
-        style="stroke-dasharray: {20 * 2 * Math.PI}; stroke-dashoffset: {20 * 2 * Math.PI * (1 - scrollProgress / 100)}"
-      />
-    </svg>
+{#if largeScreen.current}
+  <div class="progress-container">
+    <div
+      class="progress-bar"
+      class:visible={scrollProgress > 0}
+      role="button"
+      tabindex="0"
+      aria-label="Scroll to top"
+      onclick={scrollToTop}
+      onkeydown={e => e.key === "Enter" && scrollToTop()}
+    >
+      <svg width="48" height="48">
+        <circle
+          class="bg"
+          stroke="var(--color-border)"
+          stroke-width="2"
+          fill="transparent"
+          r="20"
+          cx="24"
+          cy="24"
+        />
+        <circle
+          class="progress"
+          stroke="var(--color-progress)"
+          stroke-width="2"
+          fill="transparent"
+          r="20"
+          cx="24"
+          cy="24"
+          style="stroke-dasharray: {20 * 2 * Math.PI}; stroke-dashoffset: {20 * 2 * Math.PI * (1 - scrollProgress / 100)}"
+        />
+      </svg>
 
-    <div class="percentage">
-      {Math.round(scrollProgress)}%
-    </div>
+      <div class="percentage">
+        {Math.round(scrollProgress)}%
+      </div>
 
-    <div class="tooltip right">
-      Scroll to top
+      <div class="tooltip right">
+        Scroll to top
+      </div>
     </div>
   </div>
-</div>
+{/if}
 
 <style>
   .progress-container {
