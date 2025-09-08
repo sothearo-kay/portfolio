@@ -5,7 +5,8 @@
   margin-inline: auto;
   display: grid;
   grid-template-rows: max-content 1fr max-content;
-  border-inline: 1px solid color-mix(in srgb, var(--color-border) 40%, transparent);
+  border-inline: 1px solid
+    color-mix(in srgb, var(--color-border) 40%, transparent);
 
   @media (max-width: 768px) {
     border-inline: none;
@@ -79,7 +80,7 @@
   pointer-events: none;
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -101,6 +102,20 @@
     &::after {
       right: 100%;
       border-right-color: var(--color-foreground);
+    }
+  }
+
+  &.top {
+    bottom: calc(100% + 0.75rem);
+    left: 50%;
+    top: auto;
+    transform: translateX(-50%);
+
+    &::after {
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-top-color: var(--color-foreground);
     }
   }
 }

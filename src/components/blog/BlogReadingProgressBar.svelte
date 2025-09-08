@@ -1,79 +1,82 @@
 <script>
   import { MediaQuery } from "svelte/reactivity"
 
+  const desktop = new MediaQuery("(min-width: 1024px)")
+
   let scrollProgress = $state(0)
+  let bounds = $state(null)
 
-  const largeScreen = new MediaQuery("(min-width: 1280px)")
+  $effect(() => {
+    if (!desktop.current) {
+      scrollProgress = 0
+      bounds = null
+      return
+    }
 
-  let article = $state(null)
-  let ticking = $state(false)
+    let ticking = false
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateProgress()
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    const handleResize = () => {
+      bounds = calculateBounds()
+      updateProgress()
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    window.addEventListener("resize", handleResize, { passive: true })
+    updateProgress()
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      window.removeEventListener("resize", handleResize)
+    }
+  })
+
+  function calculateBounds() {
+    const article = document.querySelector("article.post")
+    if (!article)
+      return null
+
+    return {
+      start: article.offsetTop,
+      end: article.offsetTop + article.offsetHeight - window.innerHeight,
+    }
+  }
 
   function updateProgress() {
-    if (!largeScreen.current || ticking)
+    if (!desktop.current)
       return
 
-    ticking = true
-    requestAnimationFrame(() => {
-      if (!article) {
-        article = document.querySelector("article.post")
-        if (!article) {
-          ticking = false
-          return
-        }
-      }
+    bounds = bounds || calculateBounds()
+    if (!bounds)
+      return
 
-      const articleRect = article.getBoundingClientRect()
-      const articleTop = articleRect.top + window.pageYOffset
-      const articleHeight = article.offsetHeight
-      const viewportHeight = window.innerHeight
+    const scrollTop = window.pageYOffset
 
-      const scrollStart = articleTop
-      const scrollEnd = articleTop + articleHeight - viewportHeight
-      const currentScroll = window.pageYOffset
-
-      if (currentScroll <= scrollStart) {
-        scrollProgress = 0
-      }
-      else if (currentScroll >= scrollEnd) {
-        scrollProgress = 100
-      }
-      else {
-        const progress = ((currentScroll - scrollStart) / (scrollEnd - scrollStart)) * 100
-        scrollProgress = Math.min(Math.max(progress, 0), 100)
-      }
-
-      ticking = false
-    })
+    if (scrollTop <= bounds.start) {
+      scrollProgress = 0
+    }
+    else if (scrollTop >= bounds.end) {
+      scrollProgress = 100
+    }
+    else {
+      scrollProgress = Math.round(((scrollTop - bounds.start) / (bounds.end - bounds.start)) * 100)
+    }
   }
 
   function scrollToTop() {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
-
-  $effect(() => {
-    if (!largeScreen.current)
-      return
-
-    window.addEventListener("scroll", updateProgress, { passive: true })
-    updateProgress()
-
-    return () => {
-      window.removeEventListener("scroll", updateProgress)
-    }
-  })
-
-  $effect(() => {
-    if (largeScreen.current) {
-      article = null
-      updateProgress()
-    }
-    else {
-      scrollProgress = 0
-    }
-  })
 </script>
 
-{#if largeScreen.current}
+{#if desktop.current}
   <div class="progress-container">
     <div
       class="progress-bar"
@@ -107,10 +110,10 @@
       </svg>
 
       <div class="percentage">
-        {Math.round(scrollProgress)}%
+        {scrollProgress}%
       </div>
 
-      <div class="tooltip right">
+      <div class="tooltip top">
         Scroll to top
       </div>
     </div>
@@ -156,13 +159,13 @@
 
       .tooltip {
         opacity: 1;
-        transform: translateY(-50%) translateX(0);
+        transform: translateX(-50%) translateY(0);
       }
     }
 
     .tooltip {
       opacity: 0;
-      transform: translateY(-50%) translateX(-10px);
+      transform: translateX(-50%) translateY(10px);
       transition: opacity 0.2s ease, transform 0.2s ease;
     }
 

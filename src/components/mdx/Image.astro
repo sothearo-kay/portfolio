@@ -1,0 +1,24 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+export interface Props extends HTMLAttributes<"img"> {
+  src: string
+  alt: string
+}
+
+const {
+  src,
+  alt,
+  loading = "lazy",
+  decoding = "async",
+  ...rest
+} = Astro.props
+---
+
+<img
+  {src}
+  {alt}
+  {loading}
+  {decoding}
+  {...rest}
+/>
