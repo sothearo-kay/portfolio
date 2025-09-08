@@ -53,49 +53,59 @@
   })
 </script>
 
-<div
-  class="progress-bar"
-  class:visible={scrollProgress > 0}
-  role="button"
-  tabindex="0"
-  aria-label="Scroll to top"
->
-  <svg width="48" height="48">
-    <circle
-      class="bg"
-      stroke="var(--color-border)"
-      stroke-width="2"
-      fill="transparent"
-      r="20"
-      cx="24"
-      cy="24"
-    />
-    <circle
-      class="progress"
-      stroke="var(--color-progress)"
-      stroke-width="2"
-      fill="transparent"
-      r="20"
-      cx="24"
-      cy="24"
-      style="stroke-dasharray: {20 * 2 * Math.PI}; stroke-dashoffset: {20 * 2 * Math.PI * (1 - scrollProgress / 100)}"
-    />
-  </svg>
+<div class="progress-container">
+  <div
+    class="progress-bar"
+    class:visible={scrollProgress > 0}
+    role="button"
+    tabindex="0"
+    aria-label="Scroll to top"
+  >
+    <svg width="48" height="48">
+      <circle
+        class="bg"
+        stroke="var(--color-border)"
+        stroke-width="2"
+        fill="transparent"
+        r="20"
+        cx="24"
+        cy="24"
+      />
+      <circle
+        class="progress"
+        stroke="var(--color-progress)"
+        stroke-width="2"
+        fill="transparent"
+        r="20"
+        cx="24"
+        cy="24"
+        style="stroke-dasharray: {20 * 2 * Math.PI}; stroke-dashoffset: {20 * 2 * Math.PI * (1 - scrollProgress / 100)}"
+      />
+    </svg>
 
-  <div class="percentage">
-    {Math.round(scrollProgress)}%
-  </div>
+    <div class="percentage">
+      {Math.round(scrollProgress)}%
+    </div>
 
-  <div class="tooltip right">
-    Scroll to top
+    <div class="tooltip right">
+      Scroll to top
+    </div>
   </div>
 </div>
 
 <style>
-  .progress-bar {
+  .progress-container {
+    --border-offset: calc(3px / 2); /* 2px app border + 1px progress border, divided by 2 */
+    width: 100%;
+    max-width: 58rem;
     position: fixed;
-    right: calc(50vw - 29rem - 2rem);
     bottom: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    pointer-events: none;
+  }
+
+  .progress-bar {
     width: 48px;
     height: 48px;
     border-radius: 50%;
@@ -106,14 +116,15 @@
     justify-content: center;
     cursor: pointer;
     opacity: 0;
-    transform: scale(0.8);
+    pointer-events: auto;
+    transform: translateX(calc(50% - var(--border-offset))) scale(0.8);
     transition: all 0.3s ease;
     z-index: 100;
     box-shadow: var(--shadow-header);
 
     &.visible {
       opacity: 1;
-      transform: scale(1);
+      transform: translateX(calc(50% - var(--border-offset))) scale(1);
     }
 
     &:hover {
@@ -145,10 +156,10 @@
     }
 
     .percentage {
-      font-size: 10px;
-      font-weight: 600;
+      font-size: 12px;
+      font-weight: 500;
+      font-family: var(--font-code);
       color: var(--color-foreground);
-      font-family: var(--font-mono);
     }
 
     @media (max-width: 768px) {
