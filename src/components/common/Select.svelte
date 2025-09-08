@@ -43,7 +43,7 @@
   <button
     bind:this={selectButton}
     type="button"
-    class="button"
+    class="button inset-shadow"
     class:open={isOpen}
     onclick={toggle}
   >

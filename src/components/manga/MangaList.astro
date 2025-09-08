@@ -27,7 +27,7 @@ function getTransitionName(title: string) {
   <div class="filters">
     {filterButtons.map(({ key, label, count }, index) => (
       <button
-        class:list={["btn", { active: index === 0 }]}
+        class:list={["btn", "inset-shadow", { active: index === 0 }]}
         data-filter={key}
       >
         {label} ({count})
@@ -89,6 +89,12 @@ function getTransitionName(title: string) {
         background-color: var(--color-foreground);
         color: var(--color-background);
         border-color: var(--color-foreground);
+      }
+
+      &.active.inset-shadow {
+        box-shadow:
+          inset 1px 1px 1px color-mix(in srgb, var(--color-background) 15%, transparent),
+          inset 0 0 2px color-mix(in srgb, var(--color-background) 10%, transparent);
       }
     }
 
