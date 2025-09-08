@@ -44,7 +44,7 @@
   </svg>
 
   {#if copied}
-    <div class="tooltip" transition:fly={{ y: 10, duration: 200 }}>
+    <div class="tooltip left" transition:fly={{ y: 10, duration: 200 }}>
       Copied!
     </div>
   {/if}
@@ -68,48 +68,20 @@
     transition: 0.2s ease;
     transition-property: opacity, background-color, transform;
     opacity: 0;
+
+    &:hover {
+      background-color: var(--color-accent);
+    }
+
+    @media (hover: none) {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 
   :global(.code-snippet:hover) .copy-button,
   .copy-button.copied {
     opacity: 1;
     transform: scale(1);
-  }
-
-  @media (hover: none) {
-    .copy-button {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  .copy-button:hover {
-    background-color: var(--color-accent);
-  }
-
-  .tooltip {
-    position: absolute;
-    top: 50%;
-    right: calc(100% + 0.5rem);
-    transform: translateY(-50%);
-    background: var(--color-foreground);
-    color: var(--color-background);
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.25rem;
-    font-size: 12px;
-    font-weight: 500;
-    font-family: var(--font-code);
-    white-space: nowrap;
-    pointer-events: none;
-  }
-
-  .tooltip::after {
-    content: '';
-    position: absolute;
-    left: 100%;
-    top: 50%;
-    transform: translateY(-50%);
-    border: 4px solid transparent;
-    border-left-color: var(--color-foreground);
   }
 </style>
