@@ -21,6 +21,8 @@
   --color-diff-add: oklch(65% 0.15 145deg);
   --color-diff-remove: oklch(65% 0.15 15deg);
 
+  --color-progress: oklch(60% 0.14 150deg);
+
   --shadow-card: 0 2px 8px 0 oklch(0% 0 0deg / 0.1), 0 1px 3px 0 oklch(0% 0 0deg / 0.06);
   --shadow-header: 0 1px 3px 0 oklch(0% 0 0deg / 0.08), 0 1px 2px -1px oklch(0% 0 0deg / 0.04);
 }
@@ -47,6 +49,8 @@
 
   --color-diff-add: oklch(55% 0.12 145deg);
   --color-diff-remove: oklch(55% 0.12 15deg);
+
+  --color-progress: oklch(65% 0.13 155deg);
 
   --shadow-card: 0 2px 8px 0 oklch(0% 0 0deg / 0.25), 0 1px 3px 0 oklch(0% 0 0deg / 0.15);
   --shadow-header: 0 1px 3px 0 oklch(0% 0 0deg / 0.22), 0 1px 2px -1px oklch(0% 0 0deg / 0.16);
