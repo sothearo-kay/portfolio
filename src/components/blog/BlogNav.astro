@@ -48,6 +48,10 @@ const { prevPost, nextPost } = Astro.props
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1.5rem;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
     }
 
     .button {
@@ -70,12 +74,20 @@ const { prevPost, nextPost } = Astro.props
         justify-content: start;
         text-align: left;
         grid-column: 1;
+
+        @media (max-width: 768px) {
+          grid-column: unset;
+        }
       }
 
       &.next {
         justify-content: end;
         text-align: right;
         grid-column: 2;
+
+        @media (max-width: 768px) {
+          grid-column: unset;
+        }
       }
 
       svg {

@@ -194,4 +194,13 @@
   img[alt="cover"] {
     box-shadow: var(--shadow-card);
   }
+
+  .katex-display {
+    font: var(--font-md);
+  }
+
+  .katex {
+    color: var(--color-foreground);
+    font-size: 1.1em;
+  }
 }

@@ -31,6 +31,7 @@ const ogImageUrl = `${Astro.url.origin}/blog/${entry.id}/og.png`
     description={entry.data.description}
     ogImage={ogImageUrl}
     type="article"
+    includeKatex
   />
   <body class="app">
     <Header />

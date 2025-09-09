@@ -15,17 +15,27 @@ import SocialLinks from "../SocialLinks.astro"
 <style>
   .footer {
     padding-top: 5rem;
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
 
     .content {
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+      }
     }
 
     .copyright {
       font: var(--font-sm);
       color: var(--color-foreground-muted);
+      margin-top: 0.5rem;
+      margin-bottom: 0;
+
+      @media (max-width: 768px) {
+        order: 1;
+      }
     }
   }
 </style>

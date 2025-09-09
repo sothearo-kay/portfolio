@@ -1,18 +1,8 @@
 <script>
-  import { MediaQuery } from "svelte/reactivity"
-
-  const desktop = new MediaQuery("(min-width: 1024px)")
-
   let scrollProgress = $state(0)
   let bounds = $state(null)
 
   $effect(() => {
-    if (!desktop.current) {
-      scrollProgress = 0
-      bounds = null
-      return
-    }
-
     let ticking = false
     const handleScroll = () => {
       if (!ticking) {
@@ -51,9 +41,6 @@
   }
 
   function updateProgress() {
-    if (!desktop.current)
-      return
-
     bounds = bounds || calculateBounds()
     if (!bounds)
       return
@@ -76,49 +63,47 @@
   }
 </script>
 
-{#if desktop.current}
-  <div class="progress-container">
-    <div
-      class="progress-bar"
-      class:visible={scrollProgress > 0}
-      role="button"
-      tabindex="0"
-      aria-label="Scroll to top"
-      onclick={scrollToTop}
-      onkeydown={e => e.key === "Enter" && scrollToTop()}
-    >
-      <svg width="48" height="48">
-        <circle
-          class="bg"
-          stroke="var(--color-border)"
-          stroke-width="2"
-          fill="transparent"
-          r="20"
-          cx="24"
-          cy="24"
-        />
-        <circle
-          class="progress"
-          stroke="var(--color-progress)"
-          stroke-width="2"
-          fill="transparent"
-          r="20"
-          cx="24"
-          cy="24"
-          style="stroke-dasharray: {20 * 2 * Math.PI}; stroke-dashoffset: {20 * 2 * Math.PI * (1 - scrollProgress / 100)}"
-        />
-      </svg>
+<div class="progress-container">
+  <div
+    class="progress-bar"
+    class:visible={scrollProgress > 0}
+    role="button"
+    tabindex="0"
+    aria-label="Scroll to top"
+    onclick={scrollToTop}
+    onkeydown={e => e.key === "Enter" && scrollToTop()}
+  >
+    <svg width="48" height="48">
+      <circle
+        class="bg"
+        stroke="var(--color-border)"
+        stroke-width="2"
+        fill="transparent"
+        r="20"
+        cx="24"
+        cy="24"
+      />
+      <circle
+        class="progress"
+        stroke="var(--color-progress)"
+        stroke-width="2"
+        fill="transparent"
+        r="20"
+        cx="24"
+        cy="24"
+        style="stroke-dasharray: {20 * 2 * Math.PI}; stroke-dashoffset: {20 * 2 * Math.PI * (1 - scrollProgress / 100)}"
+      />
+    </svg>
 
-      <div class="percentage">
-        {scrollProgress}%
-      </div>
+    <div class="percentage">
+      {scrollProgress}%
+    </div>
 
-      <div class="tooltip top">
-        Scroll to top
-      </div>
+    <div class="tooltip top">
+      Scroll to top
     </div>
   </div>
-{/if}
+</div>
 
 <style>
   .progress-container {
@@ -144,14 +129,14 @@
     cursor: pointer;
     opacity: 0;
     pointer-events: auto;
-    transform: translateX(calc(50% - var(--border-offset))) scale(0.8);
+    transform: translateX(-50%) scale(0.8);
     transition: all 0.3s ease;
     z-index: 100;
     box-shadow: var(--shadow-header);
 
     &.visible {
       opacity: 1;
-      transform: translateX(calc(50% - var(--border-offset))) scale(1);
+      transform: translateX(-50%) scale(1);
     }
 
     &:hover {
@@ -189,8 +174,12 @@
       color: var(--color-foreground);
     }
 
-    @media (max-width: 768px) {
-      display: none;
+    @media (min-width: 1024px) {
+      transform: translateX(calc(50% - var(--border-offset))) scale(0.8);
+
+      &.visible {
+        transform: translateX(calc(50% - var(--border-offset))) scale(1);
+      }
     }
   }
 </style>

@@ -5,8 +5,7 @@
   margin-inline: auto;
   display: grid;
   grid-template-rows: max-content 1fr max-content;
-  border-inline: 1px solid
-    color-mix(in srgb, var(--color-border) 40%, transparent);
+  border-inline: 1px solid color-mix(in srgb, var(--color-border) 40%, transparent);
 
   @media (max-width: 768px) {
     border-inline: none;
@@ -132,4 +131,3 @@
       inset 0 0 2px color-mix(in srgb, var(--color-foreground) 8%, transparent);
   }
 }
-

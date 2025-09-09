@@ -9,7 +9,9 @@ import {
 } from "@shikijs/transformers"
 import { defineConfig } from "astro/config"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
+import rehypeKatex from "rehype-katex"
 import rehypeSlug from "rehype-slug"
+import remarkMath from "remark-math"
 import { remarkReadingTime } from "./src/plugins/index.mjs"
 
 // https://astro.build/config
@@ -42,8 +44,9 @@ export default defineConfig({
         transformerNotationDiff(),
       ],
     },
-    remarkPlugins: [remarkReadingTime],
+    remarkPlugins: [remarkMath, remarkReadingTime],
     rehypePlugins: [
+      rehypeKatex,
       rehypeSlug,
       [rehypeAutolinkHeadings, { behavior: "append" }],
     ],
