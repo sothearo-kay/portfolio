@@ -15,16 +15,12 @@ import SocialLinks from "../SocialLinks.astro"
 <style>
   .footer {
     padding-top: 5rem;
-    padding-bottom: 2rem;
+    padding-bottom: 2.5rem;
 
     .content {
       display: flex;
       justify-content: space-between;
       align-items: center;
-
-      @media (max-width: 768px) {
-        flex-direction: column;
-      }
     }
 
     .copyright {
@@ -32,10 +28,6 @@ import SocialLinks from "../SocialLinks.astro"
       color: var(--color-foreground-muted);
       margin-top: 0.5rem;
       margin-bottom: 0;
-
-      @media (max-width: 768px) {
-        order: 1;
-      }
     }
   }
 </style>
