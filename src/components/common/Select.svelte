@@ -58,7 +58,7 @@
       <div
         class="dropdown"
         style="
-          position: absolute;
+          position: fixed;
           top: {selectButton?.getBoundingClientRect().bottom + 4}px;
             left: {selectButton?.getBoundingClientRect().left}px;
             width: {selectButton?.offsetWidth}px;
@@ -98,6 +98,8 @@
   font: var(--font-sm);
   padding: 0.375rem 0.75rem;
   transition: background-color 0.2s ease;
+  user-select: none;
+  -webkit-user-select: none;
 
   &:hover {
     background: var(--color-background-secondary);
@@ -124,6 +126,7 @@
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px -1px oklch(0% 0 0deg / 0.1);
   pointer-events: auto;
+  touch-action: manipulation;
 }
 
 .option {
