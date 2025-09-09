@@ -3,8 +3,9 @@
   max-width: 58rem;
   min-height: 100dvh;
   margin-inline: auto;
+  padding-top: calc(50px + 1rem);
   display: grid;
-  grid-template-rows: max-content 1fr max-content;
+  grid-template-rows: 1fr max-content;
   border-inline: 1px solid color-mix(in srgb, var(--color-border) 40%, transparent);
 
   @media (max-width: 768px) {
