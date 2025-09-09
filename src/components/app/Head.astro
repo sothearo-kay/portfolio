@@ -10,9 +10,10 @@ interface Props {
   description: string
   ogImage?: string
   type?: "website" | "article"
+  includeKatex?: boolean
 }
 
-const { title, description, ogImage = "/home.png", type = "website" } = Astro.props
+const { title, description, ogImage = "/home.png", type = "website", includeKatex = false } = Astro.props
 const pageTitle = type === "article" ? title : `Sothearo - ${title}`
 const absoluteOgImage = ogImage.startsWith("http") ? ogImage : new URL(ogImage, Astro.url).href
 ---
@@ -23,6 +24,8 @@ const absoluteOgImage = ogImage.startsWith("http") ? ogImage : new URL(ogImage, 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="generator" content={Astro.generator} />
   <meta name="theme-color" content="#ffffff" />
+
+  {includeKatex && <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />}
 
   <title>{pageTitle}</title>
   <meta name="title" content={pageTitle} />
