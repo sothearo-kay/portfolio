@@ -87,14 +87,12 @@ function getTransitionName(title: string) {
 
       &.active {
         background-color: var(--color-foreground);
-        color: var(--color-background);
         border-color: var(--color-foreground);
+        color: var(--color-background);
       }
 
       &.active.inset-shadow {
-        box-shadow:
-          inset 1px 1px 1px color-mix(in srgb, var(--color-background) 15%, transparent),
-          inset 0 0 2px color-mix(in srgb, var(--color-background) 10%, transparent);
+        box-shadow: var(--shadow-inset-active);
       }
     }
 

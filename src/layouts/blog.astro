@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content"
+import Body from "~/components/app/Body.astro"
 import Footer from "~/components/app/Footer.astro"
 import Head from "~/components/app/Head.astro"
 import Header from "~/components/app/Header.astro"
@@ -33,7 +34,7 @@ const ogImageUrl = `${Astro.url.origin}/blog/${entry.id}/og.png`
     type="article"
     includeKatex
   />
-  <body class="app">
+  <Body>
     <Header />
     <main transition:animate="fade">
       <article class="post">
@@ -54,7 +55,7 @@ const ogImageUrl = `${Astro.url.origin}/blog/${entry.id}/og.png`
     <Footer />
     <BlogReadingProgressBar client:idle />
     <Scripts />
-  </body>
+  </Body>
 </html>
 
 <style>

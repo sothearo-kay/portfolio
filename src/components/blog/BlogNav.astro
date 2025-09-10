@@ -98,23 +98,29 @@ const { prevPost, nextPost } = Astro.props
       }
 
       .content {
+        font: var(--font-xs);
         display: flex;
         flex-direction: column;
-        gap: 0.25rem;
         min-width: 0;
+
+        .label,
+        .title {
+          font-family: var(--font-heading);
+          font-weight: 500;
+        }
       }
 
       .label {
-        font: var(--font-xs);
+        font-size: 0.9em;
         color: var(--color-foreground-muted);
-        text-transform: capitalize;
-        letter-spacing: 0.05em;
-        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        opacity: 0.8;
       }
 
       .title {
         font: var(--font-sm);
-        font-weight: 500;
+        color: var(--color-foreground);
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
