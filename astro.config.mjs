@@ -13,6 +13,7 @@ import rehypeKatex from "rehype-katex"
 import rehypeSlug from "rehype-slug"
 import remarkMath from "remark-math"
 import { remarkReadingTime } from "./src/plugins/index.mjs"
+import svg from "@poppanator/sveltekit-svg"
 
 // https://astro.build/config
 export default defineConfig({
@@ -66,6 +67,10 @@ export default defineConfig({
     svelte(),
     mdx(),
   ],
+
+  vite: {
+    plugins: [svg()],
+  },
 
   output: "static",
   adapter: vercel({

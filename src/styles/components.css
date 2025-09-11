@@ -36,6 +36,13 @@
   transition: text-decoration 0.2s ease;
 }
 
+kbd.tag {
+  font-size: 12px;
+  font-family: var(--font-heading);
+  border: none;
+  letter-spacing: 0.05em;
+}
+
 .tooltip {
   position: absolute;
   top: 50%;
@@ -89,4 +96,3 @@
     }
   }
 }
-
