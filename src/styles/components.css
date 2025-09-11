@@ -90,15 +90,3 @@
   }
 }
 
-.inset-shadow {
-  box-shadow:
-    inset 1px 1px 1px color-mix(in srgb, var(--color-foreground) 6%, transparent),
-    inset 0 0 2px color-mix(in srgb, var(--color-foreground) 4%, transparent);
-  transition: box-shadow 0.2s ease;
-
-  &:hover {
-    box-shadow:
-      inset 1px 1px 1px color-mix(in srgb, var(--color-foreground) 10%, transparent),
-      inset 0 0 2px color-mix(in srgb, var(--color-foreground) 6%, transparent);
-  }
-}
