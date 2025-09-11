@@ -62,10 +62,6 @@ class CommandStore {
     this._commands = []
   }
 
-  toggle() {
-    this._isShown = !this._isShown
-  }
-
   show() {
     this._isShown = true
   }

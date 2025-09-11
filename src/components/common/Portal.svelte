@@ -22,9 +22,11 @@
     }
 
     targetElement.appendChild(portalElement!)
+    document.body.style.overflow = "hidden"
   })
 
   onDestroy(() => {
+    document.body.style.overflow = ""
     portalElement?.remove()
   })
 </script>

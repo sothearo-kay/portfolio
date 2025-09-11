@@ -1,7 +1,15 @@
 ---
-import SearchIcon from "~/icons/search.svg"
+import { getCollection } from "astro:content"
 import Separator from "../common/Separator.astro"
+import SearchButton from "../SearchButton.svelte"
 import ThemeToggle from "../ThemeToggle.astro"
+
+const allBlogPosts = await getCollection("blog")
+const posts = allBlogPosts.map(post => ({
+  id: post.id,
+  title: post.data.title,
+  description: post.data.description,
+}))
 
 const navItems = [
   { href: "/", text: "Home" },
@@ -35,13 +43,7 @@ function isActive(href: string) {
     <Separator orientation="vertical" />
 
     <div class="actions">
-      <button id="search-trigger" class="search-button" aria-label="Open search">
-        <SearchIcon class="search-icon" />
-        <span class="shortcut" id="search-shortcut">
-          <kbd class="tag">⌘K</kbd>
-        </span>
-      </button>
-
+      <SearchButton {posts} client:load />
       <ThemeToggle />
     </div>
   </div>
@@ -99,47 +101,6 @@ function isActive(href: string) {
       display: flex;
       align-items: center;
       gap: 0.25rem;
-    }
-  }
-
-  .search-button {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.4rem 0.6rem;
-    background-color: var(--color-background-secondary);
-    border-radius: 999px;
-    color: var(--color-accent-foreground);
-    font-size: 14px;
-    cursor: pointer;
-    box-shadow: var(--shadow-inset);
-
-    &:active {
-      transform: scale(0.98);
-    }
-
-    .search-icon {
-      width: 16px;
-      height: 16px;
-    }
-
-    .shortcut {
-      kbd {
-        font-size: 12px;
-        font-family: var(--font-heading);
-        padding: 0.125rem 0.25rem;
-        border: none;
-        border-radius: 4px;
-        letter-spacing: 0.25rem;
-        background: var(--color-background-interactive);
-      }
-
-      span {
-        font-size: 12px;
-        padding: 0.25rem 0.5rem;
-        color: var(--color-accent-foreground);
-        font-family: inherit;
-      }
     }
   }
 </style>

@@ -8,6 +8,7 @@ import Scripts from "~/components/app/Scripts.astro"
 import BlogMeta from "~/components/blog/BlogMeta.astro"
 import BlogNav from "~/components/blog/BlogNav.astro"
 import BlogReadingProgressBar from "~/components/blog/BlogReadingProgressBar.svelte"
+import CommandPalette from "~/components/CommandPalette.svelte"
 import Container from "~/components/common/Container.astro"
 import Heading from "~/components/common/Heading.astro"
 import Paragraph from "~/components/common/Paragraph.astro"
@@ -54,6 +55,7 @@ const ogImageUrl = `${Astro.url.origin}/blog/${entry.id}/og.png`
     </main>
     <Footer />
     <BlogReadingProgressBar client:idle />
+    <CommandPalette client:idle />
     <Scripts />
   </Body>
 </html>
