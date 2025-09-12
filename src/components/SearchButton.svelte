@@ -1,13 +1,25 @@
 <script lang="ts">
   import type { Post } from "~/utils/commands"
   import { onMount } from "svelte"
+  import { MediaQuery } from "svelte/reactivity"
   import SearchIcon from "~/icons/search.svg?component"
   import { commandStore } from "~/stores/command.svelte"
   import { addBlogCommands, addNavCommands, addSocialCommands, addThemeCommands } from "~/utils/commands"
 
-  const { posts = [] }: { posts?: Post[] } = $props()
+  interface Props {
+    posts?: Post[]
+  }
 
-  let shortcutText = $state("⌘K")
+  const { posts = [] }: Props = $props()
+
+  const mobile = new MediaQuery("(max-width: 768px)")
+  const isMac = typeof navigator !== "undefined" ? navigator.userAgent.includes("Mac") : true
+
+  let isDetecting = $state(true)
+
+  const displayText = $derived(
+    isDetecting ? "" : mobile.current ? "Search" : isMac ? "⌘K" : "⌃K",
+  )
 
   onMount(() => {
     commandStore.clearCommands()
@@ -17,18 +29,7 @@
     addSocialCommands()
     addThemeCommands()
 
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
-    const isMac = navigator.userAgent.includes("Mac")
-
-    if (isMobile) {
-      shortcutText = "Search"
-    }
-    else if (isMac) {
-      shortcutText = "⌘K"
-    }
-    else {
-      shortcutText = "⌃K"
-    }
+    isDetecting = false
   })
 
   function handleClick() {
@@ -39,10 +40,10 @@
 <button class="search-button" onclick={handleClick} aria-label="Open search">
   <SearchIcon width="16" height="16" />
   <span class="shortcut">
-    {#if shortcutText === "Search"}
-      <span>{shortcutText}</span>
+    {#if displayText === "Search"}
+      <span>{displayText}</span>
     {:else}
-      <kbd class="tag">{shortcutText}</kbd>
+      <kbd class="tag">{displayText}</kbd>
     {/if}
   </span>
 </button>
@@ -65,14 +66,27 @@
     }
 
     .shortcut {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+
       & kbd {
         background: var(--color-background-interactive);
+        width: 2rem;
+        min-height: 1.375rem;
+        display: inline-block;
+
+        @media (max-width: 768px) {
+          width: 2.8rem;
+        }
       }
 
       span {
         font: var(--font-sm);
         font-family: var(--font-heading);
         color: var(--color-accent-foreground);
+        min-width: 2.8rem;
+        display: inline-block;
       }
     }
   }
