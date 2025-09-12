@@ -14,7 +14,7 @@
 
   --color-border: oklch(85% 0 0);
   --color-border-subtle: oklch(90% 0 0);
-  --color-separator: color-mix(in srgb, var(--color-border) 30%, transparent);
+  --color-separator: color-mix(in srgb, var(--color-border) 40%, transparent);
 
   --color-skeleton-from: oklch(96% 0 0);
   --color-skeleton-to: oklch(92% 0 0);
@@ -25,19 +25,13 @@
   --color-diff-remove: oklch(65% 0.15 15deg);
 
   --color-progress: oklch(60% 0.14 150deg);
-  
-  --color-motion: #0F1115;
+
+  --color-motion: #0f1115;
   --color-overlay: color-mix(in srgb, var(--color-background-secondary) 60%, transparent);
 
-  --shadow-card:
-    0 2px 8px 0 oklch(0% 0 0deg / 0.1),
-    0 1px 3px 0 oklch(0% 0 0deg / 0.06);
-  --shadow-header:
-    0 1px 3px 0 oklch(0% 0 0deg / 0.08),
-    0 1px 2px -1px oklch(0% 0 0deg / 0.04);
-  --shadow-dialog:
-    0 1px 2px 0 oklch(0% 0 0deg / 0.05),
-    0 1px 1px -1px oklch(0% 0 0deg / 0.03);
+  --shadow-card: 0 2px 8px 0 oklch(0% 0 0deg / 0.1), 0 1px 3px 0 oklch(0% 0 0deg / 0.06);
+  --shadow-header: 0 1px 3px 0 oklch(0% 0 0deg / 0.08), 0 1px 2px -1px oklch(0% 0 0deg / 0.04);
+  --shadow-dialog: 0 1px 2px 0 oklch(0% 0 0deg / 0.05), 0 1px 1px -1px oklch(0% 0 0deg / 0.03);
   --shadow-inset:
     inset 1px 1px 1px color-mix(in srgb, var(--color-background) 88%, black),
     inset 0 0 2px color-mix(in srgb, var(--color-background) 93%, black);
@@ -73,23 +67,15 @@
   --color-diff-remove: oklch(55% 0.12 15deg);
 
   --color-progress: oklch(65% 0.13 155deg);
-  
-  --color-motion: #FFF312;
+
+  --color-motion: #fff312;
   --color-overlay: color-mix(in srgb, black 40%, transparent);
 
-  --shadow-card:
-    0 2px 8px 0 oklch(0% 0 0deg / 0.25),
-    0 1px 3px 0 oklch(0% 0 0deg / 0.15);
-  --shadow-header:
-    0 1px 3px 0 oklch(0% 0 0deg / 0.22),
-    0 1px 2px -1px oklch(0% 0 0deg / 0.16);
-  --shadow-dialog:
-    0 1px 2px 0 oklch(0% 0 0deg / 0.15),
-    0 1px 1px -1px oklch(0% 0 0deg / 0.10);
+  --shadow-card: 0 2px 8px 0 oklch(0% 0 0deg / 0.25), 0 1px 3px 0 oklch(0% 0 0deg / 0.15);
+  --shadow-header: 0 1px 3px 0 oklch(0% 0 0deg / 0.22), 0 1px 2px -1px oklch(0% 0 0deg / 0.16);
+  --shadow-dialog: 0 1px 2px 0 oklch(0% 0 0deg / 0.15), 0 1px 1px -1px oklch(0% 0 0deg / 0.1);
   --shadow-inset:
     inset 1px 1px 1px color-mix(in srgb, var(--color-foreground) 6%, transparent),
     inset 0 0 2px color-mix(in srgb, var(--color-foreground) 4%, transparent);
-  --shadow-inset-active:
-    inset 1px 1px 3px oklch(0% 0 0deg / 0.15),
-    inset 0 0 2px oklch(0% 0 0deg / 0.08);
+  --shadow-inset-active: inset 1px 1px 3px oklch(0% 0 0deg / 0.15), inset 0 0 2px oklch(0% 0 0deg / 0.08);
 }

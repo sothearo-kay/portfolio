@@ -36,11 +36,16 @@ h4 {
 }
 
 section:first-of-type {
-  padding-block: 2rem;
+  padding-block: var(--block-spacing);
+}
+
+section:not(:first-of-type) {
+  margin-block: var(--block-spacing);
 }
 
 section:last-of-type {
   padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 section > :is(h1, h2, h3, h4):first-child {

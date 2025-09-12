@@ -40,7 +40,7 @@ kbd.tag {
   font-size: 12px;
   font-family: var(--font-heading);
   border: none;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.2em;
 }
 
 .tooltip {
@@ -95,4 +95,8 @@ kbd.tag {
       border-top-color: var(--color-foreground);
     }
   }
+}
+
+.break-container {
+  margin-inline: calc(-1 * var(--inline-spacing));
 }

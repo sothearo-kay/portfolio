@@ -30,11 +30,36 @@ import Layout from "~/layouts/default.astro"
     </div>
   </section>
 
-  <section class="social">
+  <section>
     <Spacer pattern />
     <SocialGrid />
     <Spacer pattern />
   </section>
+
+  <section class="about">
+    <Heading as="h2" size="2xl">About Me</Heading>
+    <div class="content">
+      <Paragraph>
+        Hi! I'm <strong>Sothearo</strong>, a Frontend Developer based in Phnom Penh, Cambodia.
+        I enjoy turning ideas into clean, user-friendly web experiences — from sleek UI design to smooth
+        interactions that make a site feel alive.
+      </Paragraph>
+
+      <Paragraph>
+        My work is fueled by curiosity and creativity. I'm always exploring better ways to build for the web,
+        learning modern frameworks, and pushing myself to write code that's both elegant and practical.
+      </Paragraph>
+
+      <Paragraph>
+        Outside of coding, I dive deep into the world of manga and storytelling.
+        <strong>Code by day, manga by night.</strong> Stories inspire me — whether they're written in panels
+        or in lines of code.
+        If you're curious, here are some of my <a href="/manga" class="link">favorites</a>.
+      </Paragraph>
+    </div>
+  </section>
+
+  <Spacer pattern />
 
   <section class="technologies">
     <Heading as="h2" size="2xl">Technologies</Heading>
@@ -48,7 +73,7 @@ import Layout from "~/layouts/default.astro"
 
 <style>
   .hero {
-    padding-block: 2rem;
+    padding-bottom: 0;
 
     .content {
       display: grid;
@@ -65,13 +90,25 @@ import Layout from "~/layouts/default.astro"
     }
   }
 
-  .social {
-    margin-inline: -4rem;
+  .about {
+    h2 {
+      margin-bottom: calc(var(--block-spacing) * 0.75);
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+
+      p {
+        margin-block: 0;
+      }
+    }
   }
 
   .technologies {
     h2 {
-      margin-block: 2rem;
+      margin-bottom: var(--block-spacing);
     }
 
     .grid {
@@ -99,10 +136,6 @@ import Layout from "~/layouts/default.astro"
       .illustration {
         max-width: 280px;
       }
-    }
-
-    .social {
-      margin-inline: -1rem;
     }
   }
 </style>

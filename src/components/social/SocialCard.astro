@@ -1,5 +1,4 @@
 ---
-import type { ImageMetadata } from "astro"
 import ArrowUpRightIcon from "~/icons/arrow/arrow-up-right.svg"
 import Container from "../common/Container.astro"
 import Heading from "../common/Heading.astro"
@@ -7,7 +6,7 @@ import Paragraph from "../common/Paragraph.astro"
 
 interface Props {
   url: string
-  icon: ImageMetadata
+  icon: typeof import("*.svg").default
   label: string
   username: string
 }
@@ -34,6 +33,13 @@ const needsLargerIcon = largerIconLabels.includes(label)
     position: relative;
     display: block;
     padding-block: 1.25rem;
+
+    @media (hover: none) {
+      h3 {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+    }
 
     &:hover {
       h3 {

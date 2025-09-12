@@ -245,7 +245,7 @@
     top: 20%;
     left: 50%;
     transform: translateX(-50%);
-    width: min(640px, calc(100vw - 2rem));
+    width: min(640px, calc(100vw - 2 * var(--inline-spacing)));
     max-height: 60vh;
     background: var(--color-background-elevated);
     border: 1px solid var(--color-border-subtle);

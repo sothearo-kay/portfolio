@@ -18,6 +18,7 @@ const classes = [
   orientation,
   size,
   pattern && "pattern",
+  orientation === "horizontal" && "break-container",
   className,
 ].filter(Boolean)
 ---
@@ -29,7 +30,7 @@ const classes = [
     --pattern-fg: var(--color-separator);
 
     &.horizontal {
-      width: 100%;
+      width: calc(100% + 2 * var(--inline-spacing));
       border-block: 1px solid var(--color-separator);
 
       &.xs { height: 1rem; }
