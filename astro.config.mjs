@@ -2,6 +2,7 @@
 import mdx from "@astrojs/mdx"
 import svelte from "@astrojs/svelte"
 import vercel from "@astrojs/vercel"
+import svg from "@poppanator/sveltekit-svg"
 import {
   transformerNotationDiff,
   transformerNotationFocus,
@@ -13,7 +14,6 @@ import rehypeKatex from "rehype-katex"
 import rehypeSlug from "rehype-slug"
 import remarkMath from "remark-math"
 import { remarkReadingTime } from "./src/plugins/index.mjs"
-import svg from "@poppanator/sveltekit-svg"
 
 // https://astro.build/config
 export default defineConfig({
@@ -69,7 +69,24 @@ export default defineConfig({
   ],
 
   vite: {
-    plugins: [svg()],
+    plugins: [
+      svg({
+        svgoOptions: {
+          multipass: true,
+          plugins: [
+            {
+              name: "preset-default",
+              params: {
+                overrides: {
+                  cleanupIds: false,
+                  removeViewBox: false,
+                },
+              },
+            },
+          ],
+        },
+      }),
+    ],
   },
 
   output: "static",
