@@ -3,7 +3,7 @@ import type { HTMLAttributes } from "astro/types"
 
 export interface Props extends HTMLAttributes<"p"> {
   secondary?: boolean
-  size?: "sm" | "md"
+  size?: "xs" | "sm" | "md"
 }
 
 const { secondary = false, size = "md", class: className, ...attrs } = Astro.props
@@ -15,6 +15,10 @@ const { secondary = false, size = "md", class: className, ...attrs } = Astro.pro
 
 <style>
 .paragraph {
+  &.xs {
+    font: var(--font-xs);
+  }
+
   &.sm {
     font: var(--font-sm);
   }

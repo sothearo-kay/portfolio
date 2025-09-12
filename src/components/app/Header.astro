@@ -8,7 +8,6 @@ const allBlogPosts = await getCollection("blog")
 const posts = allBlogPosts.map(post => ({
   id: post.id,
   title: post.data.title,
-  description: post.data.description,
 }))
 
 const navItems = [
@@ -51,14 +50,14 @@ function isActive(href: string) {
 
 <style>
   .header {
-    z-index: 1;
+    position: fixed;
+    top: calc(1rem + env(safe-area-inset-top, 0px));
+    left: 0;
+    width: 100%;
+    z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: fixed;
-    top: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
 
     .wrapper {
       display: flex;
