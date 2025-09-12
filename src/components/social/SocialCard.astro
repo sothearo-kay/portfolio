@@ -1,0 +1,87 @@
+---
+import ArrowUpRightIcon from "~/icons/arrow/arrow-up-right.svg"
+import Container from "../common/Container.astro"
+import Heading from "../common/Heading.astro"
+import Paragraph from "../common/Paragraph.astro"
+
+interface Props {
+  url: string
+  icon: any
+  label: string
+  username: string
+}
+
+const { url, icon: Icon, label, username } = Astro.props
+
+const largerIconLabels = ["KhmerCoder", "Facebook"]
+const needsLargerIcon = largerIconLabels.includes(label)
+---
+
+<a href={url} target="_blank" rel="noopener noreferrer" class="card">
+  <Container class="content">
+    <Icon class:list={["icon", needsLargerIcon && "large"]} />
+    <div class="info">
+      <Heading as="h3" size="md">{label}</Heading>
+      <Paragraph secondary size="xs">{username}</Paragraph>
+    </div>
+    <ArrowUpRightIcon class="arrow" />
+  </Container>
+</a>
+
+<style>
+  .card {
+    display: block;
+    padding-block: 1.25rem;
+
+    &:hover {
+      h3 {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
+      .arrow {
+        transform: translateX(4px) translateY(-2px);
+      }
+    }
+
+    .content {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .icon {
+      width: 2.25rem;
+      height: 2.25rem;
+      flex-shrink: 0;
+
+      &.large {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+    }
+
+    .info {
+      flex: 1;
+      min-width: 0;
+
+      h3, p {
+        margin-block: 0;
+      }
+
+      p {
+        font-weight: 500;
+        margin-top: -0.05em;
+      }
+    }
+
+    .arrow {
+      width: 1rem;
+      height: 1rem;
+      color: var(--color-accent-foreground);
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+  }
+</style>
+

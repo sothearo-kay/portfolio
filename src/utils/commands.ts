@@ -39,7 +39,6 @@ export function addNavCommands() {
 export interface Post {
   id: string
   title: string
-  description: string
 }
 
 export function addBlogCommands(posts: Post[]) {

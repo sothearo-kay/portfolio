@@ -1,0 +1,117 @@
+---
+import FacebookIcon from "~/icons/social/facebook.svg"
+import GitHubIcon from "~/icons/social/github.svg"
+import KhmerCoderIcon from "~/icons/social/khmercoder.svg"
+import LinkedInIcon from "~/icons/social/linkedin.svg"
+import Spacer from "../common/Spacer.astro"
+import SocialCard from "./SocialCard.astro"
+
+const socialLinks = [
+  {
+    url: "https://github.com/sothearo-kay",
+    icon: GitHubIcon,
+    label: "GitHub",
+    username: "sothearo-kay",
+  },
+  {
+    url: "https://khmercoder.com/@sothearo",
+    icon: KhmerCoderIcon,
+    label: "KhmerCoder",
+    username: "@sothearo",
+  },
+  {
+    url: "https://www.linkedin.com/in/kaysothearo19/",
+    icon: LinkedInIcon,
+    label: "LinkedIn",
+    username: "kaysothearo19",
+  },
+  {
+    url: "https://www.facebook.com/sothearo19/",
+    icon: FacebookIcon,
+    label: "Facebook",
+    username: "sothearo19",
+  },
+]
+---
+
+<div class="grid">
+  <div class="row">
+    {socialLinks.map(({ url, icon, label, username }, idx) => (
+      <div class="wrapper">
+        <div class="item">
+          <SocialCard url={url} icon={icon} label={label} username={username} />
+          <Spacer orientation="horizontal" size="xs" class={`h-spacer h-${idx}`} />
+        </div>
+        <Spacer orientation="vertical" size="xs" class={`v-spacer v-${idx}`} />
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .grid {
+    display: flex;
+    flex-direction: column;
+
+    .row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+
+      .wrapper {
+        display: flex;
+
+        &:nth-child(odd) {
+          & .card > div {
+            padding-right: 1.25rem;
+
+            @media (max-width: 768px) {
+              padding-right: 1rem;
+            }
+          }
+        }
+
+        &:nth-child(even) {
+          & .card > div {
+            padding-left: 1.25rem;
+
+            @media (max-width: 768px) {
+              padding-left: 1rem;
+            }
+          }
+        }
+
+        .item {
+          flex: 1;
+        }
+
+        &:nth-child(3) .h-spacer,
+        &:nth-child(4) .h-spacer {
+          display: none;
+        }
+
+        &:nth-child(even) .v-spacer,
+        &:nth-child(4) .v-spacer {
+          display: none;
+        }
+
+        @media (max-width: 768px) {
+          .v-spacer {
+            display: none;
+          }
+
+          &:nth-child(3) .h-spacer {
+            display: block;
+          }
+
+          &:nth-child(4) .h-spacer {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+</style>

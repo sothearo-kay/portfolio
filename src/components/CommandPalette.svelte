@@ -62,7 +62,7 @@
 
   $effect(() => {
     if (commandStore.isShown && selectedIndex >= 0) {
-      const selectedButton = contentElement?.querySelector(".item.selected")
+      const selectedButton = contentElement?.querySelector(".cmd.active")
       if (selectedButton) {
         selectedButton.scrollIntoView({
           behavior: "smooth",
@@ -155,13 +155,13 @@
       bind:this={overlayElement}
       class="palette"
       in:fade={{ duration: 300, easing: quintOut }}
-      out:fade={{ duration: 250, easing: quintOut }}
+      out:fade={{ duration: 300, easing: quintOut }}
     >
       <div
         bind:this={contentElement}
         class="content"
         in:scale={{ duration: 350, start: 0.95, easing: quintOut }}
-        out:scale={{ duration: 250, start: 0.96, easing: quintOut }}
+        out:scale={{ duration: 300, start: 0.96, easing: quintOut }}
       >
         <div class="search">
           <SearchIcon width="20" height="20" />
@@ -312,6 +312,7 @@
 
     h3 {
       font: var(--font-xs);
+      font-weight: 500;
       color: var(--color-accent-foreground);
       text-transform: capitalize;
       letter-spacing: 0.05em;

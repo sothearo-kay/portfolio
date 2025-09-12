@@ -37,22 +37,22 @@ const ogImageUrl = `${Astro.url.origin}/blog/${entry.id}/og.png`
   />
   <Body>
     <Header />
-    <main transition:animate="fade">
+    <Container as="main" transition:animate="fade">
       <article class="post">
-        <Container as="header" class="header">
+        <header class="header">
           <Heading as="h1" size="2xl">{entry.data.title}</Heading>
           <Paragraph>{entry.data.description}</Paragraph>
           <BlogMeta date={entry.data.publishedAt} tags={entry.data.tags} readingTime={readingTime} />
-        </Container>
+        </header>
 
-        <Container class="prose">
+        <div class="prose">
           <Separator />
           <slot />
-        </Container>
+        </div>
 
         <BlogNav {prevPost} {nextPost} />
       </article>
-    </main>
+    </Container>
     <Footer />
     <BlogReadingProgressBar client:idle />
     <CommandPalette client:idle />

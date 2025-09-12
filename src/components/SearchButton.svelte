@@ -70,9 +70,8 @@
       }
 
       span {
-        font-size: 12px;
+        font: var(--font-sm);
         font-family: var(--font-heading);
-        padding: 0.25rem 0.5rem;
         color: var(--color-accent-foreground);
       }
     }

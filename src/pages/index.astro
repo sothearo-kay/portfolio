@@ -1,6 +1,8 @@
 ---
 import Heading from "~/components/common/Heading.astro"
 import Paragraph from "~/components/common/Paragraph.astro"
+import Spacer from "~/components/common/Spacer.astro"
+import SocialGrid from "~/components/social/SocialGrid.astro"
 import TechIcon from "~/components/TechIcon.astro"
 import { technologies } from "~/data/technologies"
 import MonkeyIllustration from "~/icons/monkey-illustration.svg"
@@ -26,6 +28,12 @@ import Layout from "~/layouts/default.astro"
         <MonkeyIllustration class="illustration" />
       </div>
     </div>
+  </section>
+
+  <section class="social">
+    <Spacer pattern />
+    <SocialGrid />
+    <Spacer pattern />
   </section>
 
   <section class="technologies">
@@ -55,6 +63,10 @@ import Layout from "~/layouts/default.astro"
       max-width: 400px;
       height: auto;
     }
+  }
+
+  .social {
+    margin-inline: -4rem;
   }
 
   .technologies {
@@ -87,6 +99,10 @@ import Layout from "~/layouts/default.astro"
       .illustration {
         max-width: 280px;
       }
+    }
+
+    .social {
+      margin-inline: -1rem;
     }
   }
 </style>
