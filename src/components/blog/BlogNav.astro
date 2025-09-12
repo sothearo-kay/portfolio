@@ -1,9 +1,8 @@
 ---
 import type { CollectionEntry } from "astro:content"
-import Container from "~/components/common/Container.astro"
 import Separator from "~/components/common/Separator.astro"
-import ArrowLeft from "~/icons/arrow-left.svg"
-import ArrowRight from "~/icons/arrow-right.svg"
+import ArrowLeft from "~/icons/arrow/arrow-left.svg"
+import ArrowRight from "~/icons/arrow/arrow-right.svg"
 
 interface Props {
   prevPost: CollectionEntry<"blog"> | null
@@ -13,7 +12,7 @@ interface Props {
 const { prevPost, nextPost } = Astro.props
 ---
 
-<Container class="navigation">
+<div class="navigation">
   <Separator />
   <nav class="buttons">
     {prevPost && (
@@ -36,7 +35,7 @@ const { prevPost, nextPost } = Astro.props
       </a>
     )}
   </nav>
-</Container>
+</div>
 
 <style>
   .navigation {

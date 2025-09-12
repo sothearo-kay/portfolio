@@ -2,6 +2,7 @@
 import mdx from "@astrojs/mdx"
 import svelte from "@astrojs/svelte"
 import vercel from "@astrojs/vercel"
+import svg from "@poppanator/sveltekit-svg"
 import {
   transformerNotationDiff,
   transformerNotationFocus,
@@ -66,6 +67,26 @@ export default defineConfig({
     svelte(),
     mdx(),
   ],
+
+  vite: {
+    plugins: [
+      svg({
+        svgoOptions: {
+          multipass: true,
+          plugins: [
+            {
+              name: "preset-default",
+              params: {
+                overrides: {
+                  cleanupIds: false,
+                },
+              },
+            },
+          ],
+        },
+      }),
+    ],
+  },
 
   output: "static",
   adapter: vercel({

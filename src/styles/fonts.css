@@ -3,7 +3,7 @@
   src: url("/fonts/JetBrainsMono-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
-  font-display: optional;
+  font-display: swap;
 }
 
 @font-face {
@@ -30,6 +30,13 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Open Sans";
+  src: url("/fonts/OpenSans-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   --font-heading: "M PLUS Rounded 1c", system-ui, sans-serif;
@@ -45,7 +52,8 @@
   --font-size-3xl: clamp(2rem, 1.5rem + 2vi, 2.5rem);
   --font-size-4xl: clamp(2.5rem, 2rem + 2vi, 3.5rem);
 
-  --section-spacing: clamp(1.5rem, 1.25rem + 1vi, 2rem);
+  --block-spacing: clamp(1.5rem, 1.25rem + 2vi, 2.25rem);
+  --inline-spacing: clamp(1rem, 4vi, 2rem);
 
   --font-xs: var(--font-size-xs) / 1.5 var(--font-body);
   --font-sm: var(--font-size-sm) / 1.6 var(--font-body);

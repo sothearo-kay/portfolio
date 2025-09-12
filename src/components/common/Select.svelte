@@ -43,7 +43,7 @@
   <button
     bind:this={selectButton}
     type="button"
-    class="button inset-shadow"
+    class="button"
     class:open={isOpen}
     onclick={toggle}
   >
@@ -97,12 +97,17 @@
   color: var(--color-foreground-muted);
   font: var(--font-sm);
   padding: 0.375rem 0.75rem;
+  box-shadow: var(--shadow-inset);
   transition: background-color 0.2s ease;
   user-select: none;
   -webkit-user-select: none;
 
   &:hover {
     background: var(--color-background-secondary);
+  }
+
+  &:active {
+    transform: scale(0.98);
   }
 
   svg {

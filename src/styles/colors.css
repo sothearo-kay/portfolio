@@ -3,6 +3,8 @@
   --color-background-secondary: oklch(96% 0 0);
   --color-background-elevated: oklch(99% 0 0);
   --color-background-elevated-transparent: oklch(99% 0 0 / 0.96);
+  --color-background-hover: oklch(94% 0 0);
+  --color-background-interactive: oklch(92% 0 0);
 
   --color-foreground: oklch(15% 0.01 240deg);
   --color-foreground-muted: oklch(45% 0.005 240deg);
@@ -12,6 +14,7 @@
 
   --color-border: oklch(85% 0 0);
   --color-border-subtle: oklch(90% 0 0);
+  --color-separator: color-mix(in srgb, var(--color-border) 40%, transparent);
 
   --color-skeleton-from: oklch(96% 0 0);
   --color-skeleton-to: oklch(92% 0 0);
@@ -23,8 +26,15 @@
 
   --color-progress: oklch(60% 0.14 150deg);
 
+  --color-motion: #0f1115;
+  --color-overlay: color-mix(in srgb, var(--color-background-secondary) 60%, transparent);
+
   --shadow-card: 0 2px 8px 0 oklch(0% 0 0deg / 0.1), 0 1px 3px 0 oklch(0% 0 0deg / 0.06);
   --shadow-header: 0 1px 3px 0 oklch(0% 0 0deg / 0.08), 0 1px 2px -1px oklch(0% 0 0deg / 0.04);
+  --shadow-dialog: 0 1px 2px 0 oklch(0% 0 0deg / 0.05), 0 1px 1px -1px oklch(0% 0 0deg / 0.03);
+  --shadow-inset:
+    inset 1px 1px 1px color-mix(in srgb, var(--color-background) 88%, black),
+    inset 0 0 2px color-mix(in srgb, var(--color-background) 93%, black);
   --shadow-inset-active:
     inset 2px 2px 4px color-mix(in srgb, var(--color-background) 25%, transparent),
     inset -1px -1px 2px color-mix(in srgb, var(--color-foreground) 20%, transparent);
@@ -35,6 +45,8 @@
   --color-background-secondary: oklch(26% 0.006 240deg);
   --color-background-elevated: oklch(18% 0.004 240deg);
   --color-background-elevated-transparent: oklch(18% 0.004 240deg / 0.96);
+  --color-background-hover: oklch(30% 0.007 240deg);
+  --color-background-interactive: oklch(33% 0.008 240deg);
 
   --color-foreground: oklch(90% 0.003 240deg);
   --color-foreground-muted: oklch(70% 0.003 240deg);
@@ -44,6 +56,7 @@
 
   --color-border: oklch(35% 0.006 240deg);
   --color-border-subtle: oklch(28% 0.005 240deg);
+  --color-separator: color-mix(in srgb, var(--color-border) 60%, transparent);
 
   --color-skeleton-from: oklch(30% 0.005 240deg);
   --color-skeleton-to: oklch(25% 0.004 240deg);
@@ -55,9 +68,14 @@
 
   --color-progress: oklch(65% 0.13 155deg);
 
+  --color-motion: #fff312;
+  --color-overlay: color-mix(in srgb, black 40%, transparent);
+
   --shadow-card: 0 2px 8px 0 oklch(0% 0 0deg / 0.25), 0 1px 3px 0 oklch(0% 0 0deg / 0.15);
   --shadow-header: 0 1px 3px 0 oklch(0% 0 0deg / 0.22), 0 1px 2px -1px oklch(0% 0 0deg / 0.16);
-  --shadow-inset-active:
-    inset 2px 2px 4px color-mix(in srgb, var(--color-foreground) 20%, transparent),
-    inset -1px -1px 4px color-mix(in srgb, var(--color-background) 25%, transparent);
+  --shadow-dialog: 0 1px 2px 0 oklch(0% 0 0deg / 0.15), 0 1px 1px -1px oklch(0% 0 0deg / 0.1);
+  --shadow-inset:
+    inset 1px 1px 1px color-mix(in srgb, var(--color-foreground) 6%, transparent),
+    inset 0 0 2px color-mix(in srgb, var(--color-foreground) 4%, transparent);
+  --shadow-inset-active: inset 1px 1px 3px oklch(0% 0 0deg / 0.15), inset 0 0 2px oklch(0% 0 0deg / 0.08);
 }

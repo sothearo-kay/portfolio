@@ -1,0 +1,126 @@
+---
+import FacebookIcon from "~/icons/social/facebook.svg"
+import GitHubIcon from "~/icons/social/github.svg"
+import KhmerCoderIcon from "~/icons/social/khmercoder.svg"
+import LinkedInIcon from "~/icons/social/linkedin.svg"
+import SocialCard from "./SocialCard.astro"
+
+const socialLinks = [
+  {
+    url: "https://github.com/sothearo-kay",
+    icon: GitHubIcon,
+    label: "GitHub",
+    username: "sothearo-kay",
+  },
+  {
+    url: "https://khmercoder.com/@sothearo",
+    icon: KhmerCoderIcon,
+    label: "KhmerCoder",
+    username: "@sothearo",
+  },
+  {
+    url: "https://www.linkedin.com/in/kaysothearo19/",
+    icon: LinkedInIcon,
+    label: "LinkedIn",
+    username: "kaysothearo19",
+  },
+  {
+    url: "https://www.facebook.com/sothearo19/",
+    icon: FacebookIcon,
+    label: "Facebook",
+    username: "sothearo19",
+  },
+]
+---
+
+<div class="container break-container">
+  <div class="background grid"></div>
+  <div class="grid">
+    {socialLinks.map(link => <SocialCard {...link} />)}
+  </div>
+</div>
+
+<style>
+  .container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+
+      .card::before,
+      .card::after {
+        content: '';
+        position: absolute;
+        height: 1px;
+        background: var(--color-separator);
+        z-index: -1;
+      }
+
+      .card::before {
+        top: 0;
+      }
+
+      .card::after {
+        bottom: 0;
+      }
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+
+        .card::before,
+        .card::after {
+          width: 100vw;
+          display: block;
+        }
+
+        .card:first-child::before {
+          display: none;
+        }
+
+        .card:last-child::after {
+          display: none;
+        }
+      }
+
+      @media (min-width: 769px) {
+        .card:nth-child(odd)::before,
+        .card:nth-child(odd)::after {
+          width: calc(200% + 1rem);
+        }
+
+        .card:nth-child(1)::before {
+          display: none;
+        }
+
+        .card:nth-child(odd):nth-last-child(-n+2)::after {
+          display: none;
+        }
+      }
+    }
+
+    .background {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+
+      &::before {
+        content: '';
+        border-right: 1px solid var(--color-separator);
+      }
+
+      &::after {
+        content: '';
+        border-left: 1px solid var(--color-separator);
+      }
+
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+  }
+</style>

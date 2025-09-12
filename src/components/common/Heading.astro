@@ -7,7 +7,7 @@ type HeadingTag
 
 interface Props {
   as?: HeadingTag
-  size?: "3xl" | "2xl" | "xl" | "lg"
+  size?: "3xl" | "2xl" | "xl" | "lg" | "md"
   class?: string
 }
 
@@ -20,24 +20,29 @@ const { as: Tag = "h1", size = "3xl", class: className }: Props = Astro.props
 </Tag>
 
 <style>
-.\33 xl {
+  .\33 xl {
     font: var(--font-3xl);
     font-weight: 700;
   }
 
-.\32 xl {
+  .\32 xl {
     font: var(--font-2xl);
     font-weight: 700;
   }
 
-.xl {
+  .xl {
     font: var(--font-xl);
     font-weight: 700;
   }
 
-.lg {
+  .lg {
     font: var(--font-lg);
     font-weight: 500;
   }
-</style>
 
+  .md {
+    font: var(--font-md);
+    font-family: var(--font-heading);
+    font-weight: 500;
+  }
+</style>

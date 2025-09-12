@@ -124,7 +124,7 @@
   .progress-container {
     --border-offset: calc(3px / 2); /* 2px app border + 1px progress border, divided by 2 */
     width: 100%;
-    max-width: 58rem;
+    max-width: 56rem;
     position: fixed;
     bottom: 2rem;
     display: flex;

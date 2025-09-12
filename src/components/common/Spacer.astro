@@ -1,0 +1,64 @@
+---
+interface Props {
+  orientation?: "horizontal" | "vertical"
+  size?: "xs" | "sm" | "md" | "lg"
+  pattern?: boolean
+  class?: string
+}
+
+const {
+  orientation = "horizontal",
+  size = "sm",
+  pattern = false,
+  class: className,
+} = Astro.props
+
+const classes = [
+  "spacer",
+  orientation,
+  size,
+  pattern && "pattern",
+  orientation === "horizontal" && "break-container",
+  className,
+].filter(Boolean)
+---
+
+<div class:list={classes}></div>
+
+<style>
+  .spacer {
+    --pattern-fg: var(--color-separator);
+
+    &.horizontal {
+      width: calc(100% + 2 * var(--inline-spacing));
+      border-block: 1px solid var(--color-separator);
+
+      &.xs { height: 1rem; }
+      &.sm { height: 2rem; }
+      &.md { height: 4rem; }
+      &.lg { height: 6rem; }
+    }
+
+    &.vertical {
+      height: 100%;
+      border-inline: 1px solid var(--color-separator);
+
+      &.xs { width: 1rem; }
+      &.sm { width: 2rem; }
+      &.md { width: 4rem; }
+      &.lg { width: 6rem; }
+    }
+
+    &.pattern {
+      background-image: repeating-linear-gradient(
+        315deg,
+        var(--pattern-fg) 0,
+        var(--pattern-fg) 1px,
+        transparent 0,
+        transparent 50%
+      );
+      background-size: 10px 10px;
+      background-attachment: fixed;
+    }
+  }
+</style>

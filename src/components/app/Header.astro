@@ -1,12 +1,19 @@
 ---
+import { getCollection } from "astro:content"
 import Separator from "../common/Separator.astro"
+import SearchButton from "../SearchButton.svelte"
 import ThemeToggle from "../ThemeToggle.astro"
+
+const allBlogPosts = await getCollection("blog")
+const posts = allBlogPosts.map(post => ({
+  id: post.id,
+  title: post.data.title,
+}))
 
 const navItems = [
   { href: "/", text: "Home" },
   { href: "/blog", text: "Blog" },
   { href: "/projects", text: "Projects" },
-  { href: "/about", text: "About" },
 ]
 
 const currentPath = new URL(Astro.request.url).pathname
@@ -33,20 +40,24 @@ function isActive(href: string) {
     </nav>
 
     <Separator orientation="vertical" />
-    <ThemeToggle />
+
+    <div class="actions">
+      <SearchButton {posts} client:load />
+      <ThemeToggle />
+    </div>
   </div>
 </header>
 
 <style>
   .header {
-    z-index: 1;
+    position: fixed;
+    top: calc(1rem + env(safe-area-inset-top, 0px));
+    left: 0;
+    width: 100%;
+    z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: fixed;
-    top: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
 
     .wrapper {
       display: flex;
@@ -83,6 +94,12 @@ function isActive(href: string) {
           color: var(--color-foreground);
         }
       }
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
     }
   }
 </style>
