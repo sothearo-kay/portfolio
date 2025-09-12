@@ -16,9 +16,8 @@ const { class: className } = Astro.props
   max-width: 56rem;
   min-height: 100dvh;
   margin-inline: auto;
-  padding-top: calc(50px + 1rem);
   display: grid;
-  grid-template-rows: 1fr max-content;
+  grid-template-rows: min-content 1fr min-content;
   border-inline: 1px solid var(--color-separator);
 
   @media (max-width: 768px) {

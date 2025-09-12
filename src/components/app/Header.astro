@@ -50,7 +50,7 @@ function isActive(href: string) {
 
 <style>
   .header {
-    position: fixed;
+    position: sticky;
     top: calc(1rem + env(safe-area-inset-top, 0px));
     left: 0;
     width: 100%;
@@ -58,6 +58,7 @@ function isActive(href: string) {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: calc(1rem + env(safe-area-inset-top, 0px));
 
     .wrapper {
       display: flex;
