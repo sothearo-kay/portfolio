@@ -3,7 +3,6 @@ import FacebookIcon from "~/icons/social/facebook.svg"
 import GitHubIcon from "~/icons/social/github.svg"
 import KhmerCoderIcon from "~/icons/social/khmercoder.svg"
 import LinkedInIcon from "~/icons/social/linkedin.svg"
-import Spacer from "../common/Spacer.astro"
 import SocialCard from "./SocialCard.astro"
 
 const socialLinks = [
@@ -34,83 +33,93 @@ const socialLinks = [
 ]
 ---
 
-<div class="grid">
-  <div class="row">
-    {socialLinks.map(({ url, icon, label, username }, idx) => (
-      <div class="wrapper">
-        <div class="item">
-          <SocialCard url={url} icon={icon} label={label} username={username} />
-          <Spacer orientation="horizontal" size="xs" class={`h-spacer h-${idx}`} />
-        </div>
-        <Spacer orientation="vertical" size="xs" class={`v-spacer v-${idx}`} />
-      </div>
-    ))}
+<div class="container">
+  <div class="background grid"></div>
+  <div class="grid">
+    {socialLinks.map(link => <SocialCard {...link} />)}
   </div>
 </div>
 
 <style>
-  .grid {
+  .container {
+    position: relative;
     display: flex;
     flex-direction: column;
 
-    .row {
+    .grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+
+      .card::before,
+      .card::after {
+        content: '';
+        position: absolute;
+        height: 1px;
+        background: var(--color-separator);
+        z-index: -1;
+      }
+
+      .card::before {
+        top: 0;
+      }
+
+      .card::after {
+        bottom: 0;
+      }
 
       @media (max-width: 768px) {
         grid-template-columns: 1fr;
+
+        .card::before,
+        .card::after {
+          width: 100vw;
+          display: block;
+        }
+
+        .card:first-child::before {
+          display: none;
+        }
+
+        .card:last-child::after {
+          display: none;
+        }
       }
 
-      .wrapper {
-        display: flex;
-
-        &:nth-child(odd) {
-          & .card > div {
-            padding-right: 1.25rem;
-
-            @media (max-width: 768px) {
-              padding-right: 1rem;
-            }
-          }
+      @media (min-width: 769px) {
+        .card:nth-child(odd)::before,
+        .card:nth-child(odd)::after {
+          width: calc(200% + 1rem);
         }
 
-        &:nth-child(even) {
-          & .card > div {
-            padding-left: 1.25rem;
-
-            @media (max-width: 768px) {
-              padding-left: 1rem;
-            }
-          }
-        }
-
-        .item {
-          flex: 1;
-        }
-
-        &:nth-child(3) .h-spacer,
-        &:nth-child(4) .h-spacer {
+        .card:nth-child(1)::before {
           display: none;
         }
 
-        &:nth-child(even) .v-spacer,
-        &:nth-child(4) .v-spacer {
+        .card:nth-child(odd):nth-last-child(-n+2)::after {
           display: none;
         }
+      }
+    }
 
-        @media (max-width: 768px) {
-          .v-spacer {
-            display: none;
-          }
+    .background {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
 
-          &:nth-child(3) .h-spacer {
-            display: block;
-          }
+      &::before {
+        content: '';
+        border-right: 1px solid var(--color-separator);
+      }
 
-          &:nth-child(4) .h-spacer {
-            display: none;
-          }
-        }
+      &::after {
+        content: '';
+        border-left: 1px solid var(--color-separator);
+      }
+
+      @media (max-width: 768px) {
+        display: none;
       }
     }
   }
