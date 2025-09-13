@@ -30,7 +30,7 @@ const posts = allBlogPosts.map(post => ({
       <slot />
     </Container>
     <Footer />
-    <CommandPalette {posts} client:only="svelte" />
+    <CommandPalette {posts} client:idle />
     <Scripts />
   </Body>
 </html>

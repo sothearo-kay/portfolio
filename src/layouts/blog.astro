@@ -62,7 +62,7 @@ const posts = allBlogPosts.map(post => ({
     </Container>
     <Footer />
     <BlogReadingProgressBar client:idle />
-    <CommandPalette {posts} client:only="svelte" />
+    <CommandPalette {posts} client:idle />
     <Scripts />
   </Body>
 </html>
