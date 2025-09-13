@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content"
+import { getCollection } from "astro:content"
 import Body from "~/components/app/Body.astro"
 import Footer from "~/components/app/Footer.astro"
 import Head from "~/components/app/Head.astro"
@@ -25,6 +26,12 @@ interface Props {
 
 const { entry, prevPost, nextPost, readingTime } = Astro.props
 const ogImageUrl = `${Astro.url.origin}/blog/${entry.id}/og.png`
+
+const allBlogPosts = await getCollection("blog")
+const posts = allBlogPosts.map(post => ({
+  id: post.id,
+  title: post.data.title,
+}))
 ---
 
 <html lang="en" transition:name="root">
@@ -55,7 +62,7 @@ const ogImageUrl = `${Astro.url.origin}/blog/${entry.id}/og.png`
     </Container>
     <Footer />
     <BlogReadingProgressBar client:idle />
-    <CommandPalette client:only="svelte" />
+    <CommandPalette {posts} client:only="svelte" />
     <Scripts />
   </Body>
 </html>

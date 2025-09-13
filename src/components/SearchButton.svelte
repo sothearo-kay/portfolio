@@ -1,16 +1,8 @@
 <script lang="ts">
-  import type { Post } from "~/utils/commands"
   import { onMount } from "svelte"
   import { MediaQuery } from "svelte/reactivity"
   import SearchIcon from "~/icons/search.svg?component"
   import { commandStore } from "~/stores/command.svelte"
-  import { addBlogCommands, addNavCommands, addSocialCommands, addThemeCommands } from "~/utils/commands"
-
-  interface Props {
-    posts?: Post[]
-  }
-
-  const { posts = [] }: Props = $props()
 
   const mobile = new MediaQuery("(max-width: 768px)")
   const isMac = typeof navigator !== "undefined" ? navigator.userAgent.includes("Mac") : true
@@ -22,13 +14,6 @@
   )
 
   onMount(() => {
-    commandStore.clearCommands()
-
-    addNavCommands()
-    addBlogCommands(posts)
-    addSocialCommands()
-    addThemeCommands()
-
     isDetecting = false
   })
 

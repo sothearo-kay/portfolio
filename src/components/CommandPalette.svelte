@@ -1,5 +1,7 @@
 <script lang="ts">
   import type { Command } from "~/stores/command.svelte"
+  import type { Post } from "~/utils/commands"
+  import { onMount } from "svelte"
   import { quintOut } from "svelte/easing"
   import { MediaQuery } from "svelte/reactivity"
   import { fade, scale } from "svelte/transition"
@@ -18,7 +20,14 @@
   import SunIcon from "~/icons/theme/sun.svg?component"
   import XIcon from "~/icons/x.svg?component"
   import { commandStore } from "~/stores/command.svelte"
+  import { addBlogCommands, addNavCommands, addSocialCommands, addThemeCommands } from "~/utils/commands"
   import Portal from "./common/Portal.svelte"
+
+  interface Props {
+    posts: Post[]
+  }
+
+  const { posts }: Props = $props()
 
   const mobile = new MediaQuery("(max-width: 768px)")
 
@@ -52,6 +61,15 @@
   })
 
   const flatCommands = $derived(Object.values(groupedCommands).flat())
+
+  onMount(() => {
+    if (commandStore.commands.length === 0) {
+      addNavCommands()
+      addBlogCommands(posts)
+      addSocialCommands()
+      addThemeCommands()
+    }
+  })
 
   $effect(() => {
     if (commandStore.isShown && inputElement) {
