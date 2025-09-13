@@ -55,7 +55,7 @@ const ogImageUrl = `${Astro.url.origin}/blog/${entry.id}/og.png`
     </Container>
     <Footer />
     <BlogReadingProgressBar client:idle />
-    <CommandPalette client:idle />
+    <CommandPalette client:only="svelte" />
     <Scripts />
   </Body>
 </html>

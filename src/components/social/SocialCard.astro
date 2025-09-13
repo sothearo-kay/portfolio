@@ -21,7 +21,7 @@ const needsLargerIcon = largerIconLabels.includes(label)
   <Container class="content">
     <Icon class:list={["icon", needsLargerIcon && "large"]} />
     <div class="info">
-      <Heading as="h3" size="md">{label}</Heading>
+      <Heading as="h2" size="md">{label}</Heading>
       <Paragraph secondary size="xs">{username}</Paragraph>
     </div>
     <ArrowUpRightIcon class="arrow" />
@@ -35,14 +35,14 @@ const needsLargerIcon = largerIconLabels.includes(label)
     padding-block: 1.25rem;
 
     @media (hover: none) {
-      h3 {
+      h2 {
         text-decoration: underline;
         text-underline-offset: 3px;
       }
     }
 
     &:hover {
-      h3 {
+      h2 {
         text-decoration: underline;
         text-underline-offset: 3px;
       }
@@ -73,7 +73,7 @@ const needsLargerIcon = largerIconLabels.includes(label)
       flex: 1;
       min-width: 0;
 
-      h3, p {
+      h2, p {
         margin-block: 0;
       }
 

@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Command } from "~/stores/command.svelte"
   import { quintOut } from "svelte/easing"
+  import { MediaQuery } from "svelte/reactivity"
   import { fade, scale } from "svelte/transition"
   import BookImageIcon from "~/icons/book-image.svg?component"
   import FileMinusIcon from "~/icons/file-minus.svg?component"
@@ -18,6 +19,8 @@
   import XIcon from "~/icons/x.svg?component"
   import { commandStore } from "~/stores/command.svelte"
   import Portal from "./common/Portal.svelte"
+
+  const mobile = new MediaQuery("(max-width: 768px)")
 
   const icons = {
     "mouse": MouseIcon,
@@ -216,11 +219,13 @@
           {/if}
         </div>
 
-        <div class="footer">
-          <span><kbd class="tag">↑</kbd><kbd class="tag">↓</kbd> to navigate</span>
-          <span><kbd class="tag">↵</kbd> to select</span>
-          <span><kbd class="tag">esc</kbd> to close</span>
-        </div>
+        {#if !mobile.current}
+          <div class="footer">
+            <span><kbd class="tag">↑</kbd><kbd class="tag">↓</kbd> to navigate</span>
+            <span><kbd class="tag">↵</kbd> to select</span>
+            <span><kbd class="tag">esc</kbd> to close</span>
+          </div>
+        {/if}
       </div>
     </div>
   </Portal>
@@ -263,9 +268,8 @@
     border-bottom: 1px solid var(--color-border-subtle);
 
     input {
-      font: var(--font-sm);
       width: 100%;
-      margin-inline: 1rem;
+      margin-inline: 0.5rem;
       border: none;
       background: transparent;
       color: var(--color-foreground);
@@ -297,6 +301,8 @@
   }
 
   .group {
+    margin-block:  0;
+
     &:first-child {
       padding-block: 0;
     }

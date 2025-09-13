@@ -21,9 +21,11 @@ const absoluteOgImage = ogImage.startsWith("http") ? ogImage : new URL(ogImage, 
 <head>
   <meta charset="utf-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="generator" content={Astro.generator} />
   <meta name="theme-color" content="#ffffff" />
+  <meta name="author" content="Sothearo" />
+  <link rel="canonical" href={Astro.url.href} />
 
   <link rel="preload" href="/fonts/MPLUSRounded1c-Bold.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/fonts/MPLUSRounded1c-Medium.woff2" as="font" type="font/woff2" crossorigin />

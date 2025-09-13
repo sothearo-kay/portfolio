@@ -8,6 +8,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  -webkit-text-size-adjust: none;
 }
 
 html {
@@ -58,6 +59,13 @@ section > :is(h1, h2, h3, h4):first-child {
 
 button {
   all: unset;
+}
+
+input,
+textarea,
+select {
+  font: var(--font-sm);
+  font-size: 16px;
 }
 
 button:not(:disabled),
