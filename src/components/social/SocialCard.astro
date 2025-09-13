@@ -34,6 +34,54 @@ const needsLargerIcon = largerIconLabels.includes(label)
     display: block;
     padding-block: 1.25rem;
 
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      height: 1px;
+      background: var(--color-separator);
+      z-index: -1;
+    }
+
+    &::before {
+      top: 0;
+    }
+
+    &::after {
+      bottom: 0;
+    }
+
+    @media (max-width: 768px) {
+      &::before,
+      &::after {
+        width: 100vw;
+        display: block;
+      }
+
+      &:first-child::before {
+        display: none;
+      }
+
+      &:last-child::after {
+        display: none;
+      }
+    }
+
+    @media (min-width: 769px) {
+      &:nth-child(odd)::before,
+      &:nth-child(odd)::after {
+        width: calc(200% + 1rem);
+      }
+
+      &:nth-child(1)::before {
+        display: none;
+      }
+
+      &:nth-child(odd):nth-last-child(-n+2)::after {
+        display: none;
+      }
+    }
+
     @media (hover: none) {
       & .heading {
         text-decoration: underline;

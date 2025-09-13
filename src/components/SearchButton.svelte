@@ -1,20 +1,11 @@
 <script lang="ts">
   import { onMount } from "svelte"
-  import { MediaQuery } from "svelte/reactivity"
-  import SearchIcon from "~/icons/search.svg?component"
   import { commandStore } from "~/stores/command.svelte"
 
-  const mobile = new MediaQuery("(max-width: 768px)")
-  const isMac = typeof navigator !== "undefined" ? navigator.userAgent.includes("Mac") : true
-
-  let isDetecting = $state(true)
-
-  const displayText = $derived(
-    isDetecting ? "" : mobile.current ? "Search" : isMac ? "⌘K" : "⌃K",
-  )
+  let shortcut = $state("")
 
   onMount(() => {
-    isDetecting = false
+    shortcut = navigator.userAgent.includes("Mac") ? "⌘K" : "⌃K"
   })
 
   function handleClick() {
@@ -23,13 +14,13 @@
 </script>
 
 <button class="search-button" onclick={handleClick} aria-label="Open search">
-  <SearchIcon width="16" height="16" />
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m21 21-4.34-4.34" />
+    <circle cx="11" cy="11" r="8" />
+  </svg>
   <span class="shortcut">
-    {#if displayText === "Search"}
-      <span>{displayText}</span>
-    {:else}
-      <kbd class="tag">{displayText}</kbd>
-    {/if}
+    <span class="mobile">Search</span>
+    <kbd class="desktop tag">{shortcut}</kbd>
   </span>
 </button>
 
@@ -55,23 +46,28 @@
       align-items: center;
       box-sizing: border-box;
 
-      & kbd {
+      .mobile {
+        font-size:  14px;
+        font-family: var(--font-heading);
+        color: var(--color-accent-foreground);
+        min-width: 2.8rem;
+        display: none;
+
+        @media (max-width: 768px) {
+          display: inline-block;
+        }
+      }
+
+      .desktop {
         background: var(--color-background-interactive);
         width: 2rem;
         min-height: 1.375rem;
         display: inline-block;
+        letter-spacing: 0.2em;
 
         @media (max-width: 768px) {
-          width: 2.8rem;
+          display: none;
         }
-      }
-
-      span {
-        font: var(--font-sm);
-        font-family: var(--font-heading);
-        color: var(--color-accent-foreground);
-        min-width: 2.8rem;
-        display: inline-block;
       }
     }
   }

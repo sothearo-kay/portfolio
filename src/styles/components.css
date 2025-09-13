@@ -40,7 +40,6 @@ kbd.tag {
   font-size: 12px;
   font-family: var(--font-heading);
   border: none;
-  letter-spacing: 0.2em;
 }
 
 .tooltip {
