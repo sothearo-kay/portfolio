@@ -3,6 +3,7 @@ import mdx from "@astrojs/mdx"
 import sitemap from "@astrojs/sitemap"
 import svelte from "@astrojs/svelte"
 import vercel from "@astrojs/vercel"
+import compress from "@playform/compress"
 import svg from "@poppanator/sveltekit-svg"
 import {
   transformerNotationDiff,
@@ -10,6 +11,8 @@ import {
   transformerNotationHighlight,
 } from "@shikijs/transformers"
 import { defineConfig } from "astro/config"
+import browserslist from "browserslist"
+import { browserslistToTargets, Features } from "lightningcss"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeKatex from "rehype-katex"
 import rehypeSlug from "rehype-slug"
@@ -68,9 +71,25 @@ export default defineConfig({
     mdx(),
     svelte(),
     sitemap(),
+    compress({
+      CSS: false,
+      HTML: true,
+      Image: false,
+      JavaScript: true,
+      SVG: true,
+    }),
   ],
 
   vite: {
+    css: {
+      lightningcss: {
+        targets: browserslistToTargets(
+          browserslist.loadConfig({ path: "." }) ?? [...browserslist.defaults],
+        ),
+        include: Features.Nesting,
+      },
+      transformer: "lightningcss",
+    },
     plugins: [
       svg({
         svgoOptions: {

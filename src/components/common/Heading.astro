@@ -9,13 +9,14 @@ interface Props {
   as?: HeadingTag
   size?: "3xl" | "2xl" | "xl" | "lg" | "md"
   class?: string
+  reset?: boolean
 }
 
 
-const { as: Tag = "h1", size = "3xl", class: className }: Props = Astro.props
+const { as: Tag = "h1", size = "3xl", class: className, reset = false }: Props = Astro.props
 ---
 
-<Tag class:list={[size, className]}>
+<Tag class:list={[size, className, { reset }]}>
   <slot />
 </Tag>
 
@@ -44,5 +45,9 @@ const { as: Tag = "h1", size = "3xl", class: className }: Props = Astro.props
     font: var(--font-md);
     font-family: var(--font-heading);
     font-weight: 500;
+  }
+
+  .reset {
+    margin-block: 0;
   }
 </style>

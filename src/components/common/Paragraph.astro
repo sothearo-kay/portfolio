@@ -4,12 +4,13 @@ import type { HTMLAttributes } from "astro/types"
 export interface Props extends HTMLAttributes<"p"> {
   secondary?: boolean
   size?: "xs" | "sm" | "md"
+  reset?: boolean
 }
 
-const { secondary = false, size = "md", class: className, ...attrs } = Astro.props
+const { secondary = false, size = "md", class: className, reset = false, ...attrs } = Astro.props
 ---
 
-<p class:list={["paragraph", className, size, { secondary }]} {...attrs}>
+<p class:list={["paragraph", className, size, { secondary, reset }]} {...attrs}>
   <slot />
 </p>
 
@@ -29,6 +30,10 @@ const { secondary = false, size = "md", class: className, ...attrs } = Astro.pro
 
   &.secondary {
     color: var(--color-foreground-muted);
+  }
+
+  &.reset {
+    margin-block: 0;
   }
 }
 </style>

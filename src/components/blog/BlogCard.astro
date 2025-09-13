@@ -12,7 +12,7 @@ const { post } = Astro.props
 ---
 
 <article class="card">
-  <Heading as="h2" size="lg">
+  <Heading as="h2" size="lg" reset>
     <a href={`/blog/${post.id}`} class="title">
       {post.data.title}
     </a>
@@ -27,9 +27,6 @@ const { post } = Astro.props
 
 <style>
   .card {
-    h2 {
-      margin-block: 0;
-    }
 
     .title {
       &:hover {

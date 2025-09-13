@@ -37,7 +37,7 @@ import Layout from "~/layouts/default.astro"
   </section>
 
   <section class="about">
-    <Heading as="h2" size="2xl">About Me</Heading>
+    <Heading as="h2" size="2xl" class="heading">About Me</Heading>
     <div class="content">
       <Paragraph>
         Hi! I'm <strong>Sothearo</strong>, a Frontend Developer based in Phnom Penh, Cambodia.
@@ -62,7 +62,7 @@ import Layout from "~/layouts/default.astro"
   <Spacer pattern />
 
   <section class="technologies">
-    <Heading as="h2" size="2xl">Technologies</Heading>
+    <Heading as="h2" size="2xl" class="heading">Technologies</Heading>
     <div class="grid">
       {technologies.map(tech => (
         <TechIcon name={tech.name} label={tech.label} />
@@ -91,7 +91,7 @@ import Layout from "~/layouts/default.astro"
   }
 
   .about {
-    h2 {
+    & :global(.heading) {
       margin-bottom: calc(var(--block-spacing) * 0.75);
     }
 
@@ -107,7 +107,7 @@ import Layout from "~/layouts/default.astro"
   }
 
   .technologies {
-    h2 {
+    & :global(.heading) {
       margin-bottom: var(--block-spacing);
     }
 
