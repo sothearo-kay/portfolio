@@ -51,54 +51,8 @@ const socialLinks = [
       grid-template-columns: repeat(2, 1fr);
       gap: 1rem;
 
-      .card::before,
-      .card::after {
-        content: '';
-        position: absolute;
-        height: 1px;
-        background: var(--color-separator);
-        z-index: -1;
-      }
-
-      .card::before {
-        top: 0;
-      }
-
-      .card::after {
-        bottom: 0;
-      }
-
       @media (max-width: 768px) {
         grid-template-columns: 1fr;
-
-        .card::before,
-        .card::after {
-          width: 100vw;
-          display: block;
-        }
-
-        .card:first-child::before {
-          display: none;
-        }
-
-        .card:last-child::after {
-          display: none;
-        }
-      }
-
-      @media (min-width: 769px) {
-        .card:nth-child(odd)::before,
-        .card:nth-child(odd)::after {
-          width: calc(200% + 1rem);
-        }
-
-        .card:nth-child(1)::before {
-          display: none;
-        }
-
-        .card:nth-child(odd):nth-last-child(-n+2)::after {
-          display: none;
-        }
       }
     }
 
