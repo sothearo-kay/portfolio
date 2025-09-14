@@ -1,7 +1,9 @@
 ---
+import CommandPalette from "../command/CommandPalette.svelte"
 import Separator from "../common/Separator.astro"
 import SearchButton from "../SearchButton.svelte"
 import ThemeToggle from "../ThemeToggle.astro"
+import { getPosts } from "~/utils/blog"
 
 const navItems = [
   { href: "/", text: "Home" },
@@ -16,6 +18,12 @@ function isActive(href: string) {
   const normalizedHref = href === "/" ? "/" : href.replace(/\/$/, "")
   return normalizedCurrent === normalizedHref
 }
+
+const allBlogPosts = await getPosts()
+const posts = allBlogPosts.map(post => ({
+  id: post.id,
+  title: post.data.title,
+}))
 ---
 
 <header class="header">
@@ -39,6 +47,7 @@ function isActive(href: string) {
       <ThemeToggle />
     </div>
   </div>
+  <CommandPalette {posts} client:idle />
 </header>
 
 <style>
