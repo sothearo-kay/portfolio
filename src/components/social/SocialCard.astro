@@ -21,7 +21,7 @@ const needsLargerIcon = largerIconLabels.includes(label)
   <Container class="content">
     <Icon class:list={["icon", needsLargerIcon && "large"]} />
     <div class="info">
-      <Heading as="h2" size="md" reset>{label}</Heading>
+      <Heading as="h2" size="md" class="heading" reset>{label}</Heading>
       <Paragraph secondary size="xs" reset>{username}</Paragraph>
     </div>
     <ArrowUpRightIcon class="arrow" />
@@ -83,19 +83,20 @@ const needsLargerIcon = largerIconLabels.includes(label)
     }
 
     @media (hover: none) {
-      & .heading {
+      & :global(.heading) {
         text-decoration: underline;
         text-underline-offset: 3px;
       }
     }
 
     &:hover {
-      & .heading {
+      & :global(.heading) {
         text-decoration: underline;
         text-underline-offset: 3px;
       }
 
       .arrow {
+        color: var(--color-foreground);
         transform: translateX(4px) translateY(-2px);
       }
     }
@@ -130,9 +131,11 @@ const needsLargerIcon = largerIconLabels.includes(label)
     .arrow {
       width: 1rem;
       height: 1rem;
-      color: var(--color-accent-foreground);
+      color: var(--color-foreground-muted);
       flex-shrink: 0;
-      transition: transform 0.2s ease;
+      transition-property: color, transform;
+      transition-duration: 0.2s;
+      transition-timing-function: ease;
     }
   }
 </style>

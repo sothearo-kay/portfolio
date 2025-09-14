@@ -1,12 +1,23 @@
 ---
+import BlogPreview from "~/components/blog/BlogPreview.astro"
+import Container from "~/components/common/Container.astro"
 import Heading from "~/components/common/Heading.astro"
 import Paragraph from "~/components/common/Paragraph.astro"
 import Spacer from "~/components/common/Spacer.astro"
 import SocialGrid from "~/components/social/SocialGrid.astro"
 import TechIcon from "~/components/TechIcon.astro"
 import { technologies } from "~/data/technologies"
+import ArrowUpRight from "~/icons/arrow/arrow-up-right.svg"
 import MonkeyIllustration from "~/icons/monkey-illustration.svg"
 import Layout from "~/layouts/default.astro"
+import { getPosts } from "~/utils/blog"
+
+const allBlogPosts = await getPosts()
+const latestPosts = allBlogPosts.slice(0, 3).map(post => ({
+  id: post.id,
+  title: post.data.title,
+  description: post.data.description,
+}))
 ---
 
 <Layout title="Homepage" description="Frontend Developer based in Phnom Penh crafting beautiful web experiences. Code by day, manga by night.">
@@ -69,6 +80,20 @@ import Layout from "~/layouts/default.astro"
       ))}
     </div>
   </section>
+
+  <Spacer pattern />
+
+  <section class="latest-blogs">
+    <div class="header">
+      <Heading as="h2" size="2xl" class="heading">Latest Blogs</Heading>
+      <a href="/blog" class="link">
+        View all posts
+      </a>
+    </div>
+    <div class="blogs">
+      {latestPosts.map(post => <BlogPreview {...post} />)}
+    </div>
+  </section>
 </Layout>
 
 <style>
@@ -116,6 +141,30 @@ import Layout from "~/layouts/default.astro"
       grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
       gap: 1rem;
       justify-items: center;
+    }
+  }
+
+  .latest-blogs {
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: calc(var(--block-spacing) * 0.75);
+
+      & :global(.heading) {
+        margin-block: 0;
+      }
+
+      & .link {
+        font: var(--font-md);
+        font-weight: 500;
+      }
+    }
+
+    .blogs {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
     }
   }
 
