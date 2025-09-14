@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Command } from "~/stores/command.svelte"
   import type { Post } from "~/utils/commands"
-  import { onMount } from "svelte"
+  import { onMount, tick } from "svelte"
   import { quintOut } from "svelte/easing"
   import { MediaQuery } from "svelte/reactivity"
   import { fade, scale } from "svelte/transition"
@@ -49,9 +49,14 @@
   })
 
   $effect(() => {
-    if (commandStore.isShown && inputElement) {
+    if (commandStore.isShown) {
       selectedIndex = 0
-      inputElement.focus()
+      // Wait for Portal mount and DOM updates
+      tick().then(() => {
+        if (inputElement) {
+          inputElement.focus()
+        }
+      })
     }
     else if (!commandStore.isShown) {
       selectedIndex = 0
