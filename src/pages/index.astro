@@ -11,7 +11,7 @@ import Layout from "~/layouts/default.astro"
 import { getPosts } from "~/utils/blog"
 
 const allBlogPosts = await getPosts()
-const latestPosts = allBlogPosts.slice(0, 3).map(post => ({
+const latestPosts = allBlogPosts.slice(0, 2).map(post => ({
   id: post.id,
   title: post.data.title,
   description: post.data.description,
