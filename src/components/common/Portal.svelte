@@ -1,45 +1,51 @@
 <script lang="ts">
   import type { Snippet } from "svelte"
-  import { onDestroy, onMount } from "svelte"
+  import { mount, unmount } from "svelte"
+  import Overlay from "./Overlay.svelte"
 
   interface Props {
-    target?: string | HTMLElement
     children: Snippet
+    target?: string | HTMLElement
+    disabled?: boolean
   }
 
-  const { target = "body", children }: Props = $props()
+  const { children, target = "body", disabled = false }: Props = $props()
 
-  let portalElement: HTMLElement | null = null
+  let app: Record<string, unknown>
+  let element: Element | null
 
-  onMount(() => {
-    let targetElement: HTMLElement
+  $effect(() => {
+    if (disabled) {
+      return
+    }
 
     if (typeof target === "string") {
-      targetElement = document.querySelector(target) || document.body
+      element = document.querySelector(target)
     }
     else {
-      targetElement = target || document.body
+      element = target
     }
 
-    targetElement.appendChild(portalElement!)
-    document.body.style.overflow = "hidden"
-  })
+    if (element) {
+      document.body.style.overflow = "hidden"
 
-  onDestroy(() => {
-    document.body.style.overflow = ""
-    portalElement?.remove()
+      app = mount(Overlay, {
+        target: element,
+        props: {
+          children,
+        },
+      })
+
+      return () => {
+        document.body.style.overflow = ""
+        if (app) {
+          unmount(app, { outro: true })
+        }
+      }
+    }
   })
 </script>
 
-<div bind:this={portalElement} class="portal-container">
+{#if disabled}
   {@render children()}
-</div>
-
-<style>
-  :global(.portal-container) {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    transform: translate3d(0, 0, 0);
-  }
-</style>
+{/if}

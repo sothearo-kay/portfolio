@@ -1,5 +1,4 @@
 <script>
-  import { onMount } from "svelte"
   import { fly } from "svelte/transition"
   import Portal from "../common/Portal.svelte"
 
@@ -16,18 +15,36 @@
 
   const selectedOption = $derived(sortOptions.find(opt => opt.value === sortValue))
 
-  onMount(() => {
+  $effect(() => {
     postsContainer = document.getElementById("posts-container")
+    updateDropdownPosition()
 
-    if (selectButton) {
-      const rect = selectButton.getBoundingClientRect()
-      dropdownPosition = {
-        top: rect.bottom + 4,
-        left: rect.left,
-        width: rect.width,
-      }
+    window.addEventListener("resize", updateDropdownPosition)
+
+    return () => {
+      window.removeEventListener("resize", updateDropdownPosition)
     }
   })
+
+  function updateDropdownPosition() {
+    if (selectButton) {
+      let top = selectButton.offsetTop + selectButton.offsetHeight + 4
+      let left = selectButton.offsetLeft
+
+      let element = selectButton.offsetParent
+      while (element) {
+        top += element.offsetTop
+        left += element.offsetLeft
+        element = element.offsetParent
+      }
+
+      dropdownPosition = {
+        top,
+        left,
+        width: selectButton.offsetWidth,
+      }
+    }
+  }
 
   function toggle() {
     isOpen = !isOpen
@@ -97,7 +114,7 @@
             left: {dropdownPosition.left}px;
             width: {dropdownPosition.width}px;
         "
-        transition:fly={{ y: -6, duration: 150 }}
+        transition:fly|global={{ y: -6, duration: 150 }}
       >
         {#each sortOptions as option}
           <button

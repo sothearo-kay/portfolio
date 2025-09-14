@@ -155,14 +155,14 @@
     <div
       bind:this={overlayElement}
       class="palette"
-      in:fade={{ duration: 300, easing: quintOut }}
-      out:fade={{ duration: 300, easing: quintOut }}
+      in:fade|global={{ duration: 300, easing: quintOut }}
+      out:fade|global={{ duration: 300, easing: quintOut }}
     >
       <div
         bind:this={contentElement}
         class="content"
-        in:scale={{ duration: 350, start: 0.95, easing: quintOut }}
-        out:scale={{ duration: 300, start: 0.96, easing: quintOut }}
+        in:scale|global={{ duration: 350, start: 0.95, easing: quintOut }}
+        out:scale|global={{ duration: 300, start: 0.96, easing: quintOut }}
       >
         <div class="search">
           <SearchIcon width="20" height="20" />
