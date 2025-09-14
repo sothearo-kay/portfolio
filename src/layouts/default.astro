@@ -1,11 +1,9 @@
 ---
-import { getCollection } from "astro:content"
 import Body from "~/components/app/Body.astro"
 import Footer from "~/components/app/Footer.astro"
 import Head from "~/components/app/Head.astro"
 import Header from "~/components/app/Header.astro"
 import Scripts from "~/components/app/Scripts.astro"
-import CommandPalette from "~/components/command/CommandPalette.svelte"
 import Container from "~/components/common/Container.astro"
 
 interface Props {
@@ -14,12 +12,6 @@ interface Props {
 }
 
 const { title, description } = Astro.props
-
-const allBlogPosts = await getCollection("blog")
-const posts = allBlogPosts.map(post => ({
-  id: post.id,
-  title: post.data.title,
-}))
 ---
 
 <html lang="en" transition:name="root">
@@ -30,7 +22,6 @@ const posts = allBlogPosts.map(post => ({
       <slot />
     </Container>
     <Footer />
-    <CommandPalette {posts} client:idle />
     <Scripts />
   </Body>
 </html>
