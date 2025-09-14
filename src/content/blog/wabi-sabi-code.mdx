@@ -1,0 +1,84 @@
+---
+title: "Wabi-Sabi Code - On Embracing Imperfection and Continuous Improvement"
+description: "Why writing understandable, maintainable code matters more than perfect architecture. A philosophy of coding that values clarity over cleverness."
+publishedAt: 2025-09-14
+tags: ["personal", "programming", "philosophy"]
+---
+
+import CodeSnippet from "~/components/mdx/CodeSnippet.astro";
+
+If I could give one piece of advice to my past self as a developer, it would be this: **stop trying to write perfect code and start writing code that tells a story.**
+
+In Japanese aesthetics, _wabi-sabi_ finds beauty in imperfection and incompleteness. Applied to programming, it means valuing **readable code over clever code**, and **maintainable today over optimized for an unknown future**.
+
+## Code as a Conversation with Future You
+
+Every line of code is a message to someone who will read it later—usually you, six months from now. Make it a conversation worth having.
+
+<CodeSnippet>
+
+```javascript
+// Before: Clever but cryptic
+const f = (u) => u.reduce((a, x) => a + (x.a && x.s ? x.v : 0), 0); // [!code highlight]
+
+// After: Clear intent
+const calculateActiveUserTotal = (users) => {
+  // [!code highlight]
+  return users // [!code highlight]
+    .filter((user) => user.isActive && user.hasSubscription) // [!code highlight]
+    .reduce((total, user) => total + user.value, 0); // [!code highlight]
+}; // [!code highlight]
+
+// The second version tells a story:
+// "Calculate the total value of users who are active and have subscriptions"
+```
+
+</CodeSnippet>
+
+## The Learning Cycle Over the Feature Rush
+
+When facing a new problem, we have two approaches:
+
+1. **Feature rush**: Find the fastest solution, ship it, move on
+2. **Learning cycle**: Understand the problem, explore solutions, implement thoughtfully
+
+I used to be firmly in camp 1. Deadlines, pressure, the satisfaction of checking things off a list. But here's what the feature rush cost me:
+
+- **Technical debt** that compounded faster than I could pay it down
+- **Repeated mistakes** because I never took time to understand the root cause
+- **Fear of changing code** because I didn't understand what it actually did
+
+The learning cycle is different. It's slower upfront but faster in the long run.
+
+> "Three years sitting on a rock" — with enough patience and persistence, even the most uncomfortable situation will eventually become familiar.
+
+Learning new patterns, understanding domains deeply, writing readable code — it all feels uncomfortable at first. But persistence transforms that cold stone into something warm and familiar.
+
+## Start Where You Are, Learn From Others
+
+The perfect codebase doesn't exist, but good patterns do. Your code will change—that's growth, not failure.
+
+Here's what I've learned: when writing just for yourself, it's easy to fall into unreadable shortcuts. But when you study how experienced engineers solve problems—like following VueUse patterns for composables or established conventions—your code naturally improves just by thinking "how would someone skilled approach this?"
+
+My current practice:
+
+- **Write the obvious solution first**—solve the problem, don't solve future problems
+- **Study established patterns**—learn from libraries and experienced developers
+- **Name things clearly**—your future self will thank you
+- **Extract complexity into functions**—make the main flow readable
+- **Refactor when you understand better**—which is always
+
+> "Make it work, make it right, make it fast" — Kent Beck
+
+But here's the key: **"make it right" doesn't mean perfect—it means maintainable, understandable, and following patterns that other good engineers would recognize.**
+
+## The Beauty of Imperfect Code
+
+Your code doesn't need to be perfect. It needs to be:
+
+- **Honest** about what it does
+- **Kind** to the next person who reads it
+- **Ready** to change when the time comes
+
+**Write code that tells a story. Make it a story worth reading.**
+
