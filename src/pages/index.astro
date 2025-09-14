@@ -1,13 +1,11 @@
 ---
 import BlogPreview from "~/components/blog/BlogPreview.astro"
-import Container from "~/components/common/Container.astro"
 import Heading from "~/components/common/Heading.astro"
 import Paragraph from "~/components/common/Paragraph.astro"
 import Spacer from "~/components/common/Spacer.astro"
 import SocialGrid from "~/components/social/SocialGrid.astro"
 import TechIcon from "~/components/TechIcon.astro"
 import { technologies } from "~/data/technologies"
-import ArrowUpRight from "~/icons/arrow/arrow-up-right.svg"
 import MonkeyIllustration from "~/icons/monkey-illustration.svg"
 import Layout from "~/layouts/default.astro"
 import { getPosts } from "~/utils/blog"
@@ -149,7 +147,7 @@ const latestPosts = allBlogPosts.slice(0, 3).map(post => ({
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: calc(var(--block-spacing) * 0.75);
+      margin-bottom: var(--block-spacing);
 
       & :global(.heading) {
         margin-block: 0;

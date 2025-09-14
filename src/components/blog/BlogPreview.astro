@@ -26,68 +26,90 @@ const { id, title, description } = Astro.props
 </article>
 
 <style>
-  .card {
-    position: relative;
-    display: block;
-
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      height: 1px;
-      width: 100%;
+  article {
+    .card {
+      position: relative;
       display: block;
-      background: var(--color-separator);
-      z-index: -1;
-    }
 
-    &::before {
-      top: 0;
-    }
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        height: 1px;
+        width: 100%;
+        display: block;
+        background: var(--color-separator);
+        z-index: -1;
+      }
 
-    &::after {
-      bottom: 0;
-    }
+      &::before {
+        top: 0;
+      }
 
-    & :global(.content) {
-      padding-block: calc(var(--block-spacing) * 0.75);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
+      &::after {
+        bottom: 0;
+      }
 
-    p {
-      margin-top: 0.5rem;
-      margin-bottom: 0;
-    }
+      & :global(.content) {
+        padding-block: calc(var(--block-spacing) * 0.75);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
 
-    .icon {
-      width: 1.5rem;
-      height: 1.5rem;
-      flex-shrink: 0;
-      color: var(--color-foreground-muted);
-      transition-property: color, transform;
-      transition-duration: 0.2s;
-      transition-timing-function: ease;
-    }
-
-    &:hover {
-      & :global(.heading) {
-        text-decoration: underline;
-        text-underline-offset: 3px;
+      p {
+        margin-top: 0.5rem;
+        margin-bottom: 0;
       }
 
       .icon {
-        color: var(--color-foreground);
-        transform: translateX(4px) translateY(-2px);
+        width: 1.5rem;
+        height: 1.5rem;
+        flex-shrink: 0;
+        color: var(--color-foreground-muted);
+        transition-property: color, transform;
+        transition-duration: 0.2s;
+        transition-timing-function: ease;
+      }
+
+      &:hover {
+        & :global(.heading) {
+          text-decoration: underline;
+          text-underline-offset: 3px;
+        }
+
+        .icon {
+          color: var(--color-foreground);
+          transform: translateX(4px) translateY(-2px);
+        }
+      }
+
+      @media (hover: none) {
+        & :global(.heading) {
+          text-decoration: underline;
+          text-underline-offset: 3px;
+        }
       }
     }
 
-    @media (hover: none) {
-      & :global(.heading) {
-        text-decoration: underline;
-        text-underline-offset: 3px;
+    &:first-child .card {
+      .content {
+        padding-top: 0;
+      }
+
+      &::before {
+        display: none;
+      }
+    }
+
+    &:last-child .card {
+      .content {
+        padding-bottom: 0;
+      }
+
+      &::after {
+        display: none;
       }
     }
   }
