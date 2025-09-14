@@ -19,7 +19,9 @@ const needsLargerIcon = largerIconLabels.includes(label)
 
 <a href={url} target="_blank" rel="noopener noreferrer" class="card">
   <Container class="content">
-    <Icon class:list={["icon", needsLargerIcon && "large"]} />
+    <div class="icon-wrapper">
+      <Icon class:list={["icon", needsLargerIcon && "large"]} />
+    </div>
     <div class="info">
       <Heading as="h2" size="md" class="heading" reset>{label}</Heading>
       <Paragraph secondary size="xs" reset>{username}</Paragraph>
@@ -105,6 +107,14 @@ const needsLargerIcon = largerIconLabels.includes(label)
       display: flex;
       align-items: center;
       gap: 1rem;
+    }
+
+    .icon-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
     }
 
     .icon {
