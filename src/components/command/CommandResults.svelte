@@ -156,7 +156,7 @@
     scroll-margin-block: 0.5rem;
 
     &.active {
-      background: var(--color-background-hover);
+      background: var(--color-accent);
     }
 
     .icon {

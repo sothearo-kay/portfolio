@@ -3,7 +3,6 @@
   --color-background-secondary: oklch(96% 0 0);
   --color-background-elevated: oklch(99% 0 0);
   --color-background-elevated-transparent: oklch(99% 0 0 / 0.96);
-  --color-background-hover: oklch(94% 0 0);
   --color-background-interactive: oklch(92% 0 0);
 
   --color-foreground: oklch(15% 0.01 240deg);
@@ -45,7 +44,6 @@
   --color-background-secondary: oklch(26% 0.006 240deg);
   --color-background-elevated: oklch(18% 0.004 240deg);
   --color-background-elevated-transparent: oklch(18% 0.004 240deg / 0.96);
-  --color-background-hover: oklch(30% 0.007 240deg);
   --color-background-interactive: oklch(33% 0.008 240deg);
 
   --color-foreground: oklch(90% 0.003 240deg);
