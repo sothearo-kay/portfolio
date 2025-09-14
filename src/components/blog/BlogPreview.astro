@@ -73,22 +73,17 @@ const { id, title, description } = Astro.props
         transition-timing-function: ease;
       }
 
-      &:hover {
-        & :global(.heading) {
-          text-decoration: underline;
-          text-underline-offset: 3px;
-        }
+      @media (hover: hover) {
+        &:hover {
+          & :global(.heading) {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+          }
 
-        .icon {
-          color: var(--color-foreground);
-          transform: translateX(4px) translateY(-2px);
-        }
-      }
-
-      @media (hover: none) {
-        & :global(.heading) {
-          text-decoration: underline;
-          text-underline-offset: 3px;
+          .icon {
+            color: var(--color-foreground);
+            transform: translateX(4px) translateY(-2px);
+          }
         }
       }
     }

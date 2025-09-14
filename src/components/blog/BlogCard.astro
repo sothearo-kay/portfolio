@@ -27,16 +27,12 @@ const { post } = Astro.props
 
 <style>
   .card {
-
     .title {
-      &:hover {
-        text-decoration: underline;
-        text-underline-offset: 3px;
-      }
-
-      @media (hover: none) {
-        text-decoration: underline;
-        text-underline-offset: 3px;
+      @media (hover: hover) {
+        &:hover {
+          text-decoration: underline;
+          text-underline-offset: 3px;
+        }
       }
     }
 
