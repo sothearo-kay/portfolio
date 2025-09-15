@@ -13,13 +13,14 @@ interface Props {
   includeKatex?: boolean
 }
 
-const { title, description, ogImage = "/home.png", type = "website", includeKatex = false } = Astro.props
+const { title, description, ogImage = "/og-image.jpg", type = "website", includeKatex = false } = Astro.props
 const pageTitle = type === "article" ? title : `Sothearo - ${title}`
 const absoluteOgImage = ogImage.startsWith("http") ? ogImage : new URL(ogImage, Astro.url).href
 ---
 
 <head>
   <meta charset="utf-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="generator" content={Astro.generator} />
