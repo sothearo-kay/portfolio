@@ -6,7 +6,7 @@ import Paragraph from "../common/Paragraph.astro"
 
 interface Props {
   url: string
-  icon: typeof import("*.svg").default
+  icon: typeof import("*.svg").default | string
   label: string
   username: string
 }
@@ -20,7 +20,13 @@ const needsLargerIcon = largerIconLabels.includes(label)
 <a href={url} target="_blank" rel="noopener noreferrer" class="card">
   <Container class="content">
     <div class="icon-wrapper">
-      <Icon class:list={["icon", needsLargerIcon && "large"]} />
+      {typeof Icon === "string"
+        ? (
+          <img src={Icon} alt={label} class:list={["icon", needsLargerIcon && "large"]} />
+        )
+        : (
+          <Icon class:list={["icon", needsLargerIcon && "large"]} />
+        )}
     </div>
     <div class="info">
       <Heading as="h2" size="md" class="heading" reset>{label}</Heading>
