@@ -1,6 +1,6 @@
 ---
 import { getPosts } from "~/utils/blog"
-import CommandPalette from "../command/CommandPalette.svelte"
+import CommandPaletteLazy from "../command/CommandPaletteLazy.svelte"
 import Separator from "../common/Separator.astro"
 import SearchButton from "../SearchButton.svelte"
 import ThemeToggle from "../ThemeToggle.astro"
@@ -47,7 +47,7 @@ const posts = allBlogPosts.map(post => ({
       <ThemeToggle />
     </div>
   </div>
-  <CommandPalette {posts} client:idle />
+  <CommandPaletteLazy {posts} client:load />
 </header>
 
 <style>

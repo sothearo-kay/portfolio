@@ -135,30 +135,9 @@
       selectedIndex = index
     }
   }
-
-  function handleClickOutside(event: MouseEvent) {
-    if (commandStore.isShown && contentElement && !contentElement.contains(event.target as Node)) {
-      // Don't close if clicking on search button
-      const target = event.target as HTMLElement
-      if (target.closest(".search-button")) {
-        return
-      }
-      commandStore.hide()
-    }
-  }
-
-  function handleGlobalKeydown(event: KeyboardEvent) {
-    if ((event.metaKey || event.ctrlKey) && event.key === "k") {
-      event.preventDefault()
-      commandStore.show()
-      return
-    }
-
-    handleKeydown(event)
-  }
 </script>
 
-<svelte:window onkeydown={handleGlobalKeydown} onclick={handleClickOutside} />
+<svelte:window onkeydown={handleKeydown} />
 
 {#if commandStore.isShown}
   <Portal>
