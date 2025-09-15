@@ -36,6 +36,7 @@ class CommandStore {
       keys: ["title", "group"],
       threshold: 0.3,
       includeScore: true,
+      ignoreLocation: true,
     })
   }
 
