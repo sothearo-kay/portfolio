@@ -5,10 +5,10 @@
   import FolderOpenIcon from "~/icons/folder-open.svg?component"
   import MouseIcon from "~/icons/mouse.svg?component"
   import RssIcon from "~/icons/rss.svg?component"
-  import FacebookIcon from "~/icons/social/facebook.svg?component"
+  import facebookIcon from "~/icons/social/facebook.svg?url"
   import GitHubIcon from "~/icons/social/github.svg?component"
-  import KhmerCoderIcon from "~/icons/social/khmercoder.svg?component"
-  import LinkedInIcon from "~/icons/social/linkedin.svg?component"
+  import khmercoderIcon from "~/icons/social/khmercoder.svg?url"
+  import linkedinIcon from "~/icons/social/linkedin.svg?url"
   import MonitorIcon from "~/icons/theme/monitor.svg?component"
   import MoonIcon from "~/icons/theme/moon.svg?component"
   import SunIcon from "~/icons/theme/sun.svg?component"
@@ -33,9 +33,9 @@
     "moon": MoonIcon,
     "monitor": MonitorIcon,
     "github": GitHubIcon,
-    "linkedin": LinkedInIcon,
-    "facebook": FacebookIcon,
-    "khmercoder": KhmerCoderIcon,
+    "linkedin": linkedinIcon,
+    "facebook": facebookIcon,
+    "khmercoder": khmercoderIcon,
   }
 
   const flatCommands = $derived(Object.values(groupedCommands).flat())
@@ -47,9 +47,10 @@
   function getIcon(command: Command) {
     const iconKey = typeof command.icon === "function" ? command.icon() : command.icon
     if (typeof iconKey === "string") {
-      return icons[iconKey as keyof typeof icons] || iconKey
+      const iconValue = icons[iconKey as keyof typeof icons] || iconKey
+      return { icon: iconValue, key: iconKey }
     }
-    return iconKey || ""
+    return { icon: iconKey || "", key: iconKey }
   }
 </script>
 
@@ -60,7 +61,7 @@
       <ul>
         {#each commands as command, commandIndex}
           {@const flatIndex = Object.values(groupedCommands).slice(0, groupIndex).flat().length + commandIndex}
-          {@const Icon = getIcon(command)}
+          {@const { icon: Icon, key: iconKey } = getIcon(command)}
           <li>
             <button
               class="cmd"
@@ -80,7 +81,7 @@
               {#if Icon}
                 <span class="icon">
                   {#if typeof Icon === "string"}
-                    {Icon}
+                    <img src={Icon} alt={iconKey} width="16" height="16" />
                   {:else}
                     <Icon width="16" height="16" />
                   {/if}

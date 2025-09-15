@@ -27,14 +27,19 @@
 
   let lastNavigationTime = 0
 
-  const groupedCommands = $derived.by(() => {
-    return commandStore.filteredCommands.reduce((acc, command) => {
-      const group = command.group || "General"
-      if (!acc[group])
-        acc[group] = []
-      acc[group].push(command)
-      return acc
-    }, {} as Record<string, Command[]>)
+  let groupedCommands = $state({} as Record<string, Command[]>)
+
+  $effect(() => {
+    (async () => {
+      const commands = await commandStore.filteredCommands()
+      groupedCommands = commands.reduce((acc, command) => {
+        const group = command.group || "General"
+        if (!acc[group])
+          acc[group] = []
+        acc[group].push(command)
+        return acc
+      }, {} as Record<string, Command[]>)
+    })()
   })
 
   const flatCommands = $derived(Object.values(groupedCommands).flat())

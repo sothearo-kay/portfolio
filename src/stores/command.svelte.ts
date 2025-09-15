@@ -1,4 +1,4 @@
-import Fuse from "fuse.js"
+import type Fuse from "fuse.js"
 
 export interface Command {
   id?: string
@@ -14,6 +14,7 @@ class CommandStore {
   _search = $state("")
   _isShown = $state(false)
   _commands = $state<Command[]>([])
+  _fuse: Fuse<Command> | null = null
 
   get search() {
     return this._search
@@ -31,21 +32,26 @@ class CommandStore {
     return this._commands
   }
 
-  get fuse() {
-    return new Fuse(this._commands, {
-      keys: ["title", "group"],
-      threshold: 0.3,
-      includeScore: true,
-      ignoreLocation: true,
-    })
+  async getFuse() {
+    if (!this._fuse) {
+      const { default: Fuse } = await import("fuse.js")
+      this._fuse = new Fuse(this._commands, {
+        keys: ["title", "group"],
+        threshold: 0.3,
+        includeScore: true,
+        ignoreLocation: true,
+      })
+    }
+    return this._fuse
   }
 
-  get filteredCommands() {
+  async filteredCommands() {
     if (!this._search.trim()) {
       return this._commands.filter(cmd => cmd.visible ? cmd.visible() : true)
     }
 
-    const results = this.fuse.search(this._search)
+    const fuse = await this.getFuse()
+    const results = fuse.search(this._search)
     return results
       .map(result => result.item)
       .filter(cmd => cmd.visible ? cmd.visible() : true)
