@@ -71,6 +71,10 @@ const { id, title, description } = Astro.props
         transition-property: color, transform;
         transition-duration: 0.2s;
         transition-timing-function: ease;
+
+        @media (max-width: 768px) {
+          display: none;
+        }
       }
 
       @media (hover: hover) {

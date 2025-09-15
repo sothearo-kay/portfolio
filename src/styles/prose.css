@@ -61,11 +61,11 @@
 
   p {
     font: var(--font-md);
-    margin-top: 0.75rem;
+    margin-top: 0.5rem;
     margin-bottom: 0;
 
     &:not(:is(h1, h2, h3, h4) + p) {
-      margin-top: clamp(1rem, 1.5vi, 1.1rem);
+      margin-top: clamp(0.85rem, 2vi, 1.1rem);
     }
   }
 
@@ -82,8 +82,12 @@
 
   ul,
   ol {
-    margin: 0.5rem 0;
+    margin: 0.75rem 0;
     padding-left: 1.5rem;
+
+    &:not(:is(h1, h2, h3, h4) + :is(ul, ol)) {
+      margin: 0.5rem 0;
+    }
   }
 
   ul {
