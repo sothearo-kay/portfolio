@@ -17,6 +17,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeKatex from "rehype-katex"
 import rehypeSlug from "rehype-slug"
 import remarkMath from "remark-math"
+import Sonda from "sonda/astro"
 import { remarkReadingTime } from "./src/plugins/index.mjs"
 
 // https://astro.build/config
@@ -71,6 +72,7 @@ export default defineConfig({
     mdx(),
     svelte(),
     sitemap(),
+    Sonda(),
     compress({
       CSS: false,
       HTML: true,
@@ -81,6 +83,9 @@ export default defineConfig({
   ],
 
   vite: {
+    build: {
+      sourcemap: true,
+    },
     css: {
       lightningcss: {
         targets: browserslistToTargets(
