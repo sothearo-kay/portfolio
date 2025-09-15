@@ -43,11 +43,11 @@ const posts = allBlogPosts.map(post => ({
     <Separator orientation="vertical" />
 
     <div class="actions">
-      <SearchButton client:load />
+      <SearchButton client:idle />
       <ThemeToggle />
     </div>
   </div>
-  <CommandPaletteLazy {posts} client:load />
+  <CommandPaletteLazy {posts} client:idle />
 </header>
 
 <style>
