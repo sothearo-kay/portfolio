@@ -40,7 +40,7 @@ const ogImageUrl = `${Astro.url.origin}/blog/${entry.id}/og.png`
       <article class="post">
         <header class="header">
           <Heading as="h1" size="2xl" reset>{entry.data.title}</Heading>
-          <Paragraph class="text">{entry.data.description}</Paragraph>
+          <Paragraph secondary class="text">{entry.data.description}</Paragraph>
           <BlogMeta date={entry.data.publishedAt} tags={entry.data.tags} readingTime={readingTime} />
         </header>
 
