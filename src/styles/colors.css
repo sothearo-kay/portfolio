@@ -13,7 +13,7 @@
 
   --color-border: oklch(85% 0 0);
   --color-border-subtle: oklch(90% 0 0);
-  --color-separator: color-mix(in srgb, var(--color-border) 40%, transparent);
+  --color-separator: color-mix(in srgb, var(--color-border) 50%, transparent);
 
   --color-skeleton-from: oklch(96% 0 0);
   --color-skeleton-to: oklch(92% 0 0);
@@ -54,7 +54,7 @@
 
   --color-border: oklch(35% 0.006 240deg);
   --color-border-subtle: oklch(28% 0.005 240deg);
-  --color-separator: color-mix(in srgb, var(--color-border) 60%, transparent);
+  --color-separator: color-mix(in srgb, var(--color-border) 70%, transparent);
 
   --color-skeleton-from: oklch(30% 0.005 240deg);
   --color-skeleton-to: oklch(25% 0.004 240deg);

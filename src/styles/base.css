@@ -15,6 +15,7 @@ html {
   box-sizing: border-box;
   scrollbar-gutter: stable;
   scroll-padding-top: calc(50px + 2rem);
+  scroll-behavior: smooth;
 }
 
 body {

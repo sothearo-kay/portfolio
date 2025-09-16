@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content"
-import Separator from "~/components/common/Separator.astro"
+import Spacer from "~/components/common/Spacer.astro"
 import ArrowLeft from "~/icons/arrow/arrow-left.svg"
 import ArrowRight from "~/icons/arrow/arrow-right.svg"
 
@@ -13,7 +13,7 @@ const { prevPost, nextPost } = Astro.props
 ---
 
 <div class="navigation">
-  <Separator />
+  <Spacer size="xs" />
   <nav class="buttons">
     {prevPost && (
       <a href={`/blog/${prevPost.id}`} class="button prev">
@@ -39,7 +39,7 @@ const { prevPost, nextPost } = Astro.props
 
 <style>
   .navigation {
-    .separator {
+    :global(.spacer) {
       margin-block: 2.25rem;
     }
 
