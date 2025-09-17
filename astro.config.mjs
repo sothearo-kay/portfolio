@@ -77,7 +77,7 @@ export default defineConfig({
       CSS: false,
       HTML: true,
       Image: false,
-      JavaScript: true,
+      JavaScript: false,
       SVG: true,
     }),
   ],

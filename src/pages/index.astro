@@ -22,7 +22,7 @@ const latestPosts = allBlogPosts.slice(0, 2).map(post => ({
   <section class="hero">
     <div class="content">
       <div class="text">
-        <Heading as="h1" size="3xl">Hello, I'm Sothearo.</Heading>
+        <Heading as="h1" size="3xl" class="heading">Hello, I'm Sothearo.</Heading>
         <Paragraph>
           I'm a <strong>Frontend Developer</strong> based in Phnom Penh who loves
           building beautiful, functional web experiences.
@@ -103,6 +103,10 @@ const latestPosts = allBlogPosts.slice(0, 2).map(post => ({
       grid-template-columns: 1fr 1fr;
       gap: 2rem;
       align-items: center;
+
+      & :global(.heading) {
+        margin-bottom: calc(var(--block-spacing) * 0.5);
+      }
     }
 
 
@@ -115,7 +119,7 @@ const latestPosts = allBlogPosts.slice(0, 2).map(post => ({
 
   .about {
     & :global(.heading) {
-      margin-bottom: calc(var(--block-spacing) * 0.75);
+      margin-bottom: max(1rem, calc(var(--block-spacing) * 0.5));
     }
 
     .content {
@@ -131,7 +135,7 @@ const latestPosts = allBlogPosts.slice(0, 2).map(post => ({
 
   .technologies {
     & :global(.heading) {
-      margin-bottom: var(--block-spacing);
+      margin-bottom: calc(var(--block-spacing) * 0.75);
     }
 
     .grid {
