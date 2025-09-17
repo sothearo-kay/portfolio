@@ -11,7 +11,7 @@ import BlogReadingProgressBar from "~/components/blog/BlogReadingProgressBar.sve
 import Container from "~/components/common/Container.astro"
 import Heading from "~/components/common/Heading.astro"
 import Paragraph from "~/components/common/Paragraph.astro"
-import Spacer from "~/components/common/Spacer.astro"
+import Separator from "~/components/common/Separator.astro"
 import "~/styles/code.css"
 import "~/styles/prose.css"
 
@@ -45,7 +45,7 @@ const ogImageUrl = `${Astro.url.origin}/blog/${entry.id}/og.png`
         </header>
 
         <div class="prose">
-          <Spacer size="xs" />
+          <Separator />
           <slot />
         </div>
 
@@ -70,7 +70,7 @@ const ogImageUrl = `${Astro.url.origin}/blog/${entry.id}/og.png`
     }
 
     .prose {
-      :global(.spacer) {
+      .separator {
         margin-block: var(--block-spacing);
       }
     }
