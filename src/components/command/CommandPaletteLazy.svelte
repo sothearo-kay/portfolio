@@ -39,9 +39,9 @@
 
   function handleClickOutside(event: MouseEvent) {
     if (shouldLoad && commandStore.isShown) {
-      // Don't close if clicking on search button
+      // Don't close if clicking on search button or inside the command palette
       const target = event.target as HTMLElement
-      if (target.closest(".search-button")) {
+      if (target.closest(".search-button") || target.closest(".palette .content")) {
         return
       }
       commandStore.hide()

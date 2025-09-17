@@ -12,6 +12,7 @@
   import MonitorIcon from "~/icons/theme/monitor.svg?component"
   import MoonIcon from "~/icons/theme/moon.svg?component"
   import SunIcon from "~/icons/theme/sun.svg?component"
+  import { audioManager } from "~/utils/audio"
 
   interface Props {
     groupedCommands: Record<string, Command[]>
@@ -52,6 +53,11 @@
     }
     return { icon: iconKey || "", key: iconKey }
   }
+
+  function handleCommandClick(command: Command) {
+    audioManager.play("/click-effect.mp3")
+    onExecuteCommand(command)
+  }
 </script>
 
 <div class="results">
@@ -66,7 +72,7 @@
             <button
               class="cmd"
               class:active={flatIndex === selectedIndex}
-              onclick={() => onExecuteCommand(command)}
+              onclick={() => handleCommandClick(command)}
               onmousemove={() => {
                 if (isKeyboardMode) {
                   onSelectIndex(-1) // Reset keyboard mode

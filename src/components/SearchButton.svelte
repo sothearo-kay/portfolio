@@ -1,13 +1,16 @@
 <script lang="ts">
   import { onMount } from "svelte"
+  import { audioManager } from "~/utils/audio"
 
   let shortcut = $state("")
 
   onMount(() => {
     shortcut = navigator.userAgent.includes("Mac") ? "⌘K" : "⌃K"
+    audioManager.init("/click-effect.mp3")
   })
 
   function handleClick() {
+    audioManager.play("/click-effect.mp3")
     document.dispatchEvent(new CustomEvent("command-palette:open"))
   }
 

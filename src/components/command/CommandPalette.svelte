@@ -162,9 +162,19 @@
             bind:value={commandStore.search}
             placeholder="Search for menu and commands..."
           />
-          <button class="close" onclick={() => commandStore.hide()} aria-label="Close search">
-            <XIcon width="16" height="16" />
-          </button>
+          {#if commandStore.search}
+            <button
+              class="clear"
+              onclick={(e) => {
+                e.stopPropagation()
+                commandStore.search = ""
+              }}
+              aria-label="Clear search"
+              transition:fade={{ duration: 150 }}
+            >
+              <XIcon width="16" height="16" />
+            </button>
+          {/if}
         </div>
 
         <CommandResults
@@ -236,7 +246,7 @@
           }
         }
 
-        .close {
+        .clear {
           display: flex;
           align-items: center;
           justify-content: center;
