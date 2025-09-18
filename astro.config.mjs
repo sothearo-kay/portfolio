@@ -18,11 +18,12 @@ import rehypeKatex from "rehype-katex"
 import rehypeSlug from "rehype-slug"
 import remarkMath from "remark-math"
 import Sonda from "sonda/astro"
+import { site } from "./src/constants/index.ts"
 import { remarkReadingTime } from "./src/plugins/index.mjs"
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://sothearo.dev",
+  site,
 
   prefetch: {
     defaultStrategy: "viewport",
@@ -64,6 +65,11 @@ export default defineConfig({
         protocol: "https",
         hostname: "mangadex.org",
         pathname: "/covers/**",
+      },
+      {
+        protocol: "https",
+        hostname: "assets.sothearo.dev",
+        pathname: "/images/**",
       },
     ],
   },
