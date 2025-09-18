@@ -1,0 +1,19 @@
+{
+  "rewrites": [
+    {
+      "source": "/script.js",
+      "destination": "https://cloud.umami.is/script.js",
+      "has": [{"type": "host", "value": "analytics.sothearo.dev"}]
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": "https://cloud.umami.is/api/$1",
+      "has": [{"type": "host", "value": "analytics.sothearo.dev"}]
+    },
+    {
+      "source": "/(.*)",
+      "destination": "https://sothearo.dev/$1",
+      "has": [{"type": "host", "value": "analytics.sothearo.dev"}]
+    }
+  ]
+}

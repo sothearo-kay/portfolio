@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions"
+import Analytics from "./Analytics.astro"
 import "~/styles/base.css"
 import "~/styles/colors.css"
 import "~/styles/fonts.css"
@@ -52,4 +53,5 @@ const absoluteOgImage = ogImage.startsWith("http") ? ogImage : new URL(ogImage, 
   <meta property="twitter:image" content={absoluteOgImage} />
 
   <ClientRouter fallback="swap" />
+  <Analytics />
 </head>
