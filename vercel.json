@@ -11,6 +11,44 @@
       "has": [{"type": "host", "value": "analytics.sothearo.dev"}]
     }
   ],
+  "headers": [
+    {
+      "source": "/script.js",
+      "has": [{"type": "host", "value": "analytics.sothearo.dev"}],
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type"
+        }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "has": [{"type": "host", "value": "analytics.sothearo.dev"}],
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, DELETE, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization"
+        }
+      ]
+    }
+  ],
   "redirects": [
     {
       "source": "/(.*)",
