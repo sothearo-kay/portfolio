@@ -9,10 +9,13 @@
       "source": "/api/(.*)",
       "destination": "https://cloud.umami.is/api/$1",
       "has": [{"type": "host", "value": "analytics.sothearo.dev"}]
-    },
+    }
+  ],
+  "redirects": [
     {
       "source": "/(.*)",
       "destination": "https://sothearo.dev/$1",
+      "permanent": false,
       "has": [{"type": "host", "value": "analytics.sothearo.dev"}]
     }
   ]
