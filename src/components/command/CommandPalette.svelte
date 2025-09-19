@@ -233,20 +233,31 @@
         padding: 1rem;
         border-bottom: 1px solid var(--color-border-subtle);
 
+        svg {
+          flex-shrink: 0;
+        }
+
         input {
           width: 100%;
-          margin-inline: 0.5rem;
+          margin-inline: 0.75rem;
           border: none;
           background: transparent;
           color: var(--color-foreground);
           outline: none;
+          height: 1.5rem;
+          transform: translateZ(0);
 
           &::placeholder {
             color: var(--color-accent-foreground);
           }
+
+          @media (max-width: 768px) {
+            margin-left: 0.5rem;
+          }
         }
 
         .clear {
+          flex-shrink: 0;
           display: flex;
           align-items: center;
           justify-content: center;
