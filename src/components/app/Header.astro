@@ -54,35 +54,47 @@ const posts = allBlogPosts.map(post => ({
 </header>
 
 <script>
-  document.addEventListener("astro:page-load", () => {
-    let lastScrollY = 0
-    let isScrollingDown = false
-    let ticking = false
-    const header = document.querySelector(".header")
+ document.addEventListener("astro:page-load", () => {
+   let lastScrollY = 0
+   let isScrolled = false
+   let ticking = false
+   const header = document.querySelector(".header")
 
-    function updateHeader() {
-      const currentScrollY = window.scrollY
-      isScrollingDown = currentScrollY > lastScrollY && currentScrollY > 50
+   function updateHeader() {
+     const currentScrollY = window.scrollY
+     const scrollDiff = currentScrollY - lastScrollY
 
-      if (header) {
-        header.classList.toggle("scrolled", isScrollingDown)
-      }
+     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+     const threshold = isMobile ? 10 : 3
 
-      lastScrollY = currentScrollY
-    }
+     if (Math.abs(scrollDiff) > threshold) {
+       if (currentScrollY > 50 && scrollDiff > 0) {
+         isScrolled = true
+       }
+       else if (scrollDiff < -threshold) {
+         isScrolled = false
+       }
+     }
 
-    function handleScroll() {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          updateHeader()
-          ticking = false
-        })
-        ticking = true
-      }
-    }
+     if (header) {
+       header.classList.toggle("scrolled", isScrolled)
+     }
 
-    window.addEventListener("scroll", handleScroll, { passive: true })
-  })
+     lastScrollY = currentScrollY
+   }
+
+   function handleScroll() {
+     if (!ticking) {
+       requestAnimationFrame(() => {
+         updateHeader()
+         ticking = false
+       })
+       ticking = true
+     }
+   }
+
+   window.addEventListener("scroll", handleScroll, { passive: true })
+ })
 </script>
 
 <style>
