@@ -16,7 +16,10 @@ const currentPath = new URL(Astro.request.url).pathname
 function isActive(href: string) {
   const normalizedCurrent = currentPath === "/" ? "/" : currentPath.replace(/\/$/, "")
   const normalizedHref = href === "/" ? "/" : href.replace(/\/$/, "")
-  return normalizedCurrent === normalizedHref
+
+  return normalizedHref === "/"
+    ? normalizedCurrent === "/"
+    : normalizedCurrent.startsWith(normalizedHref)
 }
 
 const allBlogPosts = await getPosts()
@@ -31,7 +34,7 @@ const posts = allBlogPosts.map(post => ({
     <nav class="nav">
       <ul class="nav-list">
         {navItems.map(item => (
-          <li class="nav-item">
+          <li class:list={["nav-item", { active: isActive(item.href) }]}>
             <a href={item.href} class:list={["nav-link", { active: isActive(item.href) }]}>
               {item.text}
             </a>
@@ -49,6 +52,38 @@ const posts = allBlogPosts.map(post => ({
   </div>
   <CommandPaletteLazy {posts} client:idle />
 </header>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    let lastScrollY = 0
+    let isScrollingDown = false
+    let ticking = false
+    const header = document.querySelector(".header")
+
+    function updateHeader() {
+      const currentScrollY = window.scrollY
+      isScrollingDown = currentScrollY > lastScrollY && currentScrollY > 50
+
+      if (header) {
+        header.classList.toggle("scrolled", isScrollingDown)
+      }
+
+      lastScrollY = currentScrollY
+    }
+
+    function handleScroll() {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateHeader()
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+  })
+</script>
 
 <style>
   .header {
@@ -76,10 +111,12 @@ const posts = allBlogPosts.map(post => ({
     }
 
     .nav-list {
+      width: 200px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
+      transition: width 0.2s ease;
     }
 
     .nav-item {
@@ -102,6 +139,17 @@ const posts = allBlogPosts.map(post => ({
       display: flex;
       align-items: center;
       gap: 0.25rem;
+    }
+
+    &.scrolled {
+      .nav-list {
+        width: 60px;
+        justify-content: center;
+      }
+
+      .nav-item:not(.active) {
+        display: none;
+      }
     }
   }
 </style>
