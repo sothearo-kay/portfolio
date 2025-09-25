@@ -31,7 +31,7 @@ export default defineConfig({
   },
 
   build: {
-    inlineStylesheets: "always",
+    inlineStylesheets: "auto",
     format: "file",
   },
 
