@@ -5,12 +5,17 @@ export interface Props extends HTMLAttributes<"p"> {
   secondary?: boolean
   size?: "xs" | "sm" | "md"
   reset?: boolean
+  lineClamp?: number
 }
 
-const { secondary = false, size = "md", class: className, reset = false, ...attrs } = Astro.props
+const { secondary = false, size = "md", class: className, reset = false, lineClamp, ...attrs } = Astro.props
 ---
 
-<p class:list={["paragraph", className, size, { secondary, reset }]} {...attrs}>
+<p
+  class:list={["paragraph", className, size, { secondary, reset, "line-clamp": lineClamp }]}
+  style={lineClamp ? `--line-clamp: ${lineClamp}` : undefined}
+  {...attrs}
+>
   <slot />
 </p>
 
@@ -34,6 +39,14 @@ const { secondary = false, size = "md", class: className, reset = false, ...attr
 
   &.reset {
     margin-block: 0;
+  }
+
+  &.line-clamp {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--line-clamp);
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 </style>

@@ -1,6 +1,5 @@
 ---
 import type { CollectionEntry } from "astro:content"
-import Separator from "~/components/common/Separator.astro"
 import BlogCard from "./BlogCard.astro"
 import BlogSortFilter from "./BlogSortFilter.svelte"
 import BlogTagFilter from "./BlogTagFilter.astro"
@@ -19,10 +18,9 @@ const { posts, currentTag } = Astro.props
 </div>
 
 <ul class="posts" id="posts-container">
-  {posts.map((post, idx) => (
+  {posts.map(post => (
     <li data-date={post.data.publishedAt.toISOString()}>
       <BlogCard {post} />
-      {idx < posts.length - 1 && <Separator />}
     </li>
   ))}
 </ul>
@@ -39,8 +37,10 @@ const { posts, currentTag } = Astro.props
     display: flex;
     flex-direction: column;
 
-    & .separator {
-      margin-block: calc(var(--block-spacing) * 0.85);
+    & li:not(:last-child) {
+      border-bottom: 1px solid var(--color-separator);
+      padding-bottom: calc(var(--block-spacing) * 0.85);
+      margin-bottom: calc(var(--block-spacing) * 0.85);
     }
   }
 </style>

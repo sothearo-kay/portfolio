@@ -18,7 +18,9 @@ const { id, title, description } = Astro.props
     <Container class="content">
       <div class="info">
         <Heading as="h3" size="lg" class="heading" reset>{title}</Heading>
-        <Paragraph secondary size="sm">{description}</Paragraph>
+        <Paragraph secondary size="sm" lineClamp={2}>
+          {description}
+        </Paragraph>
       </div>
       <ArrowUpRight class="icon" />
     </Container>
