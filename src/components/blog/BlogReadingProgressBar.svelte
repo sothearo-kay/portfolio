@@ -126,7 +126,7 @@
     width: 100%;
     max-width: 56rem;
     position: fixed;
-    bottom: 2rem;
+    bottom: 4rem;
     display: flex;
     justify-content: flex-end;
     pointer-events: none;

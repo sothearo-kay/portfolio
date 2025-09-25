@@ -83,7 +83,7 @@ ul {
 a {
   color: inherit;
   text-decoration: none;
-  font-family: var(--font-heading);
+  font-family: var(--font-heading) !important;
 
   &.link {
     text-underline-offset: 3px;

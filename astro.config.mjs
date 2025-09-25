@@ -12,6 +12,7 @@ import {
 } from "@shikijs/transformers"
 import { defineConfig } from "astro/config"
 import browserslist from "browserslist"
+import { FontaineTransform } from "fontaine"
 import { browserslistToTargets, Features } from "lightningcss"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeKatex from "rehype-katex"
@@ -102,6 +103,10 @@ export default defineConfig({
       transformer: "lightningcss",
     },
     plugins: [
+      FontaineTransform.vite({
+        fallbacks: ["Arial"],
+        resolvePath: id => new URL(`./public${id}`, import.meta.url),
+      }),
       svg({
         svgoOptions: {
           multipass: true,
