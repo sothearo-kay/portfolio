@@ -10,6 +10,7 @@ import BlogReadingProgressBar from "~/components/blog/BlogReadingProgressBar.sve
 import Container from "~/components/common/Container.astro"
 import Heading from "~/components/common/Heading.astro"
 import Paragraph from "~/components/common/Paragraph.astro"
+import ScrollBlur from "~/components/common/ScrollBlur.astro"
 import Separator from "~/components/common/Separator.astro"
 import "~/styles/code.css"
 import "~/styles/prose.css"
@@ -52,6 +53,7 @@ const ogImageUrl = `${Astro.url.origin}/blog/${entry.id}/og.png`
       </article>
     </Container>
     <Footer />
+    <ScrollBlur />
     <BlogReadingProgressBar client:idle />
   </Body>
 </html>

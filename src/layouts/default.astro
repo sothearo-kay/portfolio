@@ -4,6 +4,7 @@ import Footer from "~/components/app/Footer.astro"
 import Head from "~/components/app/Head.astro"
 import Header from "~/components/app/Header.astro"
 import Container from "~/components/common/Container.astro"
+import ScrollBlur from "~/components/common/ScrollBlur.astro"
 
 interface Props {
   title: string
@@ -21,5 +22,6 @@ const { title, description } = Astro.props
       <slot />
     </Container>
     <Footer />
+    <ScrollBlur />
   </Body>
 </html>
