@@ -95,10 +95,6 @@ const latestPosts = allBlogPosts.slice(0, 2).map(post => ({
 </Layout>
 
 <style>
-  section {
-    --section-spacing: calc(var(--block-spacing) * 0.75);
-  }
-
   .hero {
     padding-bottom: 0;
 
@@ -123,7 +119,7 @@ const latestPosts = allBlogPosts.slice(0, 2).map(post => ({
 
   .about {
     & :global(.heading) {
-      margin-bottom: var(--section-spacing);
+      margin-bottom: calc(var(--block-spacing) * 0.75);
     }
 
     .content {
@@ -139,7 +135,7 @@ const latestPosts = allBlogPosts.slice(0, 2).map(post => ({
 
   .technologies {
     & :global(.heading) {
-      margin-bottom: var(--section-spacing);
+      margin-bottom: var(--block-spacing);
     }
 
     .grid {

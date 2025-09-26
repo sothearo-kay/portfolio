@@ -70,18 +70,19 @@
   }
 
   a {
-    color: var(--color-accent-foreground);
     text-underline-offset: 3px;
     text-decoration: underline;
-    transition: color 0.2s ease;
+    text-decoration-color: var(--color-border);
+    transition: text-decoration-color 0.2s ease;
 
     &:hover {
-      color: var(--color-foreground);
+      text-decoration-color: var(--color-foreground);
     }
   }
 
   ul,
   ol {
+    font: var(--font-md);
     margin-top: clamp(1rem, 2vi, 1.25rem);
     padding-left: 1.5rem;
 
@@ -99,13 +100,13 @@
   }
 
   li {
-    font: var(--font-sm);
-    margin-bottom: 0.5rem;
+    font-size: 0.95em;
+    margin-bottom: 0.6rem;
   }
 
   li > ul,
   li > ol {
-    margin: 0.5rem 0;
+    margin: 0.6rem 0;
   }
 
   strong {
@@ -118,7 +119,7 @@
   }
 
   blockquote {
-    margin: 1rem 0;
+    margin: clamp(1.25rem, 2vi, 1.75rem) 0;
     padding-left: 1rem;
     border-left: 3px solid var(--color-accent-foreground);
 
