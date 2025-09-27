@@ -86,6 +86,7 @@ a {
   font-family: var(--font-heading) !important;
 
   &.link {
+    color: var(--color-foreground);
     text-underline-offset: 3px;
     text-decoration: underline;
     text-decoration-color: var(--color-border);
@@ -99,7 +100,7 @@ a {
 
 /* Custom text selection */
 ::selection {
-  background: color-mix(in srgb, var(--color-accent-foreground) 50%, var(--color-foreground));
+  background: color-mix(in srgb, var(--color-accent-foreground) 60%, var(--color-foreground));
   color: var(--color-background);
 }
 

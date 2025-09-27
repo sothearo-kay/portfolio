@@ -2,7 +2,6 @@
 import Container from "~/components/common/Container.astro"
 import Heading from "~/components/common/Heading.astro"
 import Paragraph from "~/components/common/Paragraph.astro"
-import ArrowUpRight from "~/icons/arrow/arrow-up-right.svg"
 
 interface Props {
   id: string
@@ -22,7 +21,6 @@ const { id, title, description } = Astro.props
           {description}
         </Paragraph>
       </div>
-      <ArrowUpRight class="icon" />
     </Container>
   </a>
 </article>
@@ -54,10 +52,6 @@ const { id, title, description } = Astro.props
 
       & :global(.content) {
         padding-block: calc(var(--block-spacing) * 0.75);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
       }
 
       p {
@@ -65,30 +59,11 @@ const { id, title, description } = Astro.props
         margin-bottom: 0;
       }
 
-      .icon {
-        width: 1.5rem;
-        height: 1.5rem;
-        flex-shrink: 0;
-        color: var(--color-foreground-muted);
-        transition-property: color, transform;
-        transition-duration: 0.2s;
-        transition-timing-function: ease;
-
-        @media (max-width: 768px) {
-          display: none;
-        }
-      }
-
       @media (hover: hover) {
         &:hover {
           & :global(.heading) {
             text-decoration: underline;
             text-underline-offset: 3px;
-          }
-
-          .icon {
-            color: var(--color-foreground);
-            transform: translateX(4px) translateY(-2px);
           }
         }
       }

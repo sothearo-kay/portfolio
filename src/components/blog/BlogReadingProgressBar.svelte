@@ -2,6 +2,7 @@
   import { MediaQuery } from "svelte/reactivity"
 
   const desktop = new MediaQuery("(min-width: 1024px)")
+  const SCROLL_BLUR_HEIGHT = 64
 
   let scrollProgress = $state(0)
   let bounds = $state(null)
@@ -46,7 +47,7 @@
 
     return {
       start: article.offsetTop,
-      end: article.offsetTop + article.offsetHeight - window.innerHeight,
+      end: article.offsetTop + article.offsetHeight - window.innerHeight - SCROLL_BLUR_HEIGHT,
     }
   }
 

@@ -1,8 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content"
 import Separator from "~/components/common/Separator.astro"
-import ArrowLeft from "~/icons/arrow/arrow-left.svg"
-import ArrowRight from "~/icons/arrow/arrow-right.svg"
 
 interface Props {
   prevPost: CollectionEntry<"blog"> | null
@@ -14,24 +12,18 @@ const { prevPost, nextPost } = Astro.props
 
 <div class="navigation">
   <Separator />
-  <nav class="buttons">
+  <nav class="nav">
     {prevPost && (
-      <a href={`/blog/${prevPost.id}`} class="button prev">
-        <ArrowLeft />
-        <div class="content">
-          <span class="label">Previous</span>
-          <span class="title">{prevPost.data.title}</span>
-        </div>
+      <a href={`/blog/${prevPost.id}`} class="card prev">
+        <span class="label">Previous</span>
+        <span class="title">{prevPost.data.title}</span>
       </a>
     )}
 
     {nextPost && (
-      <a href={`/blog/${nextPost.id}`} class="button next">
-        <div class="content">
-          <span class="label">Next</span>
-          <span class="title">{nextPost.data.title}</span>
-        </div>
-        <ArrowRight />
+      <a href={`/blog/${nextPost.id}`} class="card next">
+        <span class="label">Next</span>
+        <span class="title">{nextPost.data.title}</span>
       </a>
     )}
   </nav>
@@ -43,87 +35,58 @@ const { prevPost, nextPost } = Astro.props
       margin-block: var(--block-spacing);
     }
 
-    .buttons {
+    .nav {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1.5rem;
 
       @media (max-width: 768px) {
         grid-template-columns: 1fr;
+        gap: 1.25rem;
       }
     }
 
-    .button {
+    .card {
       display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 1.25rem;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 1.5rem;
       border: 1px solid var(--color-border);
-      border-radius: 10px;
+      border-radius: 8px;
       text-decoration: none;
-      transition: all 0.2s ease;
-      min-height: 4rem;
-      min-width: 0;
+      transition: background-color 0.2s ease;
+      min-height: 0;
 
       &:hover {
         background-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
       }
 
       &.prev {
-        justify-content: start;
         text-align: left;
-        grid-column: 1;
-
-        @media (max-width: 768px) {
-          grid-column: unset;
-        }
       }
 
       &.next {
-        justify-content: end;
         text-align: right;
-        grid-column: 2;
-
-        @media (max-width: 768px) {
-          grid-column: unset;
-        }
       }
 
-      svg {
-        width: 1.25rem;
-        height: 1.25rem;
-        color: var(--color-foreground-muted);
-        flex-shrink: 0;
+      @media (max-width: 768px) {
+        padding: 1rem;
       }
+    }
 
-      .content {
-        font: var(--font-xs);
-        display: flex;
-        flex-direction: column;
-        min-width: 0;
+    .label {
+      font: var(--font-xs);
+      font-family: var(--font-heading);
+      font-weight: 500;
+      color: var(--color-foreground-muted);
+      text-transform: capitalize;
+      letter-spacing: 0.05em;
+    }
 
-        .label,
-        .title {
-          font-family: var(--font-heading);
-          font-weight: 500;
-        }
-      }
-
-      .label {
-        font-size: 0.9em;
-        color: var(--color-foreground-muted);
-        text-transform: capitalize;
-        letter-spacing: 0.05em;
-        opacity: 0.8;
-      }
-
-      .title {
-        font: var(--font-sm);
-        color: var(--color-foreground);
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
+    .title {
+      font: var(--font-sm);
+      font-family: var(--font-heading);
+      font-weight: 500;
     }
   }
 </style>

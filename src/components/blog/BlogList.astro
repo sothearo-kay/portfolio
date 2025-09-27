@@ -13,7 +13,7 @@ const { posts, currentTag } = Astro.props
 ---
 
 <div class="filters">
-  {currentTag ? <BlogTagFilter currentTag={currentTag} /> : <div></div>}
+  {currentTag ? <BlogTagFilter {currentTag} /> : <div></div>}
   <BlogSortFilter client:idle />
 </div>
 
