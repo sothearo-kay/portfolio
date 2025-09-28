@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <defs>
-    <clipPath id="rounded">
-      <rect width="32" height="32" rx="12" ry="12"/>
-    </clipPath>
-  </defs>
-  <image href="https://assets.sothearo.dev/images/profile.jpg" width="32" height="32" clip-path="url(#rounded)"/>
-</svg>
