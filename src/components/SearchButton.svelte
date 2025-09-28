@@ -10,6 +10,7 @@
   })
 
   function handleClick() {
+    console.log('SearchButton clicked')
     audioManager.play("/click-effect.mp3")
     document.dispatchEvent(new CustomEvent("command-palette:open"))
   }
