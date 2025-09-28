@@ -12,7 +12,6 @@
 
   $effect(() => {
     const handleSearchClick = () => {
-      console.log('Command palette event received')
       shouldLoad = true
       commandStore.show()
     }

@@ -26,8 +26,9 @@
       element = target
     }
 
+    console.log("Portal element check:", !!element)
+
     if (element) {
-      console.log("Portal mounting:", /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent) ? "Safari" : "Other")
       document.body.style.setProperty("overflow", "hidden", "important")
 
       app = mount(Overlay, {
