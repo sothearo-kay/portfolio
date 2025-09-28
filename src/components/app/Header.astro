@@ -22,6 +22,15 @@ function isActive(href: string) {
     : normalizedCurrent.startsWith(normalizedHref)
 }
 
+function getCurrentRouteName() {
+  const path = currentPath === "/" ? "/" : currentPath.replace(/\/$/, "")
+  const segments = path.split("/").filter(Boolean)
+  return segments.length > 0 ? segments[0] : "home"
+}
+
+const isCurrentRouteInNav = navItems.some(item => isActive(item.href))
+const currentRouteName = getCurrentRouteName()
+
 const allBlogPosts = await getPosts()
 const posts = allBlogPosts.map(post => ({
   id: post.id,
@@ -40,6 +49,13 @@ const posts = allBlogPosts.map(post => ({
             </a>
           </li>
         ))}
+        {!isCurrentRouteInNav && currentPath !== "/" && (
+          <li class:list={["nav-item", "nav-item-dynamic", { active: true }]}>
+            <a href={currentPath} class:list={["nav-link", { active: true }]}>
+              {currentRouteName}
+            </a>
+          </li>
+        )}
       </ul>
     </nav>
 
@@ -139,11 +155,16 @@ const posts = allBlogPosts.map(post => ({
         padding: 0.5rem;
         color: var(--color-accent-foreground);
         transition: color 0.2s ease;
+        text-transform: capitalize;
 
         &:hover,
         &.active {
           color: var(--color-foreground);
         }
+      }
+
+      &.nav-item-dynamic {
+        display: none;
       }
     }
 
@@ -161,6 +182,10 @@ const posts = allBlogPosts.map(post => ({
 
       .nav-item:not(.active) {
         display: none;
+      }
+
+      .nav-item-dynamic.active {
+        display: block;
       }
     }
   }

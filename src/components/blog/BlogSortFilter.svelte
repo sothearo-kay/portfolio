@@ -105,7 +105,7 @@
   </button>
 
   {#if isOpen}
-    <Portal>
+    <Portal disabled>
       <div
         class="dropdown"
         style="
