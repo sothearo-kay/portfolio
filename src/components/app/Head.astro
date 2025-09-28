@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions"
+import { author } from "~/constants"
 import fontStyles from "~/styles/fonts.css?url"
 import Analytics from "./Analytics.astro"
 import "~/styles/base.css"
@@ -14,21 +15,30 @@ interface Props {
   includeKatex?: boolean
 }
 
-const { title, description, ogImage = "/og-image.jpg", type = "website", includeKatex = false } = Astro.props
-const pageTitle = type === "article" ? title : `Sothearo - ${title}`
-const absoluteOgImage = ogImage.startsWith("http") ? ogImage : new URL(ogImage, Astro.url).href
+const {
+  title,
+  description,
+  ogImage = "/og-image.jpg",
+  type = "website",
+  includeKatex = false,
+} = Astro.props
+
+const pageTitle = type === "article" ? title : `${author} - ${title}`
+const ogImageUrl = new URL(ogImage, Astro.url).href
 ---
 
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="generator" content={Astro.generator} />
   <meta name="theme-color" content="#ffffff" />
-  <meta name="author" content="Sothearo" />
+  <meta name="author" content={author} />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="canonical" href={Astro.url.href} />
   <link rel="sitemap" href="/sitemap-index.xml" />
+  <link rel="alternate" type="application/rss+xml" title={`${author} - Blog`} href="/rss.xml" />
   <link rel="stylesheet" href={fontStyles} />
 
   <link rel="preload" href="/fonts/OpenSans-Regular.woff2" as="font" type="font/woff2" crossorigin />
@@ -45,12 +55,12 @@ const absoluteOgImage = ogImage.startsWith("http") ? ogImage : new URL(ogImage, 
   <meta property="og:url" content={Astro.url.href} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:image" content={absoluteOgImage} />
+  <meta property="og:image" content={ogImageUrl} />
 
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:title" content={title} />
   <meta property="twitter:description" content={description} />
-  <meta property="twitter:image" content={absoluteOgImage} />
+  <meta property="twitter:image" content={ogImageUrl} />
 
   <ClientRouter fallback="swap" />
   <Analytics />

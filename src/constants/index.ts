@@ -1,5 +1,6 @@
 export const siteName = "sothearo.dev"
 export const site = `https://${siteName}`
+export const author = "Sothearo"
 export const colors = {
   foreground: "#171717",
   accent: "#f1f5f9",
