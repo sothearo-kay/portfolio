@@ -90,9 +90,6 @@ export default defineConfig({
   ],
 
   vite: {
-    build: {
-      sourcemap: true,
-    },
     css: {
       lightningcss: {
         targets: browserslistToTargets(
