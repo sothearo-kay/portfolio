@@ -27,7 +27,8 @@
     }
 
     if (element) {
-      document.body.style.overflow = "hidden"
+      console.log("Portal mounting:", /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent) ? "Safari" : "Other")
+      document.body.style.setProperty("overflow", "hidden", "important")
 
       app = mount(Overlay, {
         target: element,
@@ -37,7 +38,7 @@
       })
 
       return () => {
-        document.body.style.overflow = ""
+        document.body.style.removeProperty("overflow")
         if (app) {
           unmount(app, { outro: true })
         }
