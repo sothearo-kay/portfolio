@@ -5,14 +5,15 @@
   import FolderOpenIcon from "~/icons/folder-open.svg?component"
   import MouseIcon from "~/icons/mouse.svg?component"
   import RssIcon from "~/icons/rss.svg?component"
-  import facebookIcon from "~/icons/social/facebook.svg?url"
+  import FacebookIcon from "~/icons/social/facebook.svg?url"
   import GitHubIcon from "~/icons/social/github.svg?component"
-  import khmercoderIcon from "~/icons/social/khmercoder.svg?url"
-  import linkedinIcon from "~/icons/social/linkedin.svg?url"
+  import LinkedinIcon from "~/icons/social/linkedin.svg?url"
   import MonitorIcon from "~/icons/theme/monitor.svg?component"
   import MoonIcon from "~/icons/theme/moon.svg?component"
   import SunIcon from "~/icons/theme/sun.svg?component"
   import { audioManager } from "~/utils/audio"
+
+  const KhmercoderIcon = "/icons/social/khmercoder.svg"
 
   interface Props {
     groupedCommands: Record<string, Command[]>
@@ -34,9 +35,9 @@
     "moon": MoonIcon,
     "monitor": MonitorIcon,
     "github": GitHubIcon,
-    "linkedin": linkedinIcon,
-    "facebook": facebookIcon,
-    "khmercoder": khmercoderIcon,
+    "linkedin": LinkedinIcon,
+    "facebook": FacebookIcon,
+    "khmercoder": KhmercoderIcon,
   }
 
   const flatCommands = $derived(Object.values(groupedCommands).flat())

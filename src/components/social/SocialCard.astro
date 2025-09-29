@@ -1,4 +1,5 @@
 ---
+import type { SvgComponent } from "astro/types"
 import ArrowUpRightIcon from "~/icons/arrow/arrow-up-right.svg"
 import Container from "../common/Container.astro"
 import Heading from "../common/Heading.astro"
@@ -6,7 +7,7 @@ import Paragraph from "../common/Paragraph.astro"
 
 interface Props {
   url: string
-  icon: typeof import("*.svg").default | string
+  icon: SvgComponent | string
   label: string
   username: string
 }
@@ -30,7 +31,7 @@ const needsLargerIcon = largerIconLabels.includes(label)
     </div>
     <div class="info">
       <Heading as="h2" size="md" class="heading" reset>{label}</Heading>
-      <Paragraph secondary size="xs" reset>{username}</Paragraph>
+      <Paragraph secondary size="sm" reset>{username}</Paragraph>
     </div>
     <ArrowUpRightIcon class="arrow" />
   </Container>
