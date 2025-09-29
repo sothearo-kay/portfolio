@@ -19,8 +19,11 @@ import rehypeKatex from "rehype-katex"
 import rehypeSlug from "rehype-slug"
 import remarkMath from "remark-math"
 import Sonda from "sonda/astro"
-import { site } from "./src/constants/index.ts"
+import { site } from "./src/constants"
 import { remarkReadingTime } from "./src/plugins/index.mjs"
+
+// eslint-disable-next-line node/prefer-global/process
+const isDev = process.env.NODE_ENV === "development"
 
 // https://astro.build/config
 export default defineConfig({
@@ -79,7 +82,6 @@ export default defineConfig({
     mdx(),
     svelte(),
     sitemap(),
-    Sonda(),
     compress({
       CSS: false,
       HTML: true,
@@ -87,9 +89,13 @@ export default defineConfig({
       JavaScript: false,
       SVG: true,
     }),
-  ],
+    isDev && Sonda(),
+  ].filter(Boolean),
 
   vite: {
+    build: {
+      sourcemap: isDev,
+    },
     css: {
       lightningcss: {
         targets: browserslistToTargets(
@@ -125,7 +131,7 @@ export default defineConfig({
   output: "static",
   adapter: vercel({
     webAnalytics: {
-      enabled: true,
+      enabled: false,
     },
   }),
 })
