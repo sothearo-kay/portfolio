@@ -72,19 +72,38 @@
     if (!postsContainer)
       return
 
-    const posts = Array.from(postsContainer.children)
     const isOldest = value === "oldest"
+    const allPosts = Array.from(postsContainer.querySelectorAll("li[data-date]"))
 
-    posts.sort((a, b) => {
-      const dateA = new Date(a.dataset.date || "")
-      const dateB = new Date(b.dataset.date || "")
-
-      return isOldest
-        ? dateA.getTime() - dateB.getTime()
-        : dateB.getTime() - dateA.getTime()
+    allPosts.sort((a, b) => {
+      const dateA = new Date(a.dataset.date || "").getTime()
+      const dateB = new Date(b.dataset.date || "").getTime()
+      return isOldest ? dateA - dateB : dateB - dateA
     })
 
-    posts.forEach(post => postsContainer.appendChild(post))
+    const postsByYear = allPosts.reduce((acc, post) => {
+      const year = new Date(post.dataset.date || "").getFullYear()
+      acc[year] ||= []
+      acc[year].push(post)
+      return acc
+    }, {})
+
+    const yearSections = Array.from(postsContainer.querySelectorAll(".year-section"))
+
+    yearSections.forEach((section) => {
+      const year = Number.parseInt(section.querySelector(".heading")?.textContent, 10)
+      const postsList = section.querySelector(".posts")
+      postsList.innerHTML = ""
+      postsByYear[year]?.forEach(post => postsList.appendChild(post))
+    })
+
+    yearSections.sort((a, b) => {
+      const yearA = Number.parseInt(a.querySelector(".heading")?.textContent, 10)
+      const yearB = Number.parseInt(b.querySelector(".heading")?.textContent, 10)
+      return isOldest ? yearA - yearB : yearB - yearA
+    })
+
+    yearSections.forEach(section => postsContainer.appendChild(section))
   }
 </script>
 
@@ -105,7 +124,7 @@
   </button>
 
   {#if isOpen}
-    <Portal disabled>
+    <Portal>
       <div
         class="dropdown"
         style="

@@ -40,6 +40,7 @@ const { prevPost, nextPost } = Astro.props
       grid-template-columns: 1fr 1fr;
       gap: 1.5rem;
 
+
       @media (max-width: 768px) {
         grid-template-columns: 1fr;
         gap: 1.25rem;
@@ -67,6 +68,11 @@ const { prevPost, nextPost } = Astro.props
 
       &.next {
         text-align: right;
+        grid-column-start: 2;
+
+        @media (max-width: 768px) {
+          grid-column-start: auto;
+        }
       }
 
       @media (max-width: 768px) {

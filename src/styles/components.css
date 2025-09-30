@@ -33,7 +33,16 @@
   padding: 0.125rem 0.375rem;
   border-radius: 0.25rem;
   text-decoration: none;
-  transition: text-decoration 0.2s ease;
+  transition-property: background-color, border-color, color, translate;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+
+  &.blog-tag:hover {
+    background: color-mix(in srgb, var(--color-accent) 15%, var(--color-background-secondary));
+    border-color: color-mix(in srgb, var(--color-accent) 30%, var(--color-border));
+    color: var(--color-foreground);
+    translate: 0 -1px;
+  }
 }
 
 kbd.tag {
