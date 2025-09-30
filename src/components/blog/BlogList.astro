@@ -65,11 +65,9 @@ const sortedYears = Object.keys(postsByYear)
   .posts-by-year {
     :global(.heading) {
       font-size: clamp(4rem, 8vw, 5rem);
-      font-weight: 900;
-      color: var(--color-foreground-muted);
-      opacity: 0.3;
+      color: color-mix(in srgb, var(--color-foreground-muted) 50%, var(--color-background));
       margin-bottom: var(--block-spacing);
-      line-height: 0.8;
+      line-height: 1;
       letter-spacing: -0.05em;
     }
   }

@@ -6,7 +6,8 @@ import SocialLinks from "../social/SocialLinks.astro"
 <footer class="footer" transition:name="footer">
   <Container>
     <div class="content">
-      <p class="copyright">© Sothearo 2025</p>
+      <p class="name">Sothearo</p>
+      <p class="copyright">© 2025. All rights reserved</p>
       <SocialLinks />
     </div>
   </Container>
@@ -14,8 +15,7 @@ import SocialLinks from "../social/SocialLinks.astro"
 
 <style>
   .footer {
-    padding-top: 6rem;
-    padding-bottom: 4rem;
+    padding-block: 4rem;
 
     @media (max-width: 768px) {
       padding-bottom: 2rem;
@@ -25,14 +25,30 @@ import SocialLinks from "../social/SocialLinks.astro"
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+      }
+    }
+
+    .name,
+    .copyright {
+      font-family: var(--font-heading);
+      margin-block: 0;
+    }
+
+    .name {
+      color: var(--color-foreground-muted);
+      font: var(--font-sm);
+      font-weight: 500;
     }
 
     .copyright {
-      font: var(--font-sm);
-      font-family: var(--font-heading);
-      font-weight: 500;
-      color: var(--color-foreground-muted);
-      margin-block: 0;
+      color: color-mix(in srgb, var(--color-foreground-muted) 70%, var(--color-background));
+      font: var(--font-xs);
+      font-weight: 400;
     }
   }
 </style>
