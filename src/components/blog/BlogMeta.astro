@@ -23,7 +23,7 @@ const { date, tags, readingTime } = Astro.props
   {tags.length > 0 && (
     <div class="tags">
       {tags.map(tag => (
-        <a href={`/blog/tag/${encodeURIComponent(tag)}`} class="tag">{tag}</a>
+        <a href={`/blog/tag/${encodeURIComponent(tag)}`} class="tag blog-tag">{tag}</a>
       ))}
     </div>
   )}
@@ -71,7 +71,4 @@ const { date, tags, readingTime } = Astro.props
     }
   }
 
-  .tag:hover {
-    text-decoration: underline;
-  }
 </style>

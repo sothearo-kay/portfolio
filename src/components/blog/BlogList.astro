@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content"
+import Heading from "~/components/common/Heading.astro"
 import BlogCard from "./BlogCard.astro"
 import BlogSortFilter from "./BlogSortFilter.svelte"
 import BlogTagFilter from "./BlogTagFilter.astro"
@@ -10,6 +11,17 @@ interface Props {
 }
 
 const { posts, currentTag } = Astro.props
+
+const postsByYear = posts.reduce((acc, post) => {
+  const year = post.data.publishedAt.getFullYear()
+  acc[year] ||= []
+  acc[year].push(post)
+  return acc
+}, {} as Record<number, typeof posts>)
+
+const sortedYears = Object.keys(postsByYear)
+  .map(Number)
+  .sort((a, b) => b - a)
 ---
 
 <div class="filters">
@@ -17,20 +29,49 @@ const { posts, currentTag } = Astro.props
   <BlogSortFilter client:idle />
 </div>
 
-<ul class="posts" id="posts-container">
-  {posts.map(post => (
-    <li data-date={post.data.publishedAt.toISOString()}>
-      <BlogCard {post} />
-    </li>
+<div class="posts-by-year" id="posts-container">
+  {sortedYears.map(year => (
+    <section class="year-section">
+      <Heading as="h2" size="3xl" class="heading">{year}</Heading>
+      <ul class="posts">
+        {postsByYear[year].map(post => (
+          <li data-date={post.data.publishedAt.toISOString()}>
+            <BlogCard {post} />
+          </li>
+        ))}
+      </ul>
+    </section>
   ))}
-</ul>
+</div>
 
 <style>
   .filters {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-block: var(--block-spacing);
+    margin-top: var(--block-spacing);
+  }
+
+  .year-section {
+    border-bottom: 1px solid var(--color-separator);
+    padding-bottom: calc(var(--block-spacing) * 1.5);
+    margin-bottom: calc(var(--block-spacing) * 1.5);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .posts-by-year {
+    :global(.heading) {
+      font-size: clamp(4rem, 8vw, 5rem);
+      font-weight: 900;
+      color: var(--color-foreground-muted);
+      opacity: 0.3;
+      margin-bottom: var(--block-spacing);
+      line-height: 0.8;
+      letter-spacing: -0.05em;
+    }
   }
 
   .posts {
@@ -38,9 +79,7 @@ const { posts, currentTag } = Astro.props
     flex-direction: column;
 
     & li:not(:last-child) {
-      border-bottom: 1px solid var(--color-separator);
-      padding-bottom: calc(var(--block-spacing) * 0.85);
-      margin-bottom: calc(var(--block-spacing) * 0.85);
+      margin-bottom: calc(var(--block-spacing) * 0.75);
     }
   }
 </style>

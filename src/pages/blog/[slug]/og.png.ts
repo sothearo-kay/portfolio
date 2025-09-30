@@ -39,7 +39,7 @@ export const GET: APIRoute = async ({ params }) => {
     const readingTime = remarkPluginFrontmatter.minutesRead
     const formattedDate = new Date(publishedAt).toLocaleDateString("en-US", {
       year: "numeric",
-      month: "long",
+      month: "short",
       day: "numeric",
     })
 

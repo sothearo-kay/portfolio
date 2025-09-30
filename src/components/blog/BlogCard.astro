@@ -1,32 +1,43 @@
 ---
 import type { CollectionEntry } from "astro:content"
 import Heading from "~/components/common/Heading.astro"
-import Paragraph from "~/components/common/Paragraph.astro"
-import BlogMeta from "./BlogMeta.astro"
 
 interface Props {
   post: CollectionEntry<"blog"> & { readingTime?: string }
 }
 
 const { post } = Astro.props
+
+const formattedDate = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "2-digit",
+}).format(post.data.publishedAt)
 ---
 
 <article class="card">
+  <time class="date" datetime={post.data.publishedAt.toISOString()}>
+    {formattedDate}
+  </time>
+
   <Heading as="h2" size="lg" reset>
     <a href={`/blog/${post.id}`} class="title">
       {post.data.title}
     </a>
   </Heading>
 
-  <Paragraph secondary size="sm" class="description" lineClamp={2}>
-    {post.data.description}
-  </Paragraph>
-
-  <BlogMeta date={post.data.publishedAt} tags={post.data.tags} readingTime={post.readingTime} />
+  <div class="tags">
+    {post.data.tags.map(tag => (
+      <a href={`/blog/tag/${encodeURIComponent(tag)}`} class="tag blog-tag">{tag}</a>
+    ))}
+  </div>
 </article>
 
 <style>
   .card {
+    display: grid;
+    grid-template-columns: 5rem 3fr 1fr;
+    align-items: baseline;
+
     .title {
       @media (hover: hover) {
         &:hover {
@@ -36,9 +47,34 @@ const { post } = Astro.props
       }
     }
 
-    .description {
-      margin-top: 0.5rem;
-      margin-bottom: 0.75rem;
+    .date {
+      font: var(--font-sm);
+      font-weight: 500;
+      color: var(--color-foreground-muted);
+      margin-right: clamp(1rem, 2vi, 1.25rem);
+      transform: translateY(-5%);
+    }
+
+    .tags {
+      font: var(--font-sm);
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.375rem;
+      flex-wrap: wrap;
+
+      & .tag {
+        font-size: 0.95em;
+      }
+    }
+
+    @media (max-width: 768px) {
+      & {
+        grid-template-columns: 4rem 1fr;
+      }
+
+      .tags {
+        display: none;
+      }
     }
   }
 </style>

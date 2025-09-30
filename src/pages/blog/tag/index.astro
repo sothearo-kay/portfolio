@@ -27,7 +27,7 @@ const sortedTags = tags.sort((a, b) => a.localeCompare(b))
       ? (
         <div class="tags">
           {sortedTags.map(tag => (
-            <a href={`/blog/tag/${encodeURIComponent(tag)}`} class="tag">
+            <a href={`/blog/tag/${encodeURIComponent(tag)}`} class="tag blog-tag">
               {tag} ({tagCounts.get(tag)})
             </a>
           ))}
@@ -43,13 +43,14 @@ const sortedTags = tags.sort((a, b) => a.localeCompare(b))
 
 <style>
   .tags {
+    font: var(--font-sm);
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
     margin-top: var(--block-spacing);
-  }
 
-  .tag:hover {
-    text-decoration: underline;
+    & .tag {
+      font-size: 0.95em;
+    }
   }
 </style>
