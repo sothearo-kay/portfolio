@@ -31,7 +31,7 @@ const sortedYears = Object.keys(postsByYear)
 
 <div class="posts-by-year" id="posts-container">
   {sortedYears.map(year => (
-    <section class="year-section">
+    <section class="year-section" data-year={year}>
       <Heading as="h2" size="3xl" class="heading">{year}</Heading>
       <ul class="posts">
         {postsByYear[year].map(post => (

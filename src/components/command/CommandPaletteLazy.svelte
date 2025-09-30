@@ -20,12 +20,23 @@
       shouldLoad = true
     }
 
+    const handlePageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) {
+        document.removeEventListener("command-palette:open", handleSearchClick)
+        document.removeEventListener("command-palette:preload", handleSearchHover)
+        document.addEventListener("command-palette:open", handleSearchClick)
+        document.addEventListener("command-palette:preload", handleSearchHover)
+      }
+    }
+
     document.addEventListener("command-palette:open", handleSearchClick)
     document.addEventListener("command-palette:preload", handleSearchHover)
+    window.addEventListener("pageshow", handlePageShow)
 
     return () => {
       document.removeEventListener("command-palette:open", handleSearchClick)
       document.removeEventListener("command-palette:preload", handleSearchHover)
+      window.removeEventListener("pageshow", handlePageShow)
     }
   })
 

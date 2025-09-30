@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Snippet } from "svelte"
-  import { mount, onDestroy, onMount, unmount } from "svelte"
+  import { mount, unmount } from "svelte"
   import Overlay from "./Overlay.svelte"
 
   interface Props {
@@ -14,7 +14,7 @@
   let app: Record<string, unknown>
   let element: Element | null
 
-  onMount(() => {
+  $effect(() => {
     if (disabled) {
       return
     }
@@ -26,22 +26,26 @@
       element = target
     }
 
-    if (element) {
-      document.body.style.setProperty("overflow", "hidden", "important")
-
-      app = mount(Overlay, {
-        target: element,
-        props: {
-          children,
-        },
-      })
+    if (!element) {
+      console.error("Portal target not found:", target)
+      return
     }
-  })
 
-  onDestroy(() => {
-    document.body.style.removeProperty("overflow")
-    if (app) {
-      unmount(app, { outro: true })
+    document.body.style.setProperty("overflow", "hidden", "important")
+
+    app = mount(Overlay, {
+      target: element,
+      props: {
+        children,
+      },
+    })
+
+    return () => {
+      document.documentElement.style.removeProperty("overflow")
+
+      if (app) {
+        unmount(app, { outro: true })
+      }
     }
   })
 </script>

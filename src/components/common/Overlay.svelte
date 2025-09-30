@@ -16,5 +16,8 @@
     transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
     isolation: isolate;
+    -webkit-overflow-scrolling: touch;
+    pointer-events: auto;
+    touch-action: none;
   }
 </style>

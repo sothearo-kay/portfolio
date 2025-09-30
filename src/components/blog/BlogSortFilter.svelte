@@ -1,17 +1,19 @@
-<script>
+<script lang="ts">
   import { fly } from "svelte/transition"
   import Portal from "../common/Portal.svelte"
 
-  let postsContainer = $state()
-  let selectButton = $state()
-  let sortValue = $state("newest")
+  type SortValue = "newest" | "oldest"
+
+  let postsContainer = $state<HTMLElement | null>()
+  let selectButton = $state<HTMLButtonElement>()
+  let sortValue = $state<SortValue>("newest")
   let isOpen = $state(false)
   let dropdownPosition = $state({ top: 0, left: 0, width: 0 })
 
   const sortOptions = [
     { value: "newest", label: "Newest first" },
     { value: "oldest", label: "Oldest first" },
-  ]
+  ] as const
 
   const selectedOption = $derived(sortOptions.find(opt => opt.value === sortValue))
 
@@ -19,10 +21,24 @@
     postsContainer = document.getElementById("posts-container")
     updateDropdownPosition()
 
-    window.addEventListener("resize", updateDropdownPosition)
+    const handleResize = () => {
+      updateDropdownPosition()
+    }
+
+    const handlePageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) {
+        postsContainer = document.getElementById("posts-container")
+        updateDropdownPosition()
+        isOpen = false
+      }
+    }
+
+    window.addEventListener("resize", handleResize)
+    window.addEventListener("pageshow", handlePageShow)
 
     return () => {
-      window.removeEventListener("resize", updateDropdownPosition)
+      window.removeEventListener("resize", handleResize)
+      window.removeEventListener("pageshow", handlePageShow)
     }
   })
 
@@ -31,11 +47,11 @@
       let top = selectButton.offsetTop + selectButton.offsetHeight + 4
       let left = selectButton.offsetLeft
 
-      let element = selectButton.offsetParent
+      let element = selectButton.offsetParent as HTMLElement | null
       while (element) {
         top += element.offsetTop
         left += element.offsetLeft
-        element = element.offsetParent
+        element = element.offsetParent as HTMLElement | null
       }
 
       dropdownPosition = {
@@ -50,60 +66,78 @@
     isOpen = !isOpen
   }
 
-  function selectOption(optionValue) {
+  function selectOption(optionValue: SortValue) {
     sortValue = optionValue
     isOpen = false
     handleSortChange(optionValue)
   }
 
-  function handleKeydown(event) {
+  function handleKeydown(event: KeyboardEvent) {
     if (event.key === "Escape") {
       isOpen = false
     }
   }
 
-  function handleClickOutside(event) {
-    if (selectButton && !selectButton.contains(event.target)) {
+  function handleClickOutside(event: MouseEvent) {
+    if (selectButton && !selectButton.contains(event.target as Node)) {
       isOpen = false
     }
   }
 
-  function handleSortChange(value) {
+  function handleSortChange(value: SortValue) {
     if (!postsContainer)
       return
 
     const isOldest = value === "oldest"
-    const allPosts = Array.from(postsContainer.querySelectorAll("li[data-date]"))
 
-    allPosts.sort((a, b) => {
-      const dateA = new Date(a.dataset.date || "").getTime()
-      const dateB = new Date(b.dataset.date || "").getTime()
-      return isOldest ? dateA - dateB : dateB - dateA
-    })
+    const getTimeSafe = (el: HTMLElement) => {
+      const t = new Date(el.dataset.date || "").getTime()
+      return Number.isFinite(t) ? t : 0
+    }
 
-    const postsByYear = allPosts.reduce((acc, post) => {
-      const year = new Date(post.dataset.date || "").getFullYear()
-      acc[year] ||= []
-      acc[year].push(post)
-      return acc
-    }, {})
+    const getYearFromSection = (section: HTMLElement) =>
+      Number(section.dataset.year || "0")
 
-    const yearSections = Array.from(postsContainer.querySelectorAll(".year-section"))
+    const sortByDate = (posts: HTMLElement[]) =>
+      posts.sort((a, b) => {
+        const dateA = getTimeSafe(a)
+        const dateB = getTimeSafe(b)
+        return isOldest ? dateA - dateB : dateB - dateA
+      })
 
+    const groupByYear = (posts: HTMLElement[]) =>
+      posts.reduce((acc, post) => {
+        const year = new Date(post.dataset.date || "").getFullYear()
+        if (!Number.isFinite(year)) {
+          return acc
+        }
+        acc[year] ||= []
+        acc[year].push(post)
+        return acc
+      }, {} as Record<number, HTMLElement[]>)
+
+    const allPosts = Array.from(postsContainer.querySelectorAll<HTMLElement>("li[data-date]"))
+    const postsByYear = groupByYear(sortByDate(allPosts))
+    const yearSections = Array.from(postsContainer.querySelectorAll<HTMLElement>(".year-section"))
+
+    // Reorder posts inside each year section
     yearSections.forEach((section) => {
-      const year = Number.parseInt(section.querySelector(".heading")?.textContent, 10)
-      const postsList = section.querySelector(".posts")
-      postsList.innerHTML = ""
-      postsByYear[year]?.forEach(post => postsList.appendChild(post))
+      const year = getYearFromSection(section)
+      const postsList = section.querySelector<HTMLElement>(".posts")
+      if (postsList) {
+        postsList.innerHTML = ""
+        postsByYear[year]?.forEach(post => postsList.appendChild(post))
+      }
     })
 
-    yearSections.sort((a, b) => {
-      const yearA = Number.parseInt(a.querySelector(".heading")?.textContent, 10)
-      const yearB = Number.parseInt(b.querySelector(".heading")?.textContent, 10)
+    // Reorder year sections
+    const sortedSections = [...yearSections].sort((a, b) => {
+      const yearA = getYearFromSection(a)
+      const yearB = getYearFromSection(b)
       return isOldest ? yearA - yearB : yearB - yearA
     })
 
-    yearSections.forEach(section => postsContainer.appendChild(section))
+    sortedSections.forEach(section => postsContainer!.appendChild(section))
   }
 </script>
 
