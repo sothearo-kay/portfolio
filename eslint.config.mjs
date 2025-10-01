@@ -27,4 +27,8 @@ export default antfu({
     "style/quotes": ["error", "double"],
     "style/semi": ["error", "never"],
   },
+}, {
+  rules: {
+    "node/prefer-global/process": "off",
+  },
 })
