@@ -1,0 +1,87 @@
+---
+import SearchIcon from "~/icons/search.svg"
+---
+
+<button class="search-button" id="search-button" aria-label="Search">
+  <SearchIcon width="16" height="16" />
+  <span class="shortcut">
+    <span class="mobile">Search</span>
+    <kbd class="desktop tag" id="shortcut-kbd"></kbd>
+  </span>
+</button>
+
+<script is:inline>
+  document.addEventListener("astro:page-load", () => {
+    const shortcut = navigator.userAgent.includes("Mac") ? "⌘K" : "⌃K"
+    const shortcutEl = document.getElementById("shortcut-kbd")
+    if (shortcutEl) {
+      shortcutEl.textContent = shortcut
+    }
+  })
+</script>
+
+<script>
+  import { audioManager } from "../utils/audio"
+
+  document.addEventListener("astro:page-load", () => {
+    audioManager.init("/click-effect.mp3")
+
+    const button = document.getElementById("search-button")
+    if (button) {
+      button.addEventListener("click", () => {
+        audioManager.play("/click-effect.mp3")
+        document.dispatchEvent(new CustomEvent("command-palette:open"))
+      })
+
+      button.addEventListener("mouseenter", () => {
+        document.dispatchEvent(new CustomEvent("command-palette:preload"))
+      })
+    }
+  })
+</script>
+
+<style>
+  .search-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.6rem;
+    background-color: var(--color-background-secondary);
+    border-radius: 999px;
+    color: var(--color-accent-foreground);
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: var(--shadow-inset);
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    .shortcut {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+
+      .mobile {
+        font-size:  14px;
+        font-family: var(--font-heading);
+        color: var(--color-accent-foreground);
+        display: none;
+
+        @media (max-width: 768px) {
+          display: inline-block;
+        }
+      }
+
+      .desktop {
+        background: var(--color-background-interactive);
+        display: inline-block;
+        letter-spacing: 0.2em;
+
+        @media (max-width: 768px) {
+          display: none;
+        }
+      }
+    }
+  }
+</style>

@@ -34,8 +34,7 @@
       const commands = await commandStore.filteredCommands()
       groupedCommands = commands.reduce((acc, command) => {
         const group = command.group || "General"
-        if (!acc[group])
-          acc[group] = []
+        acc[group] ||= []
         acc[group].push(command)
         return acc
       }, {} as Record<string, Command[]>)

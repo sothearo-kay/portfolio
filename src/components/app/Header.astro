@@ -2,7 +2,7 @@
 import { getPosts } from "~/utils/blog"
 import CommandPaletteLazy from "../command/CommandPaletteLazy.svelte"
 import Separator from "../common/Separator.astro"
-import SearchButton from "../SearchButton.svelte"
+import SearchButton from "../SearchButton.astro"
 import ThemeToggle from "../ThemeToggle.astro"
 
 const navItems = [
@@ -62,7 +62,7 @@ const posts = allBlogPosts.map(post => ({
     <Separator orientation="vertical" />
 
     <div class="actions">
-      <SearchButton client:idle />
+      <SearchButton />
       <ThemeToggle />
     </div>
   </div>
