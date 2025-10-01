@@ -1,47 +1,6 @@
-@font-face {
-  font-family: "JetBrains Mono";
-  src: url("/fonts/JetBrainsMono-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "M PLUS Rounded 1c";
-  src: url("/fonts/MPLUSRounded1c-Medium.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "M PLUS Rounded 1c";
-  src: url("/fonts/MPLUSRounded1c-Bold.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Open Sans";
-  src: url("/fonts/OpenSans-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Open Sans";
-  src: url("/fonts/OpenSans-Medium.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
-  --font-heading: "M PLUS Rounded 1c", "M PLUS Rounded 1c override", system-ui, sans-serif;
-  --font-body: "Open Sans", "Open Sans override", system-ui, sans-serif;
-  --font-code: "JetBrains Mono", "JetBrains Mono override", monospace;
+  --block-spacing: clamp(1.5rem, 1.25rem + 2vi, 2.25rem);
+  --inline-spacing: clamp(1rem, 4vi, 2rem);
 
   --font-size-xs: clamp(0.75rem, 0.7rem + 0.2vi, 0.875rem);
   --font-size-sm: clamp(0.875rem, 0.8rem + 0.3vi, 1rem);
@@ -51,9 +10,6 @@
   --font-size-2xl: clamp(1.5rem, 1rem + 2vi, 2rem);
   --font-size-3xl: clamp(2rem, 1.5rem + 2vi, 2.5rem);
   --font-size-4xl: clamp(2.5rem, 2rem + 2vi, 3.5rem);
-
-  --block-spacing: clamp(1.5rem, 1.25rem + 2vi, 2.25rem);
-  --inline-spacing: clamp(1rem, 4vi, 2rem);
 
   --font-xs: var(--font-size-xs) / 1.5 var(--font-body);
   --font-sm: var(--font-size-sm) / 1.6 var(--font-body);

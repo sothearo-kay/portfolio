@@ -1,10 +1,11 @@
 ---
+import { Font } from "astro:assets"
 import { ClientRouter } from "astro:transitions"
 import { author } from "~/constants"
-import fontStyles from "~/styles/fonts.css?url"
 import Analytics from "./Analytics.astro"
 import "~/styles/base.css"
 import "~/styles/colors.css"
+import "~/styles/fonts.css"
 import "~/styles/components.css"
 
 interface Props {
@@ -38,7 +39,10 @@ const ogImageUrl = new URL(ogImage, Astro.url).href
   <link rel="canonical" href={Astro.url.href} />
   <link rel="sitemap" href="/sitemap-index.xml" />
   <link rel="alternate" type="application/rss+xml" title={`${author} - Blog`} href="/rss.xml" />
-  <link rel="stylesheet" href={fontStyles} />
+
+  <Font cssVariable="--font-heading" preload />
+  <Font cssVariable="--font-body" preload />
+  <Font cssVariable="--font-code" />
 
   {includeKatex && <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />}
 

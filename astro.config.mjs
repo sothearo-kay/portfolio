@@ -12,7 +12,6 @@ import {
 } from "@shikijs/transformers"
 import { defineConfig } from "astro/config"
 import browserslist from "browserslist"
-import { FontaineTransform } from "fontaine"
 import { browserslistToTargets, Features } from "lightningcss"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeKatex from "rehype-katex"
@@ -40,6 +39,57 @@ export default defineConfig({
 
   experimental: {
     clientPrerender: true,
+    fonts: [
+      {
+        provider: "local",
+        name: "M PLUS Rounded 1c",
+        cssVariable: "--font-heading",
+        fallbacks: ["M PLUS Rounded 1c override", "system-ui", "sans-serif"],
+        variants: [
+          {
+            weight: 500,
+            style: "normal",
+            src: ["./src/assets/fonts/MPLUSRounded1c-Medium.woff2"],
+          },
+          {
+            weight: 700,
+            style: "normal",
+            src: ["./src/assets/fonts/MPLUSRounded1c-Bold.woff2"],
+          },
+        ],
+      },
+      {
+        provider: "local",
+        name: "Open Sans",
+        cssVariable: "--font-body",
+        fallbacks: ["Open Sans override", "system-ui", "sans-serif"],
+        variants: [
+          {
+            weight: 400,
+            style: "normal",
+            src: ["./src/assets/fonts/OpenSans-Regular.woff2"],
+          },
+          {
+            weight: 500,
+            style: "normal",
+            src: ["./src/assets/fonts/OpenSans-Medium.woff2"],
+          },
+        ],
+      },
+      {
+        provider: "local",
+        name: "JetBrains Mono",
+        cssVariable: "--font-code",
+        fallbacks: ["JetBrains Mono override", "monospace"],
+        variants: [
+          {
+            weight: 400,
+            style: "normal",
+            src: ["./src/assets/fonts/JetBrainsMono-Regular.woff2"],
+          },
+        ],
+      },
+    ],
   },
 
   markdown: {
@@ -105,10 +155,6 @@ export default defineConfig({
       transformer: "lightningcss",
     },
     plugins: [
-      FontaineTransform.vite({
-        fallbacks: ["Arial"],
-        resolvePath: id => new URL(`./public${id}`, import.meta.url),
-      }),
       svg({
         svgoOptions: {
           multipass: true,
