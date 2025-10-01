@@ -31,7 +31,7 @@
       return
     }
 
-    document.body.style.setProperty("overflow", "hidden", "important")
+    document.body.style.setProperty("overflow", "hidden")
 
     app = mount(Overlay, {
       target: element,
@@ -41,7 +41,7 @@
     })
 
     return () => {
-      document.documentElement.style.removeProperty("overflow")
+      document.body.style.removeProperty("overflow")
 
       if (app) {
         unmount(app, { outro: true })

@@ -2,6 +2,7 @@
 import { Picture } from "astro:assets"
 import StarIcon from "~/icons/star.svg"
 import Separator from "../common/Separator.astro"
+import WithPlaceholder from "../common/WithPlaceholder.astro"
 
 interface Props {
   title: string
@@ -10,21 +11,20 @@ interface Props {
 }
 
 const { title, coverId, rating } = Astro.props
+const imageUrl = `https://mangadex.org/covers/${coverId}.jpg.512.jpg`
 ---
 
 <div class="card">
-  <div class="wrapper">
+  <WithPlaceholder src={imageUrl} class="image">
     <Picture
-      src={`https://mangadex.org/covers/${coverId}.jpg.512.jpg`}
+      src={imageUrl}
       alt={title}
       width={256}
       height={384}
       widths={[256, 512]}
       formats={["avif", "png"]}
-      class="cover"
-      data-loaded="false"
     />
-  </div>
+  </WithPlaceholder>
   <h3 class="title">
     {title}
     {rating && (
@@ -40,64 +40,16 @@ const { title, coverId, rating } = Astro.props
   </h3>
 </div>
 
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const cards = document.querySelectorAll(".card")
-
-    cards.forEach((card) => {
-      const img = card.querySelector("img")
-
-      if (img) {
-        img.addEventListener("load", () => {
-          img.setAttribute("data-loaded", "true")
-        })
-
-        if (img.complete) {
-          img.setAttribute("data-loaded", "true")
-        }
-      }
-    })
-  })
-</script>
-
 <style>
   .card {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 
-    .wrapper {
-      position: relative;
-      width: 100%;
+    :global(.image) {
       aspect-ratio: 2/3;
       border-radius: 0.5rem;
-      overflow: hidden;
       box-shadow: var(--shadow-card);
-      background: linear-gradient(
-        90deg,
-        var(--color-skeleton-from) 0%,
-        var(--color-skeleton-to) 50%,
-        var(--color-skeleton-from) 100%
-      );
-      background-size: 200% 100%;
-      animation: shimmer 2s ease-in-out infinite;
-
-      &:has(img[data-loaded="true"]) {
-        animation: none;
-      }
-    }
-
-    .cover {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-
-      &[data-loaded="true"] {
-        opacity: 1;
-      }
     }
 
     .title {
@@ -129,12 +81,6 @@ const { title, coverId, rating } = Astro.props
           }
         }
       }
-    }
-  }
-
-  @keyframes shimmer {
-    100% {
-      background-position-x: -200%;
     }
   }
 </style>

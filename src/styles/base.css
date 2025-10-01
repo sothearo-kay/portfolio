@@ -98,6 +98,10 @@ a {
   }
 }
 
+img {
+  user-select: none;
+}
+
 /* Custom text selection */
 ::selection {
   background: color-mix(in srgb, var(--color-accent-foreground) 60%, var(--color-foreground));
