@@ -22,7 +22,6 @@ import Sonda from "sonda/astro"
 import { site } from "./src/constants"
 import { remarkReadingTime } from "./src/plugins/index.mjs"
 
-// eslint-disable-next-line node/prefer-global/process
 const isDev = process.env.NODE_ENV === "development"
 
 // https://astro.build/config
