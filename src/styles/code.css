@@ -22,7 +22,7 @@ code {
 }
 
 pre {
-  margin: 1rem 0;
+  margin: clamp(1rem, 2vi, 1.25rem) 0;
   background-color: var(--shiki-light-bg) !important;
   overflow-x: auto;
   border-radius: 10px;
