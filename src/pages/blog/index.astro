@@ -1,8 +1,8 @@
 ---
-import BlogListLayout from "~/layouts/blog-listing.astro"
+import BlogLayout from "~/layouts/blog.astro"
 import { getPostsWithReadingTime } from "~/utils/blog"
 
 const postsWithReadingTime = await getPostsWithReadingTime()
 ---
 
-<BlogListLayout posts={postsWithReadingTime} />
+<BlogLayout posts={postsWithReadingTime} />
