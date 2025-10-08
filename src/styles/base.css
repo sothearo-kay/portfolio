@@ -25,6 +25,10 @@ body {
   overscroll-behavior-y: contain;
 }
 
+main:has(.lightense-open) {
+  view-transition-name: none;
+}
+
 p {
   text-wrap: pretty;
 }
