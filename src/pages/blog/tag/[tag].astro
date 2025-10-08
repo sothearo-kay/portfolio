@@ -1,5 +1,5 @@
 ---
-import BlogListLayout from "~/layouts/blog-listing.astro"
+import BlogLayout from "~/layouts/blog.astro"
 import { getPostsWithReadingTime, getTags } from "~/utils/blog"
 
 export async function getStaticPaths() {
@@ -23,4 +23,4 @@ const filteredPosts = postsWithReadingTime.filter(post =>
 )
 ---
 
-<BlogListLayout posts={filteredPosts} currentTag={tag} />
+<BlogLayout posts={filteredPosts} currentTag={tag} />

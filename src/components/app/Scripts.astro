@@ -1,0 +1,16 @@
+<script is:inline src="https://cdn.jsdelivr.net/npm/lightense-images@1.0.17/dist/lightense.min.js"></script>
+<script is:inline>
+  document.addEventListener("astro:page-load", () => {
+    const zoomImgs = document.querySelectorAll(".prose img")
+    if (zoomImgs.length > 0 && typeof Lightense !== "undefined") {
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark"
+      const background = isDark
+        ? "color-mix(in srgb, black 60%, transparent)"
+        : "color-mix(in srgb, var(--color-background-secondary) 80%, transparent)"
+
+      Lightense(zoomImgs, {
+        background,
+      })
+    }
+  })
+</script>

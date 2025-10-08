@@ -3,23 +3,36 @@ import Body from "~/components/app/Body.astro"
 import Footer from "~/components/app/Footer.astro"
 import Head from "~/components/app/Head.astro"
 import Header from "~/components/app/Header.astro"
+import Scripts from "~/components/app/Scripts.astro"
 import Container from "~/components/common/Container.astro"
 
 interface Props {
   title: string
   description: string
+  ogImage?: string
+  type?: "website" | "article"
+  includeKatex?: boolean
+  includeScripts?: boolean
 }
 
-const { title, description } = Astro.props
+const { title, description, ogImage, type, includeKatex, includeScripts = false } = Astro.props
 ---
 
 <html lang="en" transition:name="root">
-  <Head {title} {description} />
+  <Head
+    {title}
+    {description}
+    {ogImage}
+    {type}
+    {includeKatex}
+  />
   <Body>
     <Header />
     <Container as="main" transition:animate="fade">
       <slot />
     </Container>
     <Footer />
+    <slot name="extras" />
+    {includeScripts && <Scripts />}
   </Body>
 </html>

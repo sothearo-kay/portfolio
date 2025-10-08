@@ -204,6 +204,7 @@
     max-width: 100%;
     border-radius: 6px;
     content-visibility: auto;
+    cursor: zoom-in;
   }
 
   img[alt="cover"] {

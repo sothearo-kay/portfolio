@@ -19,6 +19,7 @@ const { class: className } = Astro.props
   display: grid;
   grid-template-rows: min-content 1fr min-content;
   border-inline: 1px solid var(--color-separator);
+  overflow-x: hidden;
 
   @media (max-width: 768px) {
     border-inline: none;
