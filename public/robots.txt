@@ -1,8 +1,0 @@
-User-agent: *
-Allow: /
-
-# Sitemap
-Sitemap: https://sothearo.dev/sitemap-index.xml
-
-# Crawl-delay
-Crawl-delay: 1
