@@ -75,9 +75,6 @@ const sortedYears = Object.keys(postsByYear)
   .posts {
     display: flex;
     flex-direction: column;
-
-    & li:not(:last-child) {
-      margin-bottom: var(--block-spacing);
-    }
+    gap: var(--block-spacing);
   }
 </style>

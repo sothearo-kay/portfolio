@@ -1,27 +1,24 @@
 ---
-import Container from "~/components/common/Container.astro"
+import Date from "~/components/common/Date.astro"
 import Heading from "~/components/common/Heading.astro"
-import Paragraph from "~/components/common/Paragraph.astro"
 
 interface Props {
   id: string
   title: string
-  description: string
+  publishedAt: Date
 }
 
-const { id, title, description } = Astro.props
+const { id, title, publishedAt } = Astro.props
 ---
 
-<article class="break-container">
+<article>
   <a class="card" href={`/blog/${id}`}>
-    <Container class="content">
+    <div class="content">
       <div class="info">
         <Heading as="h3" size="lg" class="heading" reset>{title}</Heading>
-        <Paragraph secondary size="sm" lineClamp={2}>
-          {description}
-        </Paragraph>
+        <Date date={publishedAt} />
       </div>
-    </Container>
+    </div>
   </a>
 </article>
 
@@ -31,31 +28,17 @@ const { id, title, description } = Astro.props
       position: relative;
       display: block;
 
-      &::before,
-      &::after {
-        content: '';
-        position: absolute;
-        height: 1px;
-        width: 100%;
-        display: block;
-        background: var(--color-separator);
-        z-index: -1;
+      .info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        & :global(.date) {
+          font: var(--font-sm);
+        }
       }
 
-      &::before {
-        top: 0;
-      }
-
-      &::after {
-        bottom: 0;
-      }
-
-      & :global(.content) {
-        padding-block: calc(var(--block-spacing) * 0.75);
-      }
-
-      p {
-        margin-top: 0.5rem;
+      & :global(.heading) {
         margin-bottom: 0;
       }
 
@@ -66,26 +49,6 @@ const { id, title, description } = Astro.props
             text-underline-offset: 3px;
           }
         }
-      }
-    }
-
-    &:first-child .card {
-      .content {
-        padding-top: 0;
-      }
-
-      &::before {
-        display: none;
-      }
-    }
-
-    &:last-child .card {
-      .content {
-        padding-bottom: 0;
-      }
-
-      &::after {
-        display: none;
       }
     }
   }
