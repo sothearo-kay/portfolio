@@ -1,6 +1,8 @@
 ---
 import Heading from "~/components/common/Heading.astro"
 import Paragraph from "~/components/common/Paragraph.astro"
+import ProjectCard from "~/components/project/ProjectCard.astro"
+import { projectList } from "~/data/projects"
 import Layout from "~/layouts/default.astro"
 ---
 
@@ -10,5 +12,26 @@ import Layout from "~/layouts/default.astro"
     <Paragraph secondary>
       Here are some of the projects I've worked on.
     </Paragraph>
+
+    <div class="projects-grid">
+      {projectList.map(project => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
   </section>
 </Layout>
+
+<style>
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-top: var(--block-spacing);
+  }
+
+  @media (max-width: 768px) {
+    .projects-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>
