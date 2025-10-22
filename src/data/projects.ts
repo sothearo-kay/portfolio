@@ -7,7 +7,7 @@ export interface Project {
 
 export const projectList: Project[] = [
   {
-    title: "QuickKeys",
+    title: "Quickkeys",
     description: "A minimalist typing speed test application with real-time performance metrics and user tracking capabilities.",
     previewUrl: "https://wpm.sothearo.dev",
     githubUrl: "https://github.com/sothearo-kay/quickkeys",

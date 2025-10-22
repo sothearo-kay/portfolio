@@ -14,7 +14,7 @@ const { project } = Astro.props
 const { title, description, previewUrl, githubUrl } = project
 
 const url = previewUrl || githubUrl
-const imageUrl = `https://assets.sothearo.dev/images/projects/${title.toLowerCase()}.png`
+const imageUrl = `https://assets.sothearo.dev/images/projects/${title.toLowerCase()}/preview.png`
 ---
 
 <a href={url} target="_blank" rel="noopener noreferrer" class="card">
@@ -48,7 +48,7 @@ const imageUrl = `https://assets.sothearo.dev/images/projects/${title.toLowerCas
     gap: 1rem;
 
     :global(.image) {
-      aspect-ratio: 3/2;
+      aspect-ratio: 16 / 9;
       border-radius: 6px;
       overflow: hidden;
       box-shadow: var(--shadow-card);
