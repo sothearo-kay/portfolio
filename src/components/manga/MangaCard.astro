@@ -15,7 +15,7 @@ const imageUrl = `https://mangadex.org/covers/${coverId}.jpg.512.jpg`
 ---
 
 <div class="card">
-  <WithPlaceholder src={imageUrl} class="image">
+  <WithPlaceholder src={imageUrl} class="image-wrapper">
     <Picture
       src={imageUrl}
       alt={title}
@@ -23,6 +23,7 @@ const imageUrl = `https://mangadex.org/covers/${coverId}.jpg.512.jpg`
       height={384}
       widths={[256, 512]}
       formats={["avif", "png"]}
+      class="image"
     />
   </WithPlaceholder>
   <h3 class="title">
@@ -46,10 +47,14 @@ const imageUrl = `https://mangadex.org/covers/${coverId}.jpg.512.jpg`
     flex-direction: column;
     gap: 0.5rem;
 
-    :global(.image) {
-      aspect-ratio: 2/3;
-      border-radius: 6px;
+    :global(.image-wrapper) {
       box-shadow: var(--shadow-card);
+      border-radius: 6px;
+    }
+
+    :global(.image) {
+      border-radius: 6px;
+      aspect-ratio: 2/3;
     }
 
     .title {

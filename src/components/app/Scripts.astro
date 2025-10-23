@@ -1,7 +1,7 @@
 <script is:inline src="https://cdn.jsdelivr.net/npm/lightense-images@1.0.17/dist/lightense.min.js"></script>
 <script is:inline>
   document.addEventListener("astro:page-load", () => {
-    const zoomImgs = document.querySelectorAll(".prose img")
+    const zoomImgs = document.querySelectorAll(".prose img, img[data-zoomable]")
     if (zoomImgs.length > 0 && typeof Lightense !== "undefined") {
       const isDark = document.documentElement.getAttribute("data-theme") === "dark"
       const background = isDark

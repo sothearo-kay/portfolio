@@ -6,7 +6,11 @@ import { mangaList } from "~/data/manga"
 import Layout from "~/layouts/default.astro"
 ---
 
-<Layout title="Favorite Manga" description="A curated collection of my favorite manga series and recommendations">
+<Layout
+  title="Favorite Manga"
+  description="A curated collection of my favorite manga series and recommendations"
+  includeScripts
+>
   <section>
     <Heading as="h1" size="2xl">My Favorite Manga</Heading>
     <Paragraph secondary>
