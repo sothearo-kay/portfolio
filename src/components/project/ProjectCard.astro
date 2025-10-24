@@ -1,6 +1,7 @@
 ---
 import type { Project } from "~/data/projects"
 import { Picture } from "astro:assets"
+import Heading from "../common/Heading.astro"
 import Paragraph from "../common/Paragraph.astro"
 import WithPlaceholder from "../common/WithPlaceholder.astro"
 
@@ -22,10 +23,10 @@ const domain = url?.replace(/^https?:\/\//, "").replace(/\/$/, "")
 <a href={url} target="_blank" rel="noopener noreferrer" class="card">
   <div class="header">
     <img src={logoUrl} alt={`${projectName} logo`} class="logo" />
-    <Paragraph size="sm" reset class="title">
+    <Heading as="h3" size="md" reset class="title">
       {title}
-    </Paragraph>
-    <Paragraph size="xs" secondary reset>
+    </Heading>
+    <Paragraph size="sm" secondary reset>
       {domain}
     </Paragraph>
   </div>
@@ -79,8 +80,7 @@ const domain = url?.replace(/^https?:\/\//, "").replace(/\/$/, "")
       }
 
       :global(.title) {
-        margin-top: 0.5rem;
-        font-weight: 500;
+        margin-top: 0.75rem;
       }
     }
 
