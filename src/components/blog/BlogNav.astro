@@ -55,11 +55,11 @@ const { prevPost, nextPost } = Astro.props
       border: 1px solid var(--color-border);
       border-radius: 8px;
       text-decoration: none;
-      transition: background-color 0.2s ease;
+      transition: border-color 0.2s ease;
       min-height: 0;
 
       &:hover {
-        background-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
+        border-color: var(--color-foreground);
       }
 
       &.prev {
