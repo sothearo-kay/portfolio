@@ -7,7 +7,7 @@
   }
 
   :is(h1, h2, h3, h4) {
-    margin-top: var(--block-spacing);
+    margin-top: calc(var(--block-spacing) * 1.25);
     margin-bottom: 0;
 
     a {
@@ -61,11 +61,11 @@
 
   p {
     font: var(--font-md);
-    margin-top: clamp(0.8rem, 1.3vi, 1.05rem);
+    margin-top: clamp(0.9rem, 1.5vi, 1.15rem);
     margin-bottom: 0;
 
     &:not(:is(h1, h2, h3, h4) + p) {
-      margin-top: clamp(1rem, 2vi, 1.25rem);
+      margin-top: clamp(1.1rem, 2.2vi, 1.35rem);
     }
   }
 
@@ -83,11 +83,11 @@
   ul,
   ol {
     font: var(--font-md);
-    margin-top: clamp(0.88rem, 1.45vi, 1.125rem);
+    margin-top: clamp(1rem, 1.65vi, 1.25rem);
     padding-left: 1.5rem;
 
     &:not(:is(h1, h2, h3, h4) + :is(ul, ol)) {
-      margin-top: 0.75rem;
+      margin-top: 0.85rem;
     }
   }
 
@@ -101,7 +101,7 @@
 
   li {
     font-size: 0.95em;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.7rem;
   }
 
   li > ul,
