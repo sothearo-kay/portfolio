@@ -7,7 +7,7 @@
   }
 
   :is(h1, h2, h3, h4) {
-    margin-top: calc(var(--block-spacing) * 1.25);
+    margin-top: calc(var(--block-spacing) * 1.1);
     margin-bottom: 0;
 
     a {
@@ -61,7 +61,7 @@
 
   p {
     font: var(--font-md);
-    margin-top: clamp(0.9rem, 1.5vi, 1.15rem);
+    margin-top: clamp(0.8rem, 1.3vi, 1.05rem);
     margin-bottom: 0;
 
     &:not(:is(h1, h2, h3, h4) + p) {
@@ -83,7 +83,7 @@
   ul,
   ol {
     font: var(--font-md);
-    margin-top: clamp(1rem, 1.65vi, 1.25rem);
+    margin-top: clamp(0.9rem, 1.5vi, 1.15rem);
     padding-left: 1.5rem;
 
     &:not(:is(h1, h2, h3, h4) + :is(ul, ol)) {
@@ -202,13 +202,9 @@
 
   img {
     max-width: 100%;
-    border-radius: 6px;
-    content-visibility: auto;
-    cursor: zoom-in;
-  }
-
-  img[alt="cover"] {
+    border-radius: 0.5rem;
     box-shadow: var(--shadow-card);
+    content-visibility: auto;
   }
 
   .katex-display {
